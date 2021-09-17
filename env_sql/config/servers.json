@@ -2,7 +2,7 @@
     "Servers": {
         "1": {
             "Name": "env_sql_postgres_1",
-            "Group": "Server Group 1",
+            "Group": "Servers",
             "Port": 5432,
             "Username": "postgres",
             "Host": "env_sql_postgres_1",
