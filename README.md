@@ -1,5 +1,9 @@
 # ecn-tp-database
 
-## configuration pgadmin
-Le fichier env_sql/config/pgadmin4.db est mappé avec le fichier /var/lib/pgadmin/pgadmin4.db; celui-ci contient les infos de connexion au serveur postgresql intégré au docker-compose.
-L'utilisateur du conteneur pgadmin étant l'utilisateur pgadmin il est possible qu'il n'ait pas par défaut les droits d'accès à ce fichier mappé, ce qui empêche le conteneur de démarrer. Pour résoudre ce problème il faut donner les droits d'accès avec la commande `sudo chown -R 5050:5050 env_sql/config/pgadmin4.db`
+## Environnement SQL
+La base de donnée est une bdd postgresql.
+Pour la mettre en route il suffit de lancer la commande `make up` dans le dossier env_sql. Vous pouvez aussi la mettre en pause avec `make up` et `make resume`, ou l'arrêter totalement (suppression du conteneur) avec `make down`.
+Le conteneur embarqeu une instance de postgresql ainsi qu'une instance de pgadmin
+
+### Configuration pgadmin
+Le fichier env_sql/config/pgadmin4.db est mappé avec le fichier /var/lib/pgadmin/pgadmin4.db; la commande `make up` entraine le changement des droits sur ce fichier (afin de donner les droits d'accès au conteneur); il peut donc être nécessaire de rentrer son mot de passe pour valider l'opération (droits root nécessaires pour changer les permissions du fichier).
