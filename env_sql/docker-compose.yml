@@ -28,7 +28,7 @@ services:
       PGADMIN_DEFAULT_PASSWORD: password
       PGADMIN_LISTEN_PORT: 80
     volumes:
-      - ./config/servers.json:/pgadmin4/servers.json
+      - ./config/servers.json:/pgadmin4/servers.json:z
     ports:
       - 15432:80
     depends_on:
