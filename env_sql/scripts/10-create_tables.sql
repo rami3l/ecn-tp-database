@@ -2,7 +2,7 @@
 BEGIN;
 
 CREATE TABLE IF NOT EXISTS public."order" (
-    order_id SERIAL,
+    order_id serial,
     client character varying,
     PRIMARY KEY (order_id)
 );
@@ -15,14 +15,14 @@ CREATE TABLE IF NOT EXISTS public.client (
 );
 
 CREATE TABLE IF NOT EXISTS public.delivery_point (
-    delivery_point_id SERIAL,
+    delivery_point_id serial,
     address integer,
     client character varying,
     PRIMARY KEY (delivery_point_id)
 );
 
 CREATE TABLE IF NOT EXISTS public.order_content (
-    order_content_id SERIAL,
+    order_content_id serial,
     quantity integer,
     desired_delivery_date date,
     product integer,
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS public.order_content (
 );
 
 CREATE TABLE IF NOT EXISTS public.product (
-    product_id SERIAL,
+    product_id serial,
     name character varying,
     PRIMARY KEY (product_id)
 );
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS public.supported_by (
 );
 
 CREATE TABLE IF NOT EXISTS public.mission (
-    mission_id SERIAL,
+    mission_id serial,
     loading_time timestamp without time zone,
     loading_point integer,
     driver integer,
@@ -56,13 +56,13 @@ CREATE TABLE IF NOT EXISTS public.mission (
 );
 
 CREATE TABLE IF NOT EXISTS public.loading_point (
-    loading_point_id SERIAL,
+    loading_point_id serial,
     address integer,
     PRIMARY KEY (loading_point_id)
 );
 
 CREATE TABLE IF NOT EXISTS public.driver (
-    driver_id SERIAL,
+    driver_id serial,
     first_name character varying,
     last_name character varying,
     default_truck character varying,
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS public.truck (
 );
 
 CREATE TABLE IF NOT EXISTS public.address (
-    address_id SERIAL,
+    address_id serial,
     address_line character varying,
     zipcode character varying,
     city character varying,
