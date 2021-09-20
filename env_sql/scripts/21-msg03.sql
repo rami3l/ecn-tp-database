@@ -32,11 +32,7 @@ WHERE
         month
         from
             planned_delivery_time
-    ) >= 9
-    AND extract(
-        month
-        from
-            planned_delivery_time
-    ) <= 11;
+    ) BETWEEN 9
+    AND 11;
 
 END;
