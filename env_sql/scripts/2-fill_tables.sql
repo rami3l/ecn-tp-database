@@ -17,7 +17,7 @@ VALUES
     -- KASUMI
     -- Delivery points
     -- KAEDE
-    ('12 Boulevard Wezemir', NULL, 'Pau'),
+    ('5 allée des pinsons', NULL, 'Pau'),
     ('25 rue des tulipes', NULL, 'Bayonne'),
     ('2 rue des plantes', NULL, 'Marseille'),
     ('67 rue des 5 portes', NULL, 'Brest'),
