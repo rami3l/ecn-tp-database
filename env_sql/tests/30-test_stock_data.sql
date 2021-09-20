@@ -1,3 +1,6 @@
+/* This test suite verifies that all the info on stock management has been
+ * correctly imported into the database.
+ */
 select
     upper(city) as "Quai",
     name,

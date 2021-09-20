@@ -132,8 +132,8 @@ INSERT INTO
         loading_time
     )
 VALUES
-    (1, NULL, 1, '2021-11-15 06:00:00'),
-    (6, NULL, 1, '2021-11-18 08:00:00');
+    (1, 'AC-543-AG', 1, '2021-11-15 06:00:00'),
+    (6, 'CN-225-AB', 1, '2021-11-18 08:00:00');
 
 INSERT INTO
     public.supported_by(

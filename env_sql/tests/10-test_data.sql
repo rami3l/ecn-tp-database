@@ -1,3 +1,6 @@
+/* This test suite verifies that all the info has been correctly imported
+ * into the database.
+ */
 select
     *
 from
