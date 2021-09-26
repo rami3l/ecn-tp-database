@@ -8,13 +8,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "client", uniqueConstraints = @UniqueConstraint(columnNames = { "order_content", "mission" }))
+@Table(name = "supported_by")
 @Data
 @NoArgsConstructor
 public class SupportedBy implements Serializable {
@@ -35,7 +34,7 @@ public class SupportedBy implements Serializable {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "mission")
+    @JoinColumn
     protected Mission mission;
 
 }

@@ -7,13 +7,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "client", uniqueConstraints = @UniqueConstraint(columnNames = { "abbrev" }))
+@Table(name = "client")
 @Data
 @NoArgsConstructor
 public class Client implements Serializable {
@@ -24,7 +23,7 @@ public class Client implements Serializable {
     protected String name;
 
     @OneToOne
-    @JoinColumn(name = "address")
+    @JoinColumn
     protected Address address;
 
 }
