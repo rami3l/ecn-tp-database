@@ -23,14 +23,14 @@ public class DeliveryPoint implements Serializable {
     @Id
     @GeneratedValue
     @Column(name = "delivery_point_id")
-    protected int id;
+    private int id;
 
     @OneToOne
     @JoinColumn
-    protected Address address;
+    private Address address;
 
     @ManyToOne
     @JoinColumn
-    protected Client client;
+    private Client client;
 
 }

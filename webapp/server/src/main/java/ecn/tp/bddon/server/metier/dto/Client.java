@@ -18,12 +18,12 @@ import lombok.NoArgsConstructor;
 public class Client implements Serializable {
 
     @Id
-    protected String abbrev;
+    private String abbrev;
 
-    protected String name;
+    private String name;
 
     @OneToOne
     @JoinColumn
-    protected Address address;
+    private Address address;
 
 }

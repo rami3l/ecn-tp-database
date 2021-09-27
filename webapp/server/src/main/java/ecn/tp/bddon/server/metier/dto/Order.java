@@ -22,10 +22,10 @@ public class Order implements Serializable {
     @Id
     @GeneratedValue
     @Column(name = "order_id")
-    protected int id;
+    private int id;
 
     @ManyToOne
     @JoinColumn
-    protected Client client;
+    private Client client;
 
 }

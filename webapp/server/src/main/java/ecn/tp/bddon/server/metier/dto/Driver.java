@@ -22,16 +22,16 @@ public class Driver implements Serializable {
     @Id
     @GeneratedValue
     @Column(name = "driver_id")
-    protected int id;
+    private int id;
 
     @Column(name = "first_name")
-    protected String firtsName;
+    private String firtsName;
 
     @Column(name = "last_name")
-    protected String lastName;
+    private String lastName;
 
     @OneToOne
     @JoinColumn(name = "default_truck")
-    protected Truck defaultTruck;
+    private Truck defaultTruck;
 
 }

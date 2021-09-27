@@ -20,8 +20,8 @@ public class Product implements Serializable {
     @Id
     @GeneratedValue
     @Column(name = "product_id")
-    protected int id;
+    private int id;
 
-    protected String name;
+    private String name;
 
 }

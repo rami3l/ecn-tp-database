@@ -22,10 +22,10 @@ public class LoadingPoint implements Serializable {
     @Id
     @GeneratedValue
     @Column(name = "loading_point_id")
-    protected String id;
+    private String id;
 
     @OneToOne
     @JoinColumn
-    protected Address address;
+    private Address address;
 
 }

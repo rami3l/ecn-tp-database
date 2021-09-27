@@ -18,11 +18,11 @@ public class Truck implements Serializable {
 
     @Id
     @Column(name = "license_plate")
-    protected String licensePlate;
+    private String licensePlate;
 
     @Column(name = "is_functional")
-    protected boolean isFunctional;
+    private boolean isFunctional;
 
-    protected String comment;
+    private String comment;
 
 }

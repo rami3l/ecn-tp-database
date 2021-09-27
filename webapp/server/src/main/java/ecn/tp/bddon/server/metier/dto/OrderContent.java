@@ -22,23 +22,23 @@ public class OrderContent implements Serializable {
     @Id
     @GeneratedValue
     @Column(name = "order_content_id")
-    protected int id;
+    private int id;
 
-    protected int quantity;
+    private int quantity;
 
     @Column(name = "desired_delivery_date")
-    protected String desiredDeliveryDate;
+    private String desiredDeliveryDate;
 
     @ManyToOne
     @JoinColumn(name = "product")
-    protected Product product;
+    private Product product;
 
     @ManyToOne
     @JoinColumn
-    protected Order order;
+    private Order order;
 
     @ManyToOne
     @JoinColumn(name = "delivery_point")
-    protected DeliveryPoint deliveryPoint;
+    private DeliveryPoint deliveryPoint;
 
 }

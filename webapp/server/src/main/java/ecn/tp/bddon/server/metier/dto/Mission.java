@@ -22,21 +22,21 @@ public class Mission implements Serializable {
     @Id
     @GeneratedValue
     @Column(name = "mission_id")
-    protected int id;
+    private int id;
 
     @Column(name = "loading_time")
-    protected String loadingTime;
+    private String loadingTime;
 
     @ManyToOne
     @JoinColumn(name = "loading_point")
-    protected LoadingPoint loadingPoint;
+    private LoadingPoint loadingPoint;
 
     @ManyToOne
     @JoinColumn
-    protected Driver driver;
+    private Driver driver;
 
     @ManyToOne
     @JoinColumn
-    protected Truck truck;
+    private Truck truck;
 
 }

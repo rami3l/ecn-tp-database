@@ -20,13 +20,13 @@ public class Address implements Serializable {
     @Id
     @GeneratedValue
     @Column(name = "address_id")
-    protected int id;
+    private int id;
 
     @Column(name = "address_line")
-    protected String addressLine;
+    private String addressLine;
 
-    protected String zipcode;
+    private String zipcode;
 
-    protected String city;
+    private String city;
 
 }
