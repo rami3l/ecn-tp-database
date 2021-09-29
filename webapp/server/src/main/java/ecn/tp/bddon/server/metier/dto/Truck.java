@@ -20,9 +20,4 @@ public class Truck implements Serializable {
     @Column(name = "license_plate")
     private String licensePlate;
 
-    @Column(name = "is_functional")
-    private boolean isFunctional;
-
-    private String comment;
-
 }
