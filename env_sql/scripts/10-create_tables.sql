@@ -71,9 +71,16 @@ CREATE TABLE IF NOT EXISTS public.driver (
 
 CREATE TABLE IF NOT EXISTS public.truck (
     license_plate character varying NOT NULL,
-    is_functional boolean,
-    comments character varying,
     PRIMARY KEY (license_plate)
+);
+
+CREATE TABLE IF NOT EXISTS public.unavailability (
+    unavailability_id serial,
+    truck character varying,
+    start_date date,
+    end_date date,
+    comments character varying,
+    PRIMARY KEY (unavailability_id)
 );
 
 CREATE TABLE IF NOT EXISTS public.address (
@@ -138,6 +145,11 @@ ALTER TABLE
     public.driver
 ADD
     FOREIGN KEY (default_truck) REFERENCES public.truck (license_plate) NOT VALID;
+
+ALTER TABLE
+    public.unavailability
+ADD
+    FOREIGN KEY (truck) REFERENCES public.truck (license_plate) NOT VALID;
 
 ALTER TABLE
     public.delivery_point
