@@ -32,11 +32,11 @@ public class Mission implements Serializable {
     private LoadingPoint loadingPoint;
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "driver")
     private Driver driver;
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "truck")
     private Truck truck;
 
 }

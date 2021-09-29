@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -26,11 +28,12 @@ public class DeliveryPoint implements Serializable {
     private int id;
 
     @OneToOne
-    @JoinColumn
+    @JoinColumn(name = "address")
     private Address address;
 
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "client")
     private Client client;
 
 }

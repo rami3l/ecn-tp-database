@@ -25,7 +25,7 @@ public class Order implements Serializable {
     private int id;
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "client")
     private Client client;
 
 }

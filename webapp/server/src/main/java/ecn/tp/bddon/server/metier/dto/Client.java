@@ -23,7 +23,7 @@ public class Client implements Serializable {
     private String name;
 
     @OneToOne
-    @JoinColumn
+    @JoinColumn(name = "address")
     private Address address;
 
 }

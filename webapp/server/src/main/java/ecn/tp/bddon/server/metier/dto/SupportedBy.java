@@ -37,7 +37,7 @@ public class SupportedBy implements Serializable {
 
     @Id
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "mission")
     private Mission mission;
 
 }

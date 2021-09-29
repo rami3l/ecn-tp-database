@@ -34,7 +34,7 @@ public class OrderContent implements Serializable {
     private Product product;
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "order")
     private Order order;
 
     @ManyToOne
