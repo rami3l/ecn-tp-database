@@ -2,9 +2,12 @@
  * into the database.
  */
 select
-    *
+    license_plate,
+    comments
 from
-    truck;
+    truck
+    left join unavailability on truck = license_plate
+order by license_plate;
 
 select
     *

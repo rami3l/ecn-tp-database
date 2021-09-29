@@ -5,13 +5,9 @@
 BEGIN;
 
 -- Marquer le camion concerné comme non opérationnel.
-UPDATE
-    truck
-SET
-    is_functional = FALSE,
-    comments = 'au garage pour réparation'
-WHERE
-    license_plate = 'AC-543-AG';
+INSERT INTO
+    unavailability(truck, end_date, comments)
+VALUES ('AC-543-AG', '2021-10-30', 'Au garage pour réparation');
 
 -- Mettre à jour les missions dont le temps de livraison prévu est dans un domaine spécifique.
 UPDATE

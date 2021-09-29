@@ -53,17 +53,22 @@ VALUES
     ('KASUMI', 15);
 
 INSERT INTO
-    public.truck(license_plate, is_functional, comments)
+    public.truck(license_plate)
 VALUES
-    ('AC-543-AG', TRUE, NULL),
-    ('AD-671-KA', TRUE, NULL),
-    ('AH-126-GG', TRUE, NULL),
-    ('AM-654-TU', TRUE, NULL),
-    ('BA-865-PF', TRUE, NULL),
-    ('BA-921-AA', FALSE, 'au garage pour réparation'),
-    ('CK-221-KW', TRUE, NULL),
-    ('CL-128-TR', TRUE, NULL),
-    ('CN-225-AB', TRUE, NULL);
+    ('AC-543-AG'),
+    ('AD-671-KA'),
+    ('AH-126-GG'),
+    ('AM-654-TU'),
+    ('BA-865-PF'),
+    ('BA-921-AA'),
+    ('CK-221-KW'),
+    ('CL-128-TR'),
+    ('CN-225-AB');
+
+INSERT INTO
+    public.unavailability(truck, comments)
+VALUES
+    ('BA-921-AA', 'Au garage pour réparation');
 
 INSERT INTO
     public.driver(
