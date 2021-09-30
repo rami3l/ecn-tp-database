@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -33,10 +35,12 @@ public class OrderContent implements Serializable {
     @JoinColumn(name = "product")
     private Product product;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "order")
     private Order order;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "delivery_point")
     private DeliveryPoint deliveryPoint;
