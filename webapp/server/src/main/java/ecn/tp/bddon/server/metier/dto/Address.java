@@ -25,7 +25,7 @@ public class Address implements Serializable {
     @Column(name = "address_line")
     private String addressLine;
 
-    private int zipcode;
+    private String zipcode;
 
     private String city;
 
