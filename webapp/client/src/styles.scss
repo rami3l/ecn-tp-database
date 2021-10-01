@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --grey-typo: #bdc1c6;
+    --dark-background: #202124;
+    --dark-navbar: #333;
+}
+
+.webpage {
+    background-color: var(--dark-background);
+    color: var(--grey-typo);
+}

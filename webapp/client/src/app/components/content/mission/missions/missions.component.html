@@ -1,0 +1,7 @@
+<h1 *ngIf="this.missions == null">Chargement des missions...</h1>
+<h1 *ngIf="this.missions != null">id - loading time - driver - truck</h1>
+<ul>
+    <li *ngFor="let mission of missions">
+        {{mission.id}} - {{mission.loadingTime}} - {{mission.driver}} - {{mission.truck}}
+    </li>
+</ul>

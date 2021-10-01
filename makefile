@@ -29,4 +29,4 @@ client_up:
 
 client_open:
 	cd webapp/client \
-		&& ng s -0
+		&& ng s -o
