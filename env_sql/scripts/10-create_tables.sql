@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS public.unavailability (
 CREATE TABLE IF NOT EXISTS public.address (
     address_id serial,
     address_line character varying,
-    zipcode integer,
+    zipcode character varying,
     city character varying,
     PRIMARY KEY (address_id)
 );
