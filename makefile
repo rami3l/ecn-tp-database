@@ -22,3 +22,11 @@ sql_set:
 	cd env_sql/config \
 		&& sudo chown 5050:5050 pgpass.conf \
 		&& sudo chmod 0600 pgpass.conf
+
+client_up:
+	cd webapp/client \
+		&& ng s
+
+client_open:
+	cd webapp/client \
+		&& ng s -0
