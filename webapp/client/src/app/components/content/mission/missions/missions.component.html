@@ -1,5 +1,5 @@
 <div class="container">
-    <h1 *ngIf="this.missions == null">Chargement des missions...</h1>
+    <h1 *ngIf="this.missions == null">Loading missions...</h1>
     <h1 *ngIf="this.missions != null">{{missions.length }} missions planned</h1>
     <table class="item-list">
         <thead>
@@ -14,8 +14,8 @@
             <tr *ngFor="let mission of missions">
                 <th scope="row">{{mission.id}}</th>
                 <td>{{mission.loadingTime}}</td>
-                <td>{{mission.driver.firstName}} {{mission.driver.lastName}}</td>
-                <td>{{mission.truck == null ? "N/A" : mission.truck.licensePlate}}</td>
+                <td>{{mission.driver == null ? "" : mission.driver.firstName + " " + mission.driver.lastName}}</td>
+                <td>{{mission.truck == null ? "" : mission.truck.licensePlate}}</td>
                 <td><button class="btn" routerLink="/mission/see/{{mission.id}}">More...</button></td>
             </tr>
         </tbody>

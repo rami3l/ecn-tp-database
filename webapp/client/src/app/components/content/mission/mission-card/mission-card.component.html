@@ -1,1 +1,24 @@
-<p>mission-card works!</p>
+<div class="container">
+    <h1 *ngIf="this.mission == null">Loading...</h1>
+    <h1 *ngIf="this.mission != null">Mission (id: {{mission.id}})</h1>
+    <table *ngIf="this.mission != null" class="item-list">
+        <tbody>
+            <tr>
+                <th scope="row">Loading time:</th>
+                <td>{{mission.loadingTime}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Loading point:</th>
+                <td>TODO</td>
+            </tr>
+            <tr>
+                <th scope="row">Driver:</th>
+                <td>{{mission.driver == null ? "" : mission.driver.firstName + " " + mission.driver.lastName}}</td>
+            </tr>
+            <tr>
+                <th scope="row">truck:</th>
+                <td>{{mission.truck == null ? "" : mission.truck.licensePlate}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

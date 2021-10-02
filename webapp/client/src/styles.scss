@@ -11,15 +11,7 @@
     color: var(--grey-typo);
 }
 
-
-@media (max-width: 1000px) {
-    .container {
-        margin-left: 100px;
-        margin-right: 100px;
-    }
-}
-
-@media (min-width: 1000px) {
+@media (max-width: 2000px) {
     .container {
         margin: auto;
         width: 80%;
@@ -37,7 +29,7 @@
 .item-list {
     table-layout: auto;
     width: 100%;
-    border: 2px solid;
+    border: 3px solid;
 }
 
 .item-list tbody td, th {
