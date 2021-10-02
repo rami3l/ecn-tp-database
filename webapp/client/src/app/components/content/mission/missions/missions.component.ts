@@ -15,7 +15,9 @@ export class MissionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.missionService.getMissions().subscribe(
-      missionsReceived => { this.missions = missionsReceived; }
+      missionsReceived => {
+        this.missions = missionsReceived;
+      }
     )
   }
 

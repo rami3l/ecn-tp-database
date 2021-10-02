@@ -25,7 +25,7 @@ public class Driver implements Serializable {
     private int id;
 
     @Column(name = "first_name")
-    private String firtsName;
+    private String firstName;
 
     @Column(name = "last_name")
     private String lastName;

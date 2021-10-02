@@ -1,7 +1,21 @@
 <h1 *ngIf="this.missions == null">Chargement des missions...</h1>
-<h1 *ngIf="this.missions != null">id - loading time - driver - truck</h1>
-<ul>
-    <li *ngFor="let mission of missions">
-        {{mission.id}} - {{mission.loadingTime}} - {{mission.driver}} - {{mission.truck}}
-    </li>
-</ul>
+<h1 *ngIf="this.missions != null">{{missions.length }} missions prévues</h1>
+<table class="item-list">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">loading time</th>
+            <th scope="col">driver</th>
+            <th scope="col">truck</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let mission of missions">
+            <th scope="row">{{mission.id}}</th>
+            <td>{{mission.loadingTime}}</td>
+            <td>{{mission.driver.firstName}} {{mission.driver.lastName}}</td>
+            <td>{{mission.truck == null ? "N/A" : mission.truck.licensePlate}}</td>
+        </tr>
+
+    </tbody>
+</table>
