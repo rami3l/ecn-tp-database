@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Mission } from 'src/app/dto/mission';
 import { MissionService } from 'src/app/services/rest/mission.service';
 
@@ -11,7 +12,11 @@ export class MissionsComponent implements OnInit {
 
   missions: Mission[] | undefined;
 
-  constructor(private missionService: MissionService) { }
+  currentMissionId: number = -1;
+
+  constructor(private missionService: MissionService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.missionService.getMissions().subscribe(
@@ -19,6 +24,11 @@ export class MissionsComponent implements OnInit {
         this.missions = missionsReceived;
       }
     )
+  }
+
+  displayMission(id: number) {
+    this.currentMissionId = this.currentMissionId == id ? -1 : id;
+    this.router.navigate(['mission/', this.currentMissionId], { relativeTo: this.route });
   }
 
 }

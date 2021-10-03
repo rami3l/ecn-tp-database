@@ -10,10 +10,14 @@ import { WelcomeComponent } from './components/content/welcome/welcome.component
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
 
-  { path: 'mission/list', component: MissionsComponent },
-  { path: 'mission/see/:id', component: MissionCardComponent },
+  {
+    path: 'missions', component: MissionsComponent,
+    children: [
+      { path: 'mission/:id', component: MissionCardComponent }
+    ]
+  },
 
-  { path: 'order/list', component: OrdersComponent },
+  { path: 'orders', component: OrdersComponent },
   { path: 'order/see/:id', component: OrderCardComponent },
 
   { path: 'stock', component: StockComponent }
