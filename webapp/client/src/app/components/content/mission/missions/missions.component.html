@@ -18,7 +18,7 @@
                     <td>{{mission.driver == null ? "" : mission.driver.firstName + " " + mission.driver.lastName}}</td>
                     <td>{{mission.truck == null ? "" : mission.truck.licensePlate}}</td>
                     <td><button class="btn" routerLinkActive="active" routerLink="./mission/{{mission.id}}"
-                            (click)="updateCurrentId(mission.id)">More...</button></td>
+                            #state="routerLinkActive" (click)="checkState(state.isActive)">More...</button></td>
                 </tr>
             </tbody>
         </table>

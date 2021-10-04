@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Mission } from 'src/app/dto/mission';
 import { MissionService } from 'src/app/services/rest/mission.service';
-import { MissionCardComponent } from '../mission-card/mission-card.component';
 
 @Component({
   selector: 'app-missions',
@@ -11,14 +10,13 @@ import { MissionCardComponent } from '../mission-card/mission-card.component';
 })
 export class MissionsComponent implements OnInit {
 
-  @ViewChild(MissionCardComponent) child: MissionCardComponent | undefined;
 
   missions: Mission[] | undefined;
-  currentMissionId: number = -1;
 
   constructor(private missionService: MissionService,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
     console.log("init missions");
@@ -29,9 +27,8 @@ export class MissionsComponent implements OnInit {
     )
   }
 
-  updateCurrentId(id: number) {
-    this.currentMissionId = this.currentMissionId == id ? -1 : id;
-    if (this.currentMissionId == -1) {
+  checkState(state: boolean) {
+    if (state) {
       this.router.navigate(['.'], { relativeTo: this.route });
     }
   }

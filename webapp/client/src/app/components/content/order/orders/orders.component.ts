@@ -11,7 +11,6 @@ import { OrderService } from 'src/app/services/rest/order.service';
 export class OrdersComponent implements OnInit {
 
   orders: Order[] | undefined;
-  currentOrderId: number = -1;
 
   constructor(private orderService: OrderService,
     private router: Router,
@@ -26,9 +25,8 @@ export class OrdersComponent implements OnInit {
     )
   }
 
-  updateCurrentId(id: number) {
-    this.currentOrderId = this.currentOrderId == id ? -1 : id;
-    if (this.currentOrderId == -1) {
+  checkState(state: boolean) {
+    if (state) {
       this.router.navigate(['.'], { relativeTo: this.route });
     }
   }
