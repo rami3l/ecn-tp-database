@@ -1,5 +1,5 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Mission } from 'src/app/dto/mission';
 import { MissionService } from 'src/app/services/rest/mission.service';
 
@@ -8,18 +8,23 @@ import { MissionService } from 'src/app/services/rest/mission.service';
   templateUrl: './mission-card.component.html',
   styleUrls: ['./mission-card.component.scss']
 })
-export class MissionCardComponent implements OnInit, OnChanges {
+export class MissionCardComponent implements OnInit, OnDestroy {
 
   id: number = -1;
 
   mission: Mission | undefined;
 
   constructor(private activatedRoute: ActivatedRoute,
+    private router: Router,
     private missionService: MissionService) { }
 
   ngOnInit(): void {
-    var string_id = this.activatedRoute.snapshot.paramMap.get('id');
-    var id = string_id ? +string_id : NaN;
+    this.activatedRoute.params.subscribe(
+      param => this.loadMission(param.id)
+    );
+  }
+
+  loadMission(id: number) {
     console.log("chargement de la mission " + id);
     if (isNaN(id)) {
       //TODO: exception si isNaN
@@ -34,8 +39,8 @@ export class MissionCardComponent implements OnInit, OnChanges {
     }
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
+  ngOnDestroy() {
+    console.log("destruction du mission-card");
   }
 
 }

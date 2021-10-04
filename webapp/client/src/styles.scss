@@ -16,22 +16,34 @@
 }
 
 @media (max-width: 4000px) {
-    .container {
+    .left-container {
         margin-left: 10%;
         width: 90%;
+    }
+    .container {
+        margin-left: 10%;
+        width: 80%;
+        margin-right: 10%;
     }
 }
 
 @media (min-width: 4000px) {
-    .container {
+    .left-container, .container {
         margin: auto;
         width: 1600px;
     }
 }
 
-.grid {
-    display: grid;
-    //grid-template-columns: 1fr 1fr;
+@media (max-width: 1000px) {
+    .grid {
+        display: block;
+    }
+}
+@media (min-width: 1000px) {
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 0fr 1fr;
+    }
 }
 
 

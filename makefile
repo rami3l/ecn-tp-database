@@ -30,3 +30,7 @@ client_up:
 client_open:
 	cd webapp/client \
 		&& ng s -o
+
+server_up:
+	cd webapp/server \
+		&& ./gradlew bootRun
