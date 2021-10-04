@@ -16,9 +16,15 @@ const routes: Routes = [
       { path: 'mission/:id', component: MissionCardComponent }
     ]
   },
+  { path: 'mission/:id', component: MissionCardComponent },
 
-  { path: 'orders', component: OrdersComponent },
-  { path: 'order/see/:id', component: OrderCardComponent },
+  {
+    path: 'orders', component: OrdersComponent,
+    children: [
+      { path: 'order/:id', component: OrderCardComponent }
+    ]
+  },
+  { path: 'order/:id', component: OrderCardComponent },
 
   { path: 'stock', component: StockComponent }
 ];

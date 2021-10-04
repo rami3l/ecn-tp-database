@@ -1,1 +1,24 @@
-<p>order-card works!</p>
+<div class="container">
+    <h1 *ngIf="this.order == null && this.id != -1">Loading...</h1>
+    <h1 *ngIf="this.order != null">Order (id: {{order.id}})</h1>
+    <table *ngIf="this.order != null" class="item-list">
+        <tbody>
+            <tr>
+                <th scope="row">Client:</th>
+                <td>{{order.client.abbrev}} {{order.client.name == null ? "" : "(" + order.client.name + ")"}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Address:</th>
+                <td>{{order.client.address.addressLine}}</td>
+            </tr>
+            <tr>
+                <th scope="row">City:</th>
+                <td>{{order.client.address.zipcode}} {{order.client.address.city}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Order contents:</th>
+                <td>TODO</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

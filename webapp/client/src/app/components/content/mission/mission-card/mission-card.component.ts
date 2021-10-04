@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Mission } from 'src/app/dto/mission';
 import { MissionService } from 'src/app/services/rest/mission.service';
 
@@ -8,14 +8,12 @@ import { MissionService } from 'src/app/services/rest/mission.service';
   templateUrl: './mission-card.component.html',
   styleUrls: ['./mission-card.component.scss']
 })
-export class MissionCardComponent implements OnInit, OnDestroy {
+export class MissionCardComponent implements OnInit {
 
   id: number = -1;
-
   mission: Mission | undefined;
 
   constructor(private activatedRoute: ActivatedRoute,
-    private router: Router,
     private missionService: MissionService) { }
 
   ngOnInit(): void {
@@ -37,10 +35,6 @@ export class MissionCardComponent implements OnInit, OnDestroy {
         )
       }
     }
-  }
-
-  ngOnDestroy() {
-    console.log("destruction du mission-card");
   }
 
 }

@@ -1,23 +1,28 @@
-<div class="container">
-    <h1 *ngIf="this.orders == null">Chargement des orders...</h1>
-    <h1 *ngIf="this.orders != null">{{orders.length }} orders passed</h1>
-    <table class="item-list">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">client</th>
-                <th scope="col">address</th>
-                <th scope="col">city</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let order of orders">
-                <th scope="row">{{order.id}}</th>
-                <td>{{order.client.abbrev}} {{order.client.name == null ? "" : "(" + order.client.name + ")"}}</td>
-                <td>{{order.client.address.addressLine}}</td>
-                <td>{{order.client.address.zipcode}} {{order.client.address.city}}</td>
-                <td><button class="btn" routerLink="/order/see/{{order.id}}">More...</button></td>
-            </tr>
-        </tbody>
-    </table>
+<div class="grid">
+    <div class="container">
+        <h1 *ngIf="this.orders == null">Chargement des orders...</h1>
+        <h1 *ngIf="this.orders != null">{{orders.length }} orders passed</h1>
+        <table class="item-list">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">client</th>
+                    <th scope="col">address</th>
+                    <th scope="col">city</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let order of orders">
+                    <th scope="row">{{order.id}}</th>
+                    <td>{{order.client.abbrev}} {{order.client.name == null ? "" : "(" + order.client.name + ")"}}</td>
+                    <td>{{order.client.address.addressLine}}</td>
+                    <td>{{order.client.address.zipcode}} {{order.client.address.city}}</td>
+                    <td><button class="btn" routerLinkActive="active" routerLink="./order/{{order.id}}"
+                            (click)="updateCurrentId(order.id)">More...</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <router-outlet></router-outlet>
 </div>

@@ -14,7 +14,6 @@ export class MissionsComponent implements OnInit {
   @ViewChild(MissionCardComponent) child: MissionCardComponent | undefined;
 
   missions: Mission[] | undefined;
-
   currentMissionId: number = -1;
 
   constructor(private missionService: MissionService,
@@ -30,15 +29,10 @@ export class MissionsComponent implements OnInit {
     )
   }
 
-  displayMission(id: number) {
+  updateCurrentId(id: number) {
     this.currentMissionId = this.currentMissionId == id ? -1 : id;
-    if (this.currentMissionId >= 0) {
-      this.router.navigate(['mission/', this.currentMissionId], { relativeTo: this.route });
-    } else {
+    if (this.currentMissionId == -1) {
       this.router.navigate(['.'], { relativeTo: this.route });
-      if (this.child != null) {
-        //this.child.destroy();
-      }
     }
   }
 

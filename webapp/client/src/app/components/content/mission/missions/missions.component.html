@@ -17,8 +17,8 @@
                     <td>{{mission.loadingTime}}</td>
                     <td>{{mission.driver == null ? "" : mission.driver.firstName + " " + mission.driver.lastName}}</td>
                     <td>{{mission.truck == null ? "" : mission.truck.licensePlate}}</td>
-                    <td><button [ngClass]="{'btn': true, 'btn-activated': mission.id == this.currentMissionId}"
-                            (click)="displayMission(mission.id)">More...</button></td>
+                    <td><button class="btn" routerLinkActive="active" routerLink="./mission/{{mission.id}}"
+                            (click)="updateCurrentId(mission.id)">More...</button></td>
                 </tr>
             </tbody>
         </table>
