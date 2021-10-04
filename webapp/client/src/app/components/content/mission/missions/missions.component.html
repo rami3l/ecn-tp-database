@@ -6,7 +6,8 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">loading time</th>
+                    <th scope="col">date</th>
+                    <th scope="col">loading city</th>
                     <th scope="col">driver</th>
                     <th scope="col">truck</th>
                 </tr>
@@ -14,7 +15,8 @@
             <tbody>
                 <tr *ngFor="let mission of missions">
                     <th scope="row">{{mission.id}}</th>
-                    <td>{{mission.loadingTime}}</td>
+                    <td>{{mission.loadingTime | date:'d MMMM y'}}</td>
+                    <td>{{mission.loadingPoint == null ? "" : mission.loadingPoint.address.city}}</td>
                     <td>{{mission.driver == null ? "" : mission.driver.firstName + " " + mission.driver.lastName}}</td>
                     <td>{{mission.truck == null ? "" : mission.truck.licensePlate}}</td>
                     <td><button class="btn" routerLinkActive="active" routerLink="./mission/{{mission.id}}"

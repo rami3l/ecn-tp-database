@@ -5,11 +5,12 @@
         <tbody>
             <tr>
                 <th scope="row">Loading time:</th>
-                <td>{{mission.loadingTime}}</td>
+                <td>{{mission.loadingTime | date:"d MMMM y - hh'h'mm"}}</td>
             </tr>
             <tr>
                 <th scope="row">Loading point:</th>
-                <td>TODO</td>
+                <td *ngIf="mission.loadingPoint != null">{{mission.loadingPoint.address.addressLine}} -
+                    {{mission.loadingPoint.address.zipcode}} {{mission.loadingPoint.address.city.toUpperCase()}}</td>
             </tr>
             <tr>
                 <th scope="row">Driver:</th>

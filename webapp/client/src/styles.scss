@@ -34,15 +34,15 @@
     }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
     .grid {
         display: block;
     }
 }
-@media (min-width: 1000px) {
+@media (min-width: 1200px) {
     .grid {
         display: grid;
-        grid-template-columns: 1fr 0fr 1fr;
+        grid-template-columns: 3fr 0fr 2fr;
     }
 }
 
