@@ -5,7 +5,7 @@ export class SupportedBy {
     constructor(
         public plannedDeliveryDate: Date,
         public signatureTime: Date,
-        public isDelivered: Boolean,
+        public isDelivered: boolean,
         public orderContent: OrderContent,
         public mission: Mission
     ) { }

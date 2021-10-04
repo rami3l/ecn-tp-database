@@ -113,4 +113,9 @@ public class RepoRestService {
         return missionService.getMission(missionId);
     }
 
+    @GetMapping("/missions/{id}/ordercontents")
+    public Iterable<OrderContent> getMissionOrderContents(@PathVariable("id") int missionId) {
+        return missionService.getOrderContents(missionId);
+    }
+
 }
