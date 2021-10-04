@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Mission } from 'src/app/dto/mission';
+import { MissionWithDetails } from 'src/app/dto/details/missionWithDetails';
 import { MissionService } from 'src/app/services/rest/mission.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { MissionService } from 'src/app/services/rest/mission.service';
 export class MissionCardComponent implements OnInit {
 
   id: number = -1;
-  mission: Mission | undefined;
+  mission: MissionWithDetails | undefined;
 
   constructor(private activatedRoute: ActivatedRoute,
     private missionService: MissionService) { }
@@ -30,7 +30,7 @@ export class MissionCardComponent implements OnInit {
     } else {
       this.id = id;
       if (id != -1) {
-        this.missionService.getMission(id).subscribe(
+        this.missionService.getMissionWithDetails(id).subscribe(
           missionReceived => { this.mission = missionReceived; }
         )
       }

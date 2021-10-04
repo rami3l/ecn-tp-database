@@ -17,8 +17,12 @@
                 <td>{{mission.driver == null ? "" : mission.driver.firstName + " " + mission.driver.lastName}}</td>
             </tr>
             <tr>
-                <th scope="row">truck:</th>
+                <th scope="row">Truck:</th>
                 <td>{{mission.truck == null ? "" : mission.truck.licensePlate}}</td>
+            </tr>
+            <tr *ngFor="let orderContent of mission.orderContents; index as i">
+                <th scope="row">{{i==0 ? "Order contents:" : ""}}</th>
+                <td>{{orderContent.product.name}} : {{orderContent.quantity}} kg</td>
             </tr>
         </tbody>
     </table>
