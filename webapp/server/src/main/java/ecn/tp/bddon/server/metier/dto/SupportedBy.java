@@ -6,8 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import ecn.tp.bddon.server.metier.dto.idClasses.SupportedById;
@@ -31,13 +29,10 @@ public class SupportedBy implements Serializable {
     private boolean isDelivered;
 
     @Id
-    @ManyToOne
-    @JoinColumn(name = "order_content")
-    private OrderContent orderContent;
+    @Column(name = "order_content")
+    private int orderContent;
 
     @Id
-    @ManyToOne
-    @JoinColumn(name = "mission")
-    private Mission mission;
+    private int mission;
 
 }

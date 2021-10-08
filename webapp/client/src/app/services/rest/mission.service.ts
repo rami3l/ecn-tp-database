@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MissionWithDetails } from 'src/app/dto/details/missionWithDetails';
 import { Mission } from 'src/app/dto/mission';
-import { OrderContent } from 'src/app/dto/ordercontent';
+import { SupportedBy } from 'src/app/dto/supportedby';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -23,24 +22,8 @@ export class MissionService {
         return this.http.get<Mission>(this.url + id);
     }
 
-    getMissionWithDetails(id: number): Observable<MissionWithDetails> {
-        return new Observable(observer =>
-            this.http.get<MissionWithDetails>(this.url + id).subscribe(
-                missionWithDetails => {
-                    this.getOrderContents(id).subscribe(
-                        ordercontents => {
-                            missionWithDetails.orderContents = ordercontents;
-                            observer.next(missionWithDetails);
-                            observer.complete();
-                        }
-                    )
-                }
-            )
-        );
-    }
-
-    getOrderContents(missionId: number): Observable<OrderContent[]> {
-        return this.http.get<OrderContent[]>(this.url + missionId + "/ordercontents");
+    getSupports(missionId: number): Observable<SupportedBy[]> {
+        return this.http.get<SupportedBy[]>(this.url + missionId + "/supports");
     }
 
 }

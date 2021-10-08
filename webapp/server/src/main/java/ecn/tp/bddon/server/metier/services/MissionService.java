@@ -7,14 +7,17 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import ecn.tp.bddon.server.metier.dto.Mission;
-import ecn.tp.bddon.server.metier.dto.OrderContent;
+import ecn.tp.bddon.server.metier.dto.SupportedBy;
 import ecn.tp.bddon.server.metier.repository.MissionRestRepository;
+import ecn.tp.bddon.server.metier.repository.SupportedByRestRepository;
 
 @Service
 public class MissionService {
 
     @Resource
     private MissionRestRepository missionRestRepository;
+    @Resource
+    private SupportedByRestRepository supportedByRestRepository;
 
     public Iterable<Mission> getMissions() {
         return missionRestRepository.findAll();
@@ -29,8 +32,8 @@ public class MissionService {
         return mission.get();
     }
 
-    public Iterable<OrderContent> getOrderContents(int missionId) {
-        return getMission(missionId).getSupports().stream().map(support -> support.getOrderContent()).toList();
+    public Iterable<SupportedBy> getSupports(int missionId) {
+        return supportedByRestRepository.findAllByMission(missionId);
     }
 
 }

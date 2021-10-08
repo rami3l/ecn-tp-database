@@ -13,6 +13,7 @@ import ecn.tp.bddon.server.metier.dto.Mission;
 import ecn.tp.bddon.server.metier.dto.Order;
 import ecn.tp.bddon.server.metier.dto.OrderContent;
 import ecn.tp.bddon.server.metier.dto.Product;
+import ecn.tp.bddon.server.metier.dto.SupportedBy;
 import ecn.tp.bddon.server.metier.dto.Truck;
 import ecn.tp.bddon.server.metier.dto.Unavailability;
 import ecn.tp.bddon.server.metier.services.ClientService;
@@ -113,9 +114,9 @@ public class RepoRestService {
         return missionService.getMission(missionId);
     }
 
-    @GetMapping("/missions/{id}/ordercontents")
-    public Iterable<OrderContent> getMissionOrderContents(@PathVariable("id") int missionId) {
-        return missionService.getOrderContents(missionId);
+    @GetMapping("/missions/{id}/supports")
+    public Iterable<SupportedBy> getMissionOrderContents(@PathVariable("id") int missionId) {
+        return missionService.getSupports(missionId);
     }
 
 }

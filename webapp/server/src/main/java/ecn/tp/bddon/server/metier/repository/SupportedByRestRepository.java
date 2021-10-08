@@ -6,5 +6,5 @@ import ecn.tp.bddon.server.metier.dto.SupportedBy;
 import ecn.tp.bddon.server.metier.dto.idClasses.SupportedById;
 
 public interface SupportedByRestRepository extends CrudRepository<SupportedBy, SupportedById> {
-
+    public Iterable<SupportedBy> findAllByMission(int mission);
 }

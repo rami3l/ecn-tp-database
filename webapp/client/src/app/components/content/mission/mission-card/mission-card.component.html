@@ -20,9 +20,9 @@
                 <th scope="row">Truck:</th>
                 <td>{{mission.truck == null ? "" : mission.truck.licensePlate}}</td>
             </tr>
-            <tr *ngFor="let orderContent of mission.orderContents; index as i">
-                <th scope="row">{{i==0 ? "Order contents:" : ""}}</th>
-                <td>{{orderContent.product.name}} : {{orderContent.quantity}} kg</td>
+            <tr *ngFor="let support of supports; index as i">
+                <th scope="row">{{i==0 ? "Delivery time:" : ""}}</th>
+                <td>{{support.plannedDeliveryTime | date:"d MMMM y - hh'h'mm"}}</td>
             </tr>
         </tbody>
     </table>
