@@ -5,7 +5,7 @@
         <tbody>
             <tr>
                 <th scope="row">Loading time:</th>
-                <td>{{mission.loadingTime | date:"d MMMM y - hh'h'mm"}}</td>
+                <td>{{mission.loadingTime | date:"d MMMM y - HH'h'mm"}}</td>
             </tr>
             <tr>
                 <th scope="row">Loading point:</th>
@@ -20,9 +20,30 @@
                 <th scope="row">Truck:</th>
                 <td>{{mission.truck == null ? "" : mission.truck.licensePlate}}</td>
             </tr>
-            <tr *ngFor="let support of supports; index as i">
-                <th scope="row">{{i==0 ? "Delivery time:" : ""}}</th>
-                <td>{{support.plannedDeliveryTime | date:"d MMMM y - hh'h'mm"}}</td>
+            <tr>
+                <td colspan=2>
+                    <table class="item-sublist">
+                        <thead>
+                            <tr>
+                                <th scope="col">client</th>
+                                <th scope="col">time</th>
+                                <th scope="col">address</th>
+                                <th scope="col">product</th>
+                                <th scope="col">quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let support of supports">
+                                <td>{{support.orderContent.order.client.abbrev}}</td>
+                                <td>{{support.plannedDeliveryTime | date:"d MMMM y - HH'h'mm"}}</td>
+                                <td>{{support.orderContent.deliveryPoint.address.addressLine}} <br>
+                                    {{support.orderContent.deliveryPoint.address.city}}</td>
+                                <td>{{support.orderContent.product.name}}</td>
+                                <td>{{support.orderContent.quantity}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
             </tr>
         </tbody>
     </table>

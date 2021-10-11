@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Mission } from 'src/app/dto/mission';
 import { SupportedBy } from 'src/app/dto/supportedby';
 import { MissionService } from 'src/app/services/rest/mission.service';
+import { OrderService } from 'src/app/services/rest/order.service';
 
 @Component({
   selector: 'app-mission-card',
@@ -16,7 +17,8 @@ export class MissionCardComponent implements OnInit {
   supports: SupportedBy[] = [];
 
   constructor(private activatedRoute: ActivatedRoute,
-    private missionService: MissionService) { }
+    private missionService: MissionService,
+    private orderService: OrderService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(
@@ -36,7 +38,14 @@ export class MissionCardComponent implements OnInit {
           missionReceived => { this.mission = missionReceived; }
         )
         this.missionService.getSupports(id).subscribe(
-          supportsReceived => { this.supports = supportsReceived; }
+          supportsReceived => {
+            this.supports = supportsReceived;
+            this.supports.forEach(support => {
+              this.orderService.getOrderContentDetailed(support.orderContentId).subscribe(
+                orderContentReceived => { support.orderContent = orderContentReceived; }
+              )
+            })
+          }
         )
       }
     }
