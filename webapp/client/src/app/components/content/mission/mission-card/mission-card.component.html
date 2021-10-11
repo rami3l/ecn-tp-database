@@ -1,5 +1,5 @@
 <div class="container">
-    <h1 *ngIf="this.mission == null && this.id != -1">Loading...</h1>
+    <h1 *ngIf="this.mission == null">Loading...</h1>
     <h1 *ngIf="this.mission != null">Mission (id: {{mission.id}})</h1>
     <table *ngIf="this.mission != null" class="item-list">
         <tbody>
