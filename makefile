@@ -22,3 +22,20 @@ sql_set:
 	cd env_sql/config \
 		&& sudo chown 5050:5050 pgpass.conf \
 		&& sudo chmod 0600 pgpass.conf
+
+mongo_up:
+	cd env_mongo \
+		&& docker-compose down \
+		&& docker-compose up -d
+
+mongo_down:
+	cd env_mongo \
+		&& docker-compose down
+
+mongo_pause:
+	cd env_mongo \
+		&& docker-compose stop
+
+mongo_resume:
+	cd env_mongo \
+		&& docker-compose start
