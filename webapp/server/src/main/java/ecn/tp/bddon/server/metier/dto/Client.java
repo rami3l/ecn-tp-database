@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -22,6 +24,7 @@ public class Client implements Serializable {
 
     private String name;
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "address")
     private Address address;

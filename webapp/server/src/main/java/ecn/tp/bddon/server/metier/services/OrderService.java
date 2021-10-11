@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import ecn.tp.bddon.server.metier.dto.Order;
 import ecn.tp.bddon.server.metier.dto.OrderContent;
+import ecn.tp.bddon.server.metier.dto.details.OrderContentDetailed;
 import ecn.tp.bddon.server.metier.repository.OrderContentRestRepository;
 import ecn.tp.bddon.server.metier.repository.OrderRestRepository;
 
@@ -43,5 +44,9 @@ public class OrderService {
             return null;
         }
         return orderContent.get();
+    }
+
+    public OrderContentDetailed getOrderContentDetailed(int id) {
+        return new OrderContentDetailed(getOrderContent(id));
     }
 }
