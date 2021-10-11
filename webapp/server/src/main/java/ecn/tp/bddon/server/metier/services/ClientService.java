@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import ecn.tp.bddon.server.metier.dto.Client;
+import ecn.tp.bddon.server.metier.dto.details.ClientDetailed;
 import ecn.tp.bddon.server.metier.repository.ClientRestRepository;
 
 @Service
@@ -26,6 +27,10 @@ public class ClientService {
 
     public Iterable<Client> getClients() {
         return clientRestRepository.findAll();
+    }
+
+    public ClientDetailed getClientDetailed(String abbrev) {
+        return new ClientDetailed(getClient(abbrev));
     }
 
 }

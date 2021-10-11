@@ -18,6 +18,7 @@ import ecn.tp.bddon.server.metier.dto.Truck;
 import ecn.tp.bddon.server.metier.dto.Unavailability;
 import ecn.tp.bddon.server.metier.dto.details.ClientDetailed;
 import ecn.tp.bddon.server.metier.dto.details.OrderContentDetailed;
+import ecn.tp.bddon.server.metier.dto.details.OrderDetailed;
 import ecn.tp.bddon.server.metier.services.ClientService;
 import ecn.tp.bddon.server.metier.services.MissionService;
 import ecn.tp.bddon.server.metier.services.OrderService;
@@ -52,8 +53,8 @@ public class RepoRestService {
     }
 
     @GetMapping("/clients/{abbrev}")
-    public Client getClient(@PathVariable("abbrev") String abbrev) {
-        return clientService.getClient(abbrev);
+    public ClientDetailed getClient(@PathVariable("abbrev") String abbrev) {
+        return clientService.getClientDetailed(abbrev);
     }
 
     @GetMapping("/clients/{abbrev}/deliverypoints")
@@ -91,9 +92,14 @@ public class RepoRestService {
         return orderService.getOrders();
     }
 
+    @GetMapping("/orders/details")
+    public Iterable<OrderDetailed> getOrdersDetailed() {
+        return orderService.getOrdersDetailed();
+    }
+
     @GetMapping("/orders/{id}")
-    public Order getOrder(@PathVariable("id") int orderId) {
-        return orderService.getOrder(orderId);
+    public OrderDetailed getOrder(@PathVariable("id") int orderId) {
+        return orderService.getOrderDetailed(orderId);
     }
 
     @GetMapping("/ordercontents")

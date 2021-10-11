@@ -1,6 +1,7 @@
 package ecn.tp.bddon.server.metier.services;
 
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 import javax.annotation.Resource;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import ecn.tp.bddon.server.metier.dto.Order;
 import ecn.tp.bddon.server.metier.dto.OrderContent;
 import ecn.tp.bddon.server.metier.dto.details.OrderContentDetailed;
+import ecn.tp.bddon.server.metier.dto.details.OrderDetailed;
 import ecn.tp.bddon.server.metier.repository.OrderContentRestRepository;
 import ecn.tp.bddon.server.metier.repository.OrderRestRepository;
 
@@ -31,6 +33,14 @@ public class OrderService {
             return null;
         }
         return order.get();
+    }
+
+    public Iterable<OrderDetailed> getOrdersDetailed() {
+        return StreamSupport.stream(getOrders().spliterator(), true).map(OrderDetailed::new).toList();
+    }
+
+    public OrderDetailed getOrderDetailed(int orderId) {
+        return new OrderDetailed(getOrder(orderId));
     }
 
     public Iterable<OrderContent> getOrderContents() {
