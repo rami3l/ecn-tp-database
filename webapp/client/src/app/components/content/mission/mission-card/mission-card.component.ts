@@ -41,7 +41,7 @@ export class MissionCardComponent implements OnInit {
           supportsReceived => {
             this.supports = supportsReceived;
             this.supports.forEach(support => {
-              this.orderService.getOrderContentDetailed(support.orderContentId).subscribe(
+              this.orderService.getOrderContent(support.orderContentId).subscribe(
                 orderContentReceived => { support.orderContent = orderContentReceived; }
               )
             })
