@@ -4,6 +4,8 @@ import javax.annotation.Resource;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import ecn.tp.bddon.server.metier.dto.Client;
@@ -16,6 +18,7 @@ import ecn.tp.bddon.server.metier.dto.Product;
 import ecn.tp.bddon.server.metier.dto.SupportedBy;
 import ecn.tp.bddon.server.metier.dto.Truck;
 import ecn.tp.bddon.server.metier.dto.Unavailability;
+import ecn.tp.bddon.server.metier.dto.creations.MissionToSave;
 import ecn.tp.bddon.server.metier.dto.details.ClientDetailed;
 import ecn.tp.bddon.server.metier.dto.details.OrderContentDetailed;
 import ecn.tp.bddon.server.metier.dto.details.OrderDetailed;
@@ -125,6 +128,11 @@ public class RepoRestService {
     @GetMapping("/missions/{id}/supports")
     public Iterable<SupportedBy> getMissionOrderContents(@PathVariable("id") int missionId) {
         return missionService.getSupports(missionId);
+    }
+
+    @PutMapping("/missions/new")
+    public int putMission(@RequestBody MissionToSave mission) {
+        return missionService.save(mission);
     }
 
 }

@@ -11,6 +11,7 @@ import ecn.tp.bddon.server.metier.dto.Truck;
 import ecn.tp.bddon.server.metier.dto.Unavailability;
 import ecn.tp.bddon.server.metier.repository.DriverRestRepository;
 import ecn.tp.bddon.server.metier.repository.TruckRestRepository;
+import lombok.NonNull;
 
 @Service
 public class TransportService {
@@ -25,7 +26,7 @@ public class TransportService {
         return truckRestRepository.findAll();
     }
 
-    public Truck getTruck(String licensePlate) {
+    public Truck getTruck(@NonNull String licensePlate) {
         Optional<Truck> truck = truckRestRepository.findById(licensePlate);
         if (truck.isEmpty()) {
             // TODO: lever erreur 404

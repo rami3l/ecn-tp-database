@@ -1,5 +1,7 @@
 package ecn.tp.bddon.server.metier.services;
 
+import java.util.Optional;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -24,6 +26,15 @@ public class PlacesService {
 
     public Iterable<LoadingPoint> getLoadingPoints() {
         return loadingPointRestRepository.findAll();
+    }
+
+    public LoadingPoint getLoadingPoint(int id) {
+        Optional<LoadingPoint> loadingPoint = loadingPointRestRepository.findById(id);
+        if (loadingPoint.isEmpty()) {
+            // TODO: lever erreur 404
+            return null;
+        }
+        return loadingPoint.get();
     }
 
     public Iterable<DeliveryPoint> getDeliveryPoints() {

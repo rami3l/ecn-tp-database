@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import ecn.tp.bddon.server.metier.dto.Mission;
 import ecn.tp.bddon.server.metier.dto.SupportedBy;
+import ecn.tp.bddon.server.metier.dto.creations.MissionToSave;
 import ecn.tp.bddon.server.metier.repository.MissionRestRepository;
 import ecn.tp.bddon.server.metier.repository.SupportedByRestRepository;
 
@@ -18,6 +19,10 @@ public class MissionService {
     private MissionRestRepository missionRestRepository;
     @Resource
     private SupportedByRestRepository supportedByRestRepository;
+    @Resource
+    private PlacesService placesService;
+    @Resource
+    private TransportService transportService;
 
     public Iterable<Mission> getMissions() {
         return missionRestRepository.findAll();
@@ -34,6 +39,19 @@ public class MissionService {
 
     public Iterable<SupportedBy> getSupports(int missionId) {
         return supportedByRestRepository.findAllByMissionId(missionId);
+    }
+
+    public int save(MissionToSave missionToSave) {
+        Mission mission = new Mission();
+        mission.setLoadingTime(missionToSave.getLoadingTime());
+        mission.setLoadingPoint(placesService.getLoadingPoint(missionToSave.getLoadingPointId()));
+        mission.setDriver(transportService.getDriver(missionToSave.getDriverId()));
+        String licencePlate = missionToSave.getTruckId();
+        if (licencePlate != null) {
+            mission.setTruck(transportService.getTruck(licencePlate));
+        }
+        missionRestRepository.save(mission);
+        return mission.getId();
     }
 
 }
