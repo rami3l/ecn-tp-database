@@ -30,9 +30,10 @@ public class SupportedBy implements Serializable {
 
     @Id
     @Column(name = "order_content")
-    private int orderContent;
+    private int orderContentId;
 
     @Id
-    private int mission;
+    @Column(name = "mission")
+    private int missionId;
 
 }

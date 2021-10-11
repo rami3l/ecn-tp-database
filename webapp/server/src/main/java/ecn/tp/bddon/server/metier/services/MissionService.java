@@ -33,7 +33,7 @@ public class MissionService {
     }
 
     public Iterable<SupportedBy> getSupports(int missionId) {
-        return supportedByRestRepository.findAllByMission(missionId);
+        return supportedByRestRepository.findAllByMissionId(missionId);
     }
 
 }

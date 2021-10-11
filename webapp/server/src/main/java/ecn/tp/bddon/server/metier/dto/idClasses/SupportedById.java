@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SupportedById implements Serializable {
 
-    private int orderContent;
-    private int mission;
+    private int orderContentId;
+    private int missionId;
 
 }
