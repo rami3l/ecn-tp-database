@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Mission } from 'src/app/dto/mission';
@@ -51,6 +52,16 @@ export class MissionCardComponent implements OnInit {
         }
       )
     })
+  }
+
+  displayDateTime(datetime: Date, datetimeRef: Date): string {
+    var display = formatDate(datetime, "HH'h'mm", 'en');
+    var date = formatDate(datetime, 'd MMMM y', 'en');
+    var dateRef = formatDate(datetimeRef, 'd MMMM y', 'en');
+    if (date != dateRef) {
+      display = date + "\n" + display;
+    }
+    return display;
   }
 
 }

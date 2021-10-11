@@ -1,3 +1,8 @@
+$max-width-display-block: 1400px;
+$max-width-ajusting-size: 4000px;
+$margin-ratio: 5%;
+$fixed-width-when-not-ajusting-size: 1800px;
+
 :root {
     --grey-typo: #bdc1c6;
     --white-typo-btn: white;
@@ -16,37 +21,47 @@
     text-align: center;
 }
 
-@media (max-width: 4000px) {
+@media (max-width: $max-width-display-block) {
     .left-container {
-        margin-left: 10%;
-        width: 90%;
+        margin-left: $margin-ratio;
+        width: 100% - 2*$margin-ratio;
+        margin-right: $margin-ratio;
     }
-    .container {
-        margin-left: 10%;
-        width: 80%;
-        margin-right: 10%;
-    }
-}
-
-@media (min-width: 4000px) {
-    .left-container, .container {
-        margin: auto;
-        width: 1600px;
-    }
-}
-
-@media (max-width: 1200px) {
     .grid {
         display: block;
     }
 }
-@media (min-width: 1200px) {
-    .grid {
-        display: grid;
-        grid-template-columns: 3fr 0fr 2fr;
+
+@media (min-width: $max-width-display-block) and (max-width: $max-width-ajusting-size) {
+    .left-container {
+        margin-left: $margin-ratio;
+        width: 100% - $margin-ratio;
     }
 }
 
+@media (min-width: $max-width-display-block) {
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 0fr 1fr;
+    }
+}
+
+@media (max-width: $max-width-ajusting-size) {
+    
+    .container {
+        margin-left: $margin-ratio;
+        width: 100% - 2*$margin-ratio;
+        margin-right: $margin-ratio;
+    }
+}
+
+@media (min-width: $max-width-ajusting-size) {
+    .left-container, .container {
+        margin: auto;
+        margin-top: 0px;
+        width: $fixed-width-when-not-ajusting-size;
+    }
+}
 
 .item-list, .item-sublist {
     table-layout: auto;

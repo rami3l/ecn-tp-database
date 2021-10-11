@@ -35,7 +35,7 @@
                         <tbody>
                             <tr *ngFor="let support of supports">
                                 <td>{{support.orderContent.order.client.abbrev}}</td>
-                                <td>{{support.plannedDeliveryTime | date:"d MMMM y - HH'h'mm"}}</td>
+                                <td>{{displayDateTime(support.plannedDeliveryTime, mission.loadingTime)}}</td>
                                 <td>{{support.orderContent.deliveryPoint.address.addressLine}} <br>
                                     {{support.orderContent.deliveryPoint.address.city}}</td>
                                 <td>{{support.orderContent.product.name}}</td>
