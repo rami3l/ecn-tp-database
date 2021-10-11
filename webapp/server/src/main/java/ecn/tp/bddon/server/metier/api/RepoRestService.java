@@ -2,10 +2,12 @@ package ecn.tp.bddon.server.metier.api;
 
 import javax.annotation.Resource;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import ecn.tp.bddon.server.metier.dto.Client;
@@ -130,8 +132,9 @@ public class RepoRestService {
         return missionService.getSupports(missionId);
     }
 
-    @PutMapping("/missions/new")
-    public int putMission(@RequestBody MissionToSave mission) {
+    @PostMapping("/missions/new")
+    @ResponseStatus(HttpStatus.CREATED)
+    public int createMission(@RequestBody MissionToSave mission) {
         return missionService.save(mission);
     }
 
