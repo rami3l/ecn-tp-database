@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ecn.tp.bddon.server.metier.dto.Client;
 import ecn.tp.bddon.server.metier.dto.DeliveryPoint;
 import ecn.tp.bddon.server.metier.dto.Driver;
+import ecn.tp.bddon.server.metier.dto.LoadingPoint;
 import ecn.tp.bddon.server.metier.dto.Mission;
 import ecn.tp.bddon.server.metier.dto.Order;
 import ecn.tp.bddon.server.metier.dto.OrderContent;
@@ -70,6 +71,11 @@ public class RepoRestService {
     @GetMapping("/deliverypoints")
     public Iterable<DeliveryPoint> getDeliveryPoints() {
         return placesService.getDeliveryPoints();
+    }
+
+    @GetMapping("/loadingpoints")
+    public Iterable<LoadingPoint> getLoadingPoints() {
+        return placesService.getLoadingPoints();
     }
 
     @GetMapping("/trucks")
