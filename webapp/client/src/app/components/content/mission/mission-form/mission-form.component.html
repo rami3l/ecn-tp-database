@@ -1,1 +1,54 @@
-<p>mission-form works!</p>
+<div class="container">
+    <h1>Add a mission</h1>
+    <table class="item-list">
+        <tbody>
+            <tr>
+                <th scope="row">Loading time:</th>
+                <td>TODO: datetime selector - display (one of) the desired delivery date for comparison ?</td>
+            </tr>
+            <tr>
+                <th scope="row">Loading point:</th>
+                <td>
+                    TODO: loadingPoint selector
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">Driver:</th>
+                <td>TODO: driver selector - list of existing drivers</td>
+            </tr>
+            <tr>
+                <th scope="row">Truck:</th>
+                <td>TODO: truck selector - list of existing trucks (set to default_truck when driver selected if truck
+                    not selected)</td>
+            </tr>
+            <tr>
+                <td colspan=2>
+                    <table class="item-sublist">
+                        <thead>
+                            <tr>
+                                <th scope="col">client</th>
+                                <th scope="col">time</th>
+                                <th scope="col">address</th>
+                                <th scope="col">product</th>
+                                <th scope="col">quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let support of supports">
+                                <td>{{support.orderContent.order.client.abbrev}}</td>
+                                <!-- <td>{{displayDateTime(support.plannedDeliveryTime, mission.loadingTime)}}</td>
+                                <td>{{support.orderContent.deliveryPoint.address.addressLine}} <br>
+                                    {{support.orderContent.deliveryPoint.address.city}}</td>
+                                <td>{{support.orderContent.product.name}}</td>
+                                <td>{{support.orderContent.quantity}}</td> -->
+                            </tr>
+                            <tr>
+                                TODO: support selector (do not display supports already selected)
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

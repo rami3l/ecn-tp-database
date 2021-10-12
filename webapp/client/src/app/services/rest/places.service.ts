@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
     providedIn: 'root',
 })
-export class placesService {
+export class PlacesService {
 
     loadingPointUrl: string = environment.apiUrl + "loadingpoints/";
     deliveryPointUrl: string = environment.apiUrl + "deliverypoints/"
