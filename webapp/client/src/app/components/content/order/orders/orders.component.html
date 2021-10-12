@@ -17,7 +17,8 @@
                     <td>{{order.client.abbrev}} {{order.client.name == null ? "" : "(" + order.client.name + ")"}}</td>
                     <td>{{order.client.address.addressLine}}</td>
                     <td>{{order.client.address.zipcode}} {{order.client.address.city}}</td>
-                    <td><button class="btn" routerLinkActive="active" routerLink="./order/{{order.id}}"
+                    <td><button class="btn-more" title="Details on order {{order.id}}"
+                            routerLinkActive="btn-more-active" routerLink="./order/{{order.id}}"
                             #state="routerLinkActive" (click)="checkState(state.isActive)">More...</button>
                     </td>
                 </tr>

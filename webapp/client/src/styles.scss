@@ -10,9 +10,12 @@ $fixed-width-when-not-ajusting-size: 1800px;
     --dark-navbar: rgb(80, 51, 51);
     --black-hover: #111;
     --green-active: #459e48;
-    --green-1: rgb(12, 100, 0); // buttons
-    --green-2: rgb(10, 83, 0); // buttons on hover
-    --green-3: rgb(5, 46, 0); // buttons when activated
+    --green-1: rgb(12, 100, 0); // buttons more
+    --green-2: rgb(10, 83, 0); // buttons more on hover
+    --green-3: rgb(5, 46, 0); // buttons more when activated
+    --red-1: #b38300; // buttons add
+    --red-2: #8f6900; // buttons add on hover
+    --red-3: #7c5b00; // buttons add when activated
 }
 
 .webpage {
@@ -99,7 +102,7 @@ $fixed-width-when-not-ajusting-size: 1800px;
 }
 
 
-.item-list tbody td > .btn {
+.btn-more, .btn-add {
     background-color: var(--green-1);
     border-color: var(--green-1);
     color: var(--white-typo-btn);
@@ -107,13 +110,28 @@ $fixed-width-when-not-ajusting-size: 1800px;
     text-align: center;
     cursor: pointer;
     border-radius: 4px;
+    float: right;
 }
 
-.item-list tbody td > .btn:hover {
+.btn-add {
+    background-color: var(--red-1);
+    border-color: var(--red-1);
+}
+
+.btn-more:hover {
     background-color: var(--green-2);
 }
 
-.item-list tbody td > .active {
+.btn-add:hover {
+    background-color: var(--red-2);
+}
+
+.btn-more-active {
     background-color: var(--green-3);
+    border-color: var(--grey-typo);
+}
+
+.btn-add-active {
+    background-color: var(--red-3);
     border-color: var(--grey-typo);
 }

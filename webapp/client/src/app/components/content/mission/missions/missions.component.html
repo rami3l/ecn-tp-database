@@ -10,6 +10,11 @@
                     <th scope="col">loading city</th>
                     <th scope="col">driver</th>
                     <th scope="col">truck</th>
+                    <th scope="col">
+                        <button class="btn-add" title="Add mission" routerLinkActive="btn-add-active"
+                            routerLink="./mission/new" #state="routerLinkActive"
+                            (click)="checkState(state.isActive)">+</button>
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -19,7 +24,8 @@
                     <td>{{mission.loadingPoint == null ? "" : mission.loadingPoint.address.city}}</td>
                     <td>{{mission.driver == null ? "" : mission.driver.firstName + " " + mission.driver.lastName}}</td>
                     <td>{{mission.truck == null ? "" : mission.truck.licensePlate}}</td>
-                    <td><button class="btn" routerLinkActive="active" routerLink="./mission/{{mission.id}}"
+                    <td><button class="btn-more" title="Details on mission {{mission.id}}"
+                            routerLinkActive="btn-more-active" routerLink="./mission/{{mission.id}}"
                             #state="routerLinkActive" (click)="checkState(state.isActive)">More...</button></td>
                 </tr>
             </tbody>
