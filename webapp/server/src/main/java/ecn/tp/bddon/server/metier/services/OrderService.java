@@ -56,6 +56,10 @@ public class OrderService {
         return orderContent.get();
     }
 
+    public Iterable<OrderContentDetailed> getOrderContentsDetailed() {
+        return StreamSupport.stream(getOrderContents().spliterator(), true).map(OrderContentDetailed::new).toList();
+    }
+
     public OrderContentDetailed getOrderContentDetailed(int id) {
         return new OrderContentDetailed(getOrderContent(id));
     }
