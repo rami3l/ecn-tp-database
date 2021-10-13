@@ -3,8 +3,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MissionToSave } from 'src/app/dto/creations/mission-to-save';
 import { Driver } from 'src/app/dto/driver';
 import { LoadingPoint } from 'src/app/dto/loadingpoint';
+import { OrderContent } from 'src/app/dto/ordercontent';
 import { SupportedBy } from 'src/app/dto/supportedby';
 import { Truck } from 'src/app/dto/truck';
+import { OrderService } from 'src/app/services/rest/order.service';
 import { PlacesService } from 'src/app/services/rest/places.service';
 import { TransportService } from 'src/app/services/rest/transport.service';
 
@@ -15,21 +17,30 @@ import { TransportService } from 'src/app/services/rest/transport.service';
 })
 export class MissionFormComponent implements OnInit {
 
-  useDefaultTruck = true;
   mission: MissionToSave = new MissionToSave();
   supports: SupportedBy[] = [];
+  useDefaultTruck = true;
+  modalOpened = false;
+  displayedOrderContents: OrderContent[] = [];
+  orderContentToAdd: OrderContent[] = [];
+
   loadingPoints: LoadingPoint[] = [];
   drivers: Driver[] = [];
   trucks: Truck[] = [];
+  orderContents: OrderContent[] = [];
+
   missionForm = new FormGroup({
-    loadingTime: new FormControl(''),
+    loadingDate: new FormControl(new Date(), Validators.required),
+    loadingTime: new FormControl(new Date(), Validators.required),
     loadingPoint: new FormControl('', Validators.required),
     driver: new FormControl('', Validators.required),
     truck: new FormControl({ value: '', disabled: true }),
+    supports: new FormControl(''),
   });
 
   constructor(private placesService: PlacesService,
-    private transportService: TransportService) { }
+    private transportService: TransportService,
+    private orderService: OrderService) { }
 
   ngOnInit(): void {
     this.placesService.getLoadingPoints().subscribe(
@@ -41,8 +52,12 @@ export class MissionFormComponent implements OnInit {
     this.transportService.getTrucks().subscribe(
       trucksReceived => { this.trucks = trucksReceived; }
     )
-
-
+    this.orderService.getOrderContentsDetailed().subscribe(
+      orderContentsReceived => {
+        this.orderContents = orderContentsReceived;
+        this.displayedOrderContents = orderContentsReceived;
+      }
+    )
   }
 
   onSubmit(): void {
@@ -66,6 +81,10 @@ export class MissionFormComponent implements OnInit {
     }
   }
 
-
+  addOrderContent(orderContent: OrderContent) {
+    this.orderContents = this.orderContents.filter(o => o !== orderContent);
+    this.displayedOrderContents = this.displayedOrderContents.filter(o => o !== orderContent);
+    this.orderContentToAdd.push(orderContent);
+  }
 
 }

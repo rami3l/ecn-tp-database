@@ -4,17 +4,19 @@
         <tbody>
             <tr>
                 <th scope="row">Loading time:</th>
-                <td>TODO: datetime selector - display (one of) the desired delivery date for comparison ?</td>
+                <td>
+                    <input type="date" formControlName="loadingDate" style="margin-right: 2%;">
+                    <input type="time" formControlName="loadingTime">
+                </td>
             </tr>
             <tr>
-                <th scope="row">Loading point:</th>
+                <th scope=" row">Loading point:</th>
                 <td>
                     <select formControlName="loadingPoint">
                         <option value="">Choose a loading point</option>
                         <option *ngFor="let loadingPoint of loadingPoints" value="{{loadingPoint.id}}">
                             {{loadingPoint.address.addressLine}} - {{loadingPoint.address.city}}</option>
                     </select>
-
                 </td>
             </tr>
             <tr>
@@ -45,23 +47,51 @@
                     <table class="item-sublist">
                         <thead>
                             <tr>
-                                <th scope="col">client</th>
                                 <th scope="col">time</th>
+                                <th scope="col">client</th>
                                 <th scope="col">address</th>
                                 <th scope="col">product</th>
                                 <th scope="col">quantity</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody formControlName="supports">
                             <tr *ngFor="let support of supports">
                                 <td>{{support.orderContent.order.client.abbrev}}</td>
-                                <!-- <td>{{displayDateTime(support.plannedDeliveryTime, mission.loadingTime)}}</td>
+                                <!-- <td>{{displayDateTime(support.plannedDeliveryTime, mission.loadingTime)}}</td> -->
                                 <td>{{support.orderContent.deliveryPoint.address.addressLine}} <br>
-                                  (ngSubmit)="onSubmit()  {{support.orderContent.deliveryPoint.address.city}}</td>
+                                    {{support.orderContent.deliveryPoint.address.city}}</td>
                                 <td>{{support.orderContent.product.name}}</td>
-                                <td>{{support.orderContent.quantity}}</td> -->
+                                <td>{{support.orderContent.quantity}}</td>
+                                <td>
+                                    <button class="btn-add">-</button>
+                                </td>
                             </tr>
                             <tr>
+                                <td>
+                                    <input type="time" formControlName="loadingTime">
+                                </td>
+                                <!-- <td>
+                                    <select>
+                                        <option value="">Filter by client</option>
+                                        <option *ngFor="let truck of trucks" value="{{truck.licensePlate}}">
+                                            {{truck.licensePlate}}</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select>
+                                        <option value="">Filter by address</option>
+                                        <option *ngFor="let truck of trucks" value="{{truck.licensePlate}}">
+                                            {{truck.licensePlate}}</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select>
+                                        <option value="">Filter by product</option>
+                                        <option *ngFor="let truck of trucks" value="{{truck.licensePlate}}">
+                                            {{truck.licensePlate}}</option>
+                                    </select>
+                                </td> -->
+
                                 TODO: support selector (do not display supports already selected)
                             </tr>
                         </tbody>
@@ -70,9 +100,49 @@
             </tr>
             <tr>
                 <td colspan=2>
-                    <button [disabled]="!missionForm.valid" (click)="onSubmit()">Submit</button>
+                    <button id="myBtn" (click)="modalOpened=true">Open Modal</button>
+                    <!-- Modal input for order contents -->
+                    <div *ngIf="modalOpened" class="modal">
+                        <div class="modal-content">
+                            <span class="close" (click)="modalOpened=false">&times;</span>
+                            <table class="add-list">
+                                <tbody>
+                                    <tr>
+                                        <th scope="colgroup" colspan="2">
+                                            <h2>Select order contents to add to the mission</h2>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for="client_filter">Client filter : </label>
+                                            <input type="text" id="client_filter">
+                                        </td>
+                                        <td>
+                                            <label for="address_filter">Address filter : </label>
+                                            <input type="text" id="address_filter">
+                                        </td>
+                                        <td>
+                                            <label for="product_filter">Product filter : </label>
+                                            <input type="text" id="product_filter">
+                                        </td>
+                                    </tr>
+                                    <tr *ngFor="let orderContent of displayedOrderContents">
+                                        <td>
+                                            {{orderContent.order.client.abbrev}} (order {{orderContent.order.id}}) -
+                                            {{orderContent.product.name}} ({{orderContent.quantity}} Kg)
+                                        </td>
+                                        <td>
+                                            <button (click)="addOrderContent(orderContent)"
+                                                title="add order content {{orderContent.id}} to this mission">+</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </td>
             </tr>
         </tbody>
     </table>
+    <button [disabled]="!missionForm.valid" (click)="onSubmit()">Submit</button>
 </div>

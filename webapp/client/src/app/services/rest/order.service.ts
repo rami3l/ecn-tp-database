@@ -27,9 +27,12 @@ export class OrderService {
         return this.http.get<Order>(this.orderUrl + id);
     }
 
-
     getOrderContents(): Observable<OrderContent[]> {
         return this.http.get<OrderContent[]>(this.orderContentUrl);
+    }
+
+    getOrderContentsDetailed(): Observable<OrderContent[]> {
+        return this.http.get<OrderContent[]>(this.orderContentUrl + "details");
     }
 
     getOrderContent(id: number): Observable<OrderContent> {
