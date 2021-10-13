@@ -1,6 +1,6 @@
 <div class="container">
     <h1>Add a mission</h1>
-    <table class="item-list">
+    <table [formGroup]="missionForm" class="item-list">
         <tbody>
             <tr>
                 <th scope="row">Loading time:</th>
@@ -9,17 +9,36 @@
             <tr>
                 <th scope="row">Loading point:</th>
                 <td>
-                    TODO: loadingPoint selector
+                    <select formControlName="loadingPoint">
+                        <option value="">Choose a loading point</option>
+                        <option *ngFor="let loadingPoint of loadingPoints" value="{{loadingPoint.id}}">
+                            {{loadingPoint.address.addressLine}} - {{loadingPoint.address.city}}</option>
+                    </select>
+
                 </td>
             </tr>
             <tr>
                 <th scope="row">Driver:</th>
-                <td>TODO: driver selector - list of existing drivers</td>
+                <td>
+                    <select formControlName="driver" (ngModelChange)="onDriverChange()">
+                        <option value="">Choose a driver</option>
+                        <option *ngFor="let driver of drivers" value="{{driver.id}}">
+                            {{driver.firstName}} {{driver.lastName}}</option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <th scope="row">Truck:</th>
-                <td>TODO: truck selector - list of existing trucks (set to default_truck when driver selected if truck
-                    not selected)</td>
+                <td>
+                    <input type="checkbox" (click)="toggleUseDefaultTruck()"
+                        title="Use different truck than driver's default one">
+                    <select formControlName="truck">
+                        <option value="">Choose a truck (optional)</option>
+                        <option *ngFor="let truck of trucks" value="{{truck.licensePlate}}">
+                            {{truck.licensePlate}}</option>
+                    </select>
+                    <!-- TODO: check if truck is available when loading time is selected -->
+                </td>
             </tr>
             <tr>
                 <td colspan=2>
@@ -38,7 +57,7 @@
                                 <td>{{support.orderContent.order.client.abbrev}}</td>
                                 <!-- <td>{{displayDateTime(support.plannedDeliveryTime, mission.loadingTime)}}</td>
                                 <td>{{support.orderContent.deliveryPoint.address.addressLine}} <br>
-                                    {{support.orderContent.deliveryPoint.address.city}}</td>
+                                  (ngSubmit)="onSubmit()  {{support.orderContent.deliveryPoint.address.city}}</td>
                                 <td>{{support.orderContent.product.name}}</td>
                                 <td>{{support.orderContent.quantity}}</td> -->
                             </tr>
@@ -47,6 +66,11 @@
                             </tr>
                         </tbody>
                     </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan=2>
+                    <button [disabled]="!missionForm.valid" (click)="onSubmit()">Submit</button>
                 </td>
             </tr>
         </tbody>
