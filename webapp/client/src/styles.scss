@@ -72,7 +72,7 @@ $fixed-width-when-not-ajusting-size: 1800px;
     }
 }
 
-.item-list, .item-sublist, .add-list {
+.item-list, .item-sublist {
     table-layout: auto;
     width: 100%;
     border: 3px solid;
@@ -82,35 +82,16 @@ $fixed-width-when-not-ajusting-size: 1800px;
     border: 1px solid;
 }
 
-.add-list {
-    border: none;
-}
-
 .item-list tbody td, th {
     vertical-align: middle;
     text-align: center;
     padding: 12px 10px;
-   // border: 1px solid;
 }
 
-.item-list tbody td > fa-icon {
-    position: relative;
-    float: left;
-    // margin-right: 15px;
+.add-list {
+    table-layout: auto;
+    margin: auto;
 }
-
-
-.item-list tbody td .item-link {
-    display: block;
-    font-size: 1.15em;
-    padding-top: 3px;
-    margin-left: 60px;
-}
-.item-list tbody td .item-subhead {
-    font-size: 0.75em;
-    font-style: italic;
-}
-
 
 .btn-more, .btn-add {
     background-color: var(--green-1);
@@ -147,19 +128,17 @@ $fixed-width-when-not-ajusting-size: 1800px;
 }
 
 .modal {
-    // display: none;
-    position: absolute; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    position: absolute;
+    z-index: 1; // sit on top
+    padding-top: 100px; // location of the modal
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: var(--modal-background); /* Black w/ opacity */
+    width: 100%;
+    height: 100%;
+    overflow: auto; // Enable scroll if needed
+    background-color: var(--modal-background); // background under the modal
   }
 
-  /* Modal Content */
 .modal-content {
     background-color: var(--modal-content-dar-background);
     margin: auto;
