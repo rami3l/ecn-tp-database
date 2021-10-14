@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Order } from 'src/app/dto/order';
 import { OrderService } from 'src/app/services/rest/order.service';
 
@@ -8,10 +9,11 @@ import { OrderService } from 'src/app/services/rest/order.service';
   templateUrl: './order-card.component.html',
   styleUrls: ['./order-card.component.scss']
 })
-export class OrderCardComponent implements OnInit {
+export class OrderCardComponent implements OnInit, OnDestroy {
 
   id: number = -1;
   order: Order | undefined;
+  orderChangeSubscription: Subscription | undefined;
 
   constructor(private activatedRoute: ActivatedRoute,
     private orderService: OrderService) { }
@@ -20,6 +22,10 @@ export class OrderCardComponent implements OnInit {
     this.activatedRoute.params.subscribe(
       param => this.loadOrder(param.id)
     );
+  }
+
+  ngOnDestroy(): void {
+    this.orderChangeSubscription?.unsubscribe();
   }
 
   loadOrder(id: number) {

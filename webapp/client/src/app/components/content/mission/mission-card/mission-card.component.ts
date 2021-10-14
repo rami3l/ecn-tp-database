@@ -1,6 +1,7 @@
 import { formatDate } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Mission } from 'src/app/dto/mission';
 import { SupportedBy } from 'src/app/dto/supportedby';
 import { MissionService } from 'src/app/services/rest/mission.service';
@@ -11,19 +12,24 @@ import { OrderService } from 'src/app/services/rest/order.service';
   templateUrl: './mission-card.component.html',
   styleUrls: ['./mission-card.component.scss']
 })
-export class MissionCardComponent implements OnInit {
+export class MissionCardComponent implements OnInit, OnDestroy {
 
   mission: Mission | undefined;
   supports: SupportedBy[] = [];
+  missionChangeSubscription: Subscription | undefined;
 
   constructor(private activatedRoute: ActivatedRoute,
     private missionService: MissionService,
     private orderService: OrderService) { }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(
+    this.missionChangeSubscription = this.activatedRoute.params.subscribe(
       param => this.loadMission(param.id)
     );
+  }
+
+  ngOnDestroy(): void {
+    this.missionChangeSubscription?.unsubscribe();
   }
 
   private loadMission(id: number) {
@@ -44,6 +50,7 @@ export class MissionCardComponent implements OnInit {
   }
 
   private loadOrderContents(supportsReceived: SupportedBy[]) {
+    this.supports = [];
     supportsReceived.forEach(support => {
       this.orderService.getOrderContent(support.orderContentId).subscribe(
         orderContentReceived => {
