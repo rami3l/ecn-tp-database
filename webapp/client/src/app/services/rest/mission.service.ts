@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MissionToSave } from 'src/app/dto/creations/mission-to-save';
+import { SupportedByToSave } from 'src/app/dto/creations/supportedby-to-save';
 import { Mission } from 'src/app/dto/mission';
 import { SupportedBy } from 'src/app/dto/supportedby';
 import { environment } from 'src/environments/environment';
@@ -12,6 +13,7 @@ import { environment } from 'src/environments/environment';
 export class MissionService {
 
     url: string = environment.apiUrl + "missions/";
+    supportedByUrl: string = environment.apiUrl + "supportedby/";
 
     constructor(private http: HttpClient) { }
 
@@ -29,6 +31,10 @@ export class MissionService {
 
     postMission(mission: MissionToSave): Observable<number> {
         return this.http.post<number>(this.url + "new", mission);
+    }
+
+    postSupportedBy(support: SupportedByToSave): Observable<number> {
+        return this.http.post<number>(this.supportedByUrl + "new", support);
     }
 
 }

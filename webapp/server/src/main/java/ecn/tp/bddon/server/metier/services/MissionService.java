@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import ecn.tp.bddon.server.metier.dto.Mission;
 import ecn.tp.bddon.server.metier.dto.SupportedBy;
 import ecn.tp.bddon.server.metier.dto.creations.MissionToSave;
+import ecn.tp.bddon.server.metier.dto.creations.SupportedByToSave;
 import ecn.tp.bddon.server.metier.repository.MissionRestRepository;
 import ecn.tp.bddon.server.metier.repository.SupportedByRestRepository;
 
@@ -52,6 +53,14 @@ public class MissionService {
         }
         missionRestRepository.save(mission);
         return mission.getId();
+    }
+
+    public void save(SupportedByToSave supportedByToSave) {
+        SupportedBy supportedBy = new SupportedBy();
+        supportedBy.setPlannedDeliveryTime(supportedByToSave.getPlannedDeliveryTime());
+        supportedBy.setOrderContentId(supportedByToSave.getOrderContentId());
+        supportedBy.setMissionId(supportedByToSave.getMissionId());
+        supportedByRestRepository.save(supportedBy);
     }
 
 }

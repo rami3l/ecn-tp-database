@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MissionToSave } from 'src/app/dto/creations/mission-to-save';
 import { SupportedByToSave } from 'src/app/dto/creations/supportedby-to-save';
 import { Driver } from 'src/app/dto/driver';
@@ -42,7 +43,8 @@ export class MissionFormComponent implements OnInit {
   constructor(private placesService: PlacesService,
     private transportService: TransportService,
     private orderService: OrderService,
-    private missionService: MissionService) { }
+    private missionService: MissionService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.placesService.getLoadingPoints().subscribe(
@@ -75,15 +77,16 @@ export class MissionFormComponent implements OnInit {
   }
 
   createMissionSupport(missionId: number): void {
-    var supports: SupportedByToSave[] = [];
     this.orderContentToAdd.forEach(
       orderContent => {
         var date = this.missionForm.controls.loadingDate.value + " " + this.missionForm.get("deliveryTime_" + orderContent.id)?.value + ":00"
-        supports.push(new SupportedByToSave(date, orderContent.id, missionId))
+        this.missionService.postSupportedBy(new SupportedByToSave(date, orderContent.id, missionId)).subscribe(
+          () => { console.log("saving mission support"); }
+        );
       }
     )
-    console.log(supports);
-    //TODO: fermer missionform & refresh missions
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+      this.router.navigate(["/missions"]));
   }
 
   onDriverChange(): void {

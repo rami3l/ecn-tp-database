@@ -22,6 +22,7 @@ import ecn.tp.bddon.server.metier.dto.SupportedBy;
 import ecn.tp.bddon.server.metier.dto.Truck;
 import ecn.tp.bddon.server.metier.dto.Unavailability;
 import ecn.tp.bddon.server.metier.dto.creations.MissionToSave;
+import ecn.tp.bddon.server.metier.dto.creations.SupportedByToSave;
 import ecn.tp.bddon.server.metier.dto.details.ClientDetailed;
 import ecn.tp.bddon.server.metier.dto.details.OrderContentDetailed;
 import ecn.tp.bddon.server.metier.dto.details.OrderDetailed;
@@ -147,6 +148,12 @@ public class RepoRestService {
     @ResponseStatus(HttpStatus.CREATED)
     public int createMission(@RequestBody MissionToSave mission) {
         return missionService.save(mission);
+    }
+
+    @PostMapping("/supportedby/new")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createSupportedBy(@RequestBody SupportedByToSave supportedBy) {
+        missionService.save(supportedBy);
     }
 
 }
