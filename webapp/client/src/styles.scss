@@ -88,11 +88,6 @@ $fixed-width-when-not-ajusting-size: 1800px;
     padding: 12px 10px;
 }
 
-.add-list {
-    table-layout: auto;
-    margin: auto;
-}
-
 .btn-more, .btn-add {
     background-color: var(--green-1);
     border-color: var(--green-1);
@@ -127,6 +122,7 @@ $fixed-width-when-not-ajusting-size: 1800px;
     border-color: var(--grey-typo);
 }
 
+/* Modal popup */
 .modal {
     position: absolute;
     z-index: 1; // sit on top
@@ -143,7 +139,7 @@ $fixed-width-when-not-ajusting-size: 1800px;
     background-color: var(--modal-content-dar-background);
     margin: auto;
     padding: 20px;
-    border: 1px solid var(--modal-content-border-color);
+    border: 2px solid var(--modal-content-border-color);
     width: $fixed-width-when-modal-not-ajusting-size;
   }
 
@@ -153,7 +149,6 @@ $fixed-width-when-not-ajusting-size: 1800px;
     }
 }
   
-  /* The Close Button */
   .close {
     color: var(--modal-close-color);
     float: right;

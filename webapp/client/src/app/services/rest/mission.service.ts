@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { MissionToSave } from 'src/app/dto/creations/mission-to-save';
 import { Mission } from 'src/app/dto/mission';
 import { SupportedBy } from 'src/app/dto/supportedby';
 import { environment } from 'src/environments/environment';
@@ -24,6 +25,10 @@ export class MissionService {
 
     getSupports(missionId: number): Observable<SupportedBy[]> {
         return this.http.get<SupportedBy[]>(this.url + missionId + "/supports");
+    }
+
+    postMission(mission: MissionToSave): Observable<number> {
+        return this.http.post<number>(this.url + "new", mission);
     }
 
 }

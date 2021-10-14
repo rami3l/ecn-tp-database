@@ -54,17 +54,17 @@
                                 <th scope="col">quantity</th>
                             </tr>
                         </thead>
-                        <tbody formControlName="supports">
-                            <tr *ngFor="let support of supports">
-                                <td><input type="time" formControlName="loadingTime"></td>
-                                <td>{{support.orderContent.order.client.abbrev}}</td>
+                        <tbody>
+                            <tr *ngFor="let orderContent of orderContentToAdd">
+                                <td><input type="time" formControlName="deliveryTime_{{orderContent.id}}"></td>
+                                <td>{{orderContent.order.client.abbrev}}</td>
                                 <!-- <td>{{displayDateTime(support.plannedDeliveryTime, mission.loadingTime)}}</td> -->
-                                <td>{{support.orderContent.deliveryPoint.address.addressLine}} <br>
-                                    {{support.orderContent.deliveryPoint.address.city}}</td>
-                                <td>{{support.orderContent.product.name}}</td>
-                                <td>{{support.orderContent.quantity}}</td>
+                                <td>{{orderContent.deliveryPoint.address.addressLine}} <br>
+                                    {{orderContent.deliveryPoint.address.city}}</td>
+                                <td>{{orderContent.product.name}}</td>
+                                <td>{{orderContent.quantity}}</td>
                                 <td>
-                                    <button class="btn-add">-</button>
+                                    <button class="btn-add" (click)="removeOrderContent(orderContent)">-</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -88,14 +88,22 @@
     <div class="modal-content">
         <span class="close" (click)="modalOpened=false">&times;</span>
         <h2>Select order contents to add to the mission</h2>
-        <div>
-            <span style="margin-right: 2%; font-size: 1.2em;">Filter by</span>
-            <label for="client_filter">Client : </label>
-            <input type="text" id="client_filter" style="margin-right: 2%;">
-            <label for="address_filter">Address : </label>
-            <input type="text" id="address_filter" style="margin-right: 2%;">
-            <label for="product_filter">Product : </label>
-            <input type="text" id="product_filter">
+        <div class="col-4">
+            <div>
+                <span style="margin-right: 2%; font-size: 1.2em;">Filter by</span>
+            </div>
+            <div>
+                <label for="client_filter">Client : </label>
+                <input type="text" id="client_filter" style="margin-right: 2%;">
+            </div>
+            <div>
+                <label for="address_filter">Address : </label>
+                <input type="text" id="address_filter" style="margin-right: 2%;">
+            </div>
+            <div>
+                <label for="product_filter">Product : </label>
+                <input type="text" id="product_filter">
+            </div>
         </div>
         <table class="add-list">
             <tr *ngFor="let orderContent of displayedOrderContents">
