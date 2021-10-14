@@ -2,8 +2,6 @@ package ecn.tp.bddon.server.metier.dto;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import ecn.tp.bddon.server.utils.DateParser;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -43,14 +42,8 @@ public class Mission implements Serializable {
     @JoinColumn(name = "truck")
     private Truck truck;
 
-    public void setLoadingTime(String timestamp) {
-        try {
-            SimpleDateFormat DATE_TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date date = DATE_TIME_FORMAT.parse(timestamp);
-            this.loadingTime = new Timestamp(date.getTime());
-        } catch (Exception e) {
-            throw new IllegalArgumentException(e);
-        }
+    public void setLoadingTime(String date) {
+        this.loadingTime = DateParser.getTimeStampFromStringDate(date);
     }
 
 }
