@@ -5,6 +5,7 @@ import ecn.tp.bddon.server.metier.dto.Order;
 import ecn.tp.bddon.server.metier.dto.OrderContent;
 import ecn.tp.bddon.server.metier.dto.Product;
 import lombok.Data;
+import lombok.NonNull;
 
 @Data
 public class OrderContentDetailed {
@@ -16,7 +17,7 @@ public class OrderContentDetailed {
     private Order order;
     private DeliveryPoint deliveryPoint;
 
-    public OrderContentDetailed(OrderContent orderContent) {
+    public OrderContentDetailed(@NonNull OrderContent orderContent) {
         this.id = orderContent.getId();
         this.quantity = orderContent.getQuantity();
         this.desiredDeliveryDate = orderContent.getDesiredDeliveryDate();

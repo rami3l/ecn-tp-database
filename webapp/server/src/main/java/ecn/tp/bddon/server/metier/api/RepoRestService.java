@@ -114,6 +114,16 @@ public class RepoRestService {
         return orderService.getOrderDetailed(orderId);
     }
 
+    @GetMapping("/orders/{id}/ordercontents")
+    public Iterable<OrderContent> getOrderContentsByOrder(@PathVariable("id") int orderId) {
+        return orderService.getOrderContentsByOrder(orderId);
+    }
+
+    @GetMapping("/orders/{id}/ordercontents/details")
+    public Iterable<OrderContentDetailed> getOrderContentsDetailedByOrder(@PathVariable("id") int orderId) {
+        return orderService.getOrderContentsDetailedByOrder(orderId);
+    }
+
     @GetMapping("/ordercontents")
     public Iterable<OrderContent> getOrderContents() {
         return orderService.getOrderContents();

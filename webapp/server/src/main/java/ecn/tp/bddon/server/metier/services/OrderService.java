@@ -60,6 +60,15 @@ public class OrderService {
         return StreamSupport.stream(getOrderContents().spliterator(), true).map(OrderContentDetailed::new).toList();
     }
 
+    public Iterable<OrderContent> getOrderContentsByOrder(int orderId) {
+        return orderContentRestRepository.findByOrder_id(orderId);
+    }
+
+    public Iterable<OrderContentDetailed> getOrderContentsDetailedByOrder(int orderId) {
+        return StreamSupport.stream(getOrderContentsByOrder(orderId).spliterator(), true).map(OrderContentDetailed::new)
+                .toList();
+    }
+
     public OrderContentDetailed getOrderContentDetailed(int id) {
         return new OrderContentDetailed(getOrderContent(id));
     }
