@@ -1,88 +1,88 @@
 <div class="container">
     <h1>Add a mission</h1>
     <table [formGroup]="missionForm" class="item-list">
-        <tbody>
-            <tr>
-                <th scope="row">Loading time:</th>
-                <td>
-                    <input type="date" formControlName="loadingDate" style="margin-right: 2%;">
-                    <input type="time" formControlName="loadingTime">
-                </td>
-            </tr>
-            <tr>
-                <th scope=" row">Loading point:</th>
-                <td>
-                    <select formControlName="loadingPoint">
-                        <option value="">Choose a loading point</option>
-                        <option *ngFor="let loadingPoint of loadingPoints" value="{{loadingPoint.id}}">
-                            {{loadingPoint.address.addressLine}} - {{loadingPoint.address.city}}</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">Driver:</th>
-                <td>
-                    <select formControlName="driver" (ngModelChange)="onDriverChange()">
-                        <option value="">Choose a driver</option>
-                        <option *ngFor="let driver of drivers" value="{{driver.id}}">
-                            {{driver.firstName}} {{driver.lastName}}</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">Truck:</th>
-                <td>
-                    <input type="checkbox" (click)="toggleUseDefaultTruck()"
-                        title="Use different truck than driver's default one">
-                    <select formControlName="truck">
-                        <option value="">Choose a truck (optional)</option>
-                        <option *ngFor="let truck of trucks" value="{{truck.licensePlate}}">
-                            {{truck.licensePlate}}</option>
-                    </select>
-                    <!-- TODO: check if truck is available when loading time is selected -->
-                </td>
-            </tr>
-            <tr>
-                <td colspan=2>
-                    <table class="item-sublist">
-                        <thead>
-                            <tr>
-                                <th scope="col">time</th>
-                                <th scope="col">client</th>
-                                <th scope="col">address</th>
-                                <th scope="col">product</th>
-                                <th scope="col">quantity</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let orderContent of orderContentToAdd">
-                                <td><input type="time" formControlName="deliveryTime_{{orderContent.id}}"></td>
-                                <td>{{orderContent.order.client.abbrev}}</td>
-                                <td>{{orderContent.deliveryPoint.address.addressLine}} <br>
-                                    {{orderContent.deliveryPoint.address.city}}</td>
-                                <td>{{orderContent.product.name}}</td>
-                                <td>{{orderContent.quantity}}</td>
-                                <td>
-                                    <button class="btn-add" (click)="removeOrderContent(orderContent)">-</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td colspan=2>
-                    <button id="myBtn" (click)="modalOpen()">Add some order contents</button>
-                    <!-- Modal input for order contents -->
-
-                </td>
-            </tr>
-        </tbody>
+        <tr>
+            <th scope="row">Loading time:</th>
+            <td>
+                <input type="date" formControlName="loadingDate" style="margin-right: 2%;">
+                <input type="time" formControlName="loadingTime">
+            </td>
+        </tr>
+        <tr>
+            <th scope=" row">Loading point:</th>
+            <td>
+                <select formControlName="loadingPoint">
+                    <option value="">Choose a loading point</option>
+                    <option *ngFor="let loadingPoint of loadingPoints" value="{{loadingPoint.id}}">
+                        {{loadingPoint.address.addressLine}} - {{loadingPoint.address.city}}</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">Driver:</th>
+            <td>
+                <select formControlName="driver" (ngModelChange)="onDriverChange()">
+                    <option value="">Choose a driver</option>
+                    <option *ngFor="let driver of drivers" value="{{driver.id}}">
+                        {{driver.firstName}} {{driver.lastName}}</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">Truck:</th>
+            <td>
+                <input type="checkbox" (click)="toggleUseDefaultTruck()"
+                    title="Use different truck than driver's default one">
+                <select formControlName="truck">
+                    <option value="">Choose a truck (optional)</option>
+                    <option *ngFor="let truck of trucks" value="{{truck.licensePlate}}">
+                        {{truck.licensePlate}}</option>
+                </select>
+                <!-- TODO: check if truck is available when loading time is selected -->
+            </td>
+        </tr>
+        <tr *ngIf="orderContentToAdd.length>0">
+            <td colspan=2>
+                <table class="item-sublist">
+                    <thead>
+                        <tr>
+                            <th scope="col">time</th>
+                            <th scope="col">client</th>
+                            <th scope="col">address</th>
+                            <th scope="col">product</th>
+                            <th scope="col">quantity</th>
+                        </tr>
+                        <tr>
+                            <td colspan="5" style="border-top: 1px solid; padding: 0px;"></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let orderContent of orderContentToAdd">
+                            <td><input type="time" formControlName="deliveryTime_{{orderContent.id}}"></td>
+                            <td>{{orderContent.order.client.abbrev}}</td>
+                            <td>{{orderContent.deliveryPoint.address.addressLine}} <br>
+                                {{orderContent.deliveryPoint.address.city}}</td>
+                            <td>{{orderContent.product.name}}</td>
+                            <td>{{orderContent.quantity}}</td>
+                            <td>
+                                <button class="btn-add" (click)="removeOrderContent(orderContent)">-</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan=2>
+                <!-- Opens the modal popup to choose order contents -->
+                <button class="btn-add centered" (click)="modalOpen()">Add some order contents</button>
+            </td>
+        </tr>
     </table>
-    <button [disabled]="!missionForm.valid" (click)="onSubmit()">Submit</button>
+    <button class="btn-submit" [disabled]="!missionForm.valid" (click)="onSubmit()">Submit</button>
 </div>
 
-
+<!-- modal popup to choose order contents -->
 <div *ngIf="modalOpened" class="modal">
     <div class="modal-content">
         <span class="close" (click)="modalClose()">&times;</span>

@@ -7,6 +7,7 @@ $fixed-width-when-not-ajusting-size: 1800px;
 
 :root {
     --grey-typo: #bdc1c6;
+    --grey-typo-2: #778fac;
     --white-typo-btn: white;
     --dark-background: #202124;
     --modal-background: rgba(0,0,0,0.4);
@@ -22,6 +23,9 @@ $fixed-width-when-not-ajusting-size: 1800px;
     --red-1: #b38300; // buttons add
     --red-2: #8f6900; // buttons add on hover
     --red-3: #7c5b00; // buttons add when activated
+    --blue-1: #0076fd; // buttons add
+    --blue-2: #006ae2; // buttons add on hover
+    --blue-3: #003a7c; // buttons add when activated
 }
 
 .webpage {
@@ -82,13 +86,13 @@ $fixed-width-when-not-ajusting-size: 1800px;
     border: 1px solid;
 }
 
-.item-list tbody td, th {
+.item-list td, th {
     vertical-align: middle;
     text-align: center;
     padding: 12px 10px;
 }
 
-.btn-more, .btn-add {
+.btn-more, .btn-add, .btn-submit {
     background-color: var(--green-1);
     border-color: var(--green-1);
     color: var(--white-typo-btn);
@@ -104,12 +108,23 @@ $fixed-width-when-not-ajusting-size: 1800px;
     border-color: var(--red-1);
 }
 
+.btn-submit {
+    background-color: var(--blue-1);
+    border-color: var(--blue-1);
+    float: none;
+    margin-top: 10px;
+}
+
 .btn-more:hover {
     background-color: var(--green-2);
 }
 
 .btn-add:hover {
     background-color: var(--red-2);
+}
+
+.btn-submit:hover {
+    background-color: var(--blue-2);
 }
 
 .btn-more-active {
@@ -120,6 +135,17 @@ $fixed-width-when-not-ajusting-size: 1800px;
 .btn-add-active {
     background-color: var(--red-3);
     border-color: var(--grey-typo);
+}
+
+.btn-submit:disabled {
+    background-color: var(--blue-3);
+    border-color: var(--blue-3);
+    // border-color: var(--grey-typo);
+    color: var(--grey-typo-2);
+}
+
+.centered {
+    float: none;
 }
 
 /* Modal popup */

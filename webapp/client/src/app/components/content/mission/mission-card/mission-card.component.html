@@ -2,49 +2,50 @@
     <h1 *ngIf="this.mission == null">Loading...</h1>
     <h1 *ngIf="this.mission != null">Mission (id: {{mission.id}})</h1>
     <table *ngIf="this.mission != null" class="item-list">
-        <tbody>
-            <tr>
-                <th scope="row">Loading time:</th>
-                <td>{{mission.loadingTime | date:"d MMMM y - HH'h'mm"}}</td>
-            </tr>
-            <tr>
-                <th scope="row">Loading point:</th>
-                <td *ngIf="mission.loadingPoint != null">{{mission.loadingPoint.address.addressLine}} -
-                    {{mission.loadingPoint.address.zipcode}} {{mission.loadingPoint.address.city.toUpperCase()}}</td>
-            </tr>
-            <tr>
-                <th scope="row">Driver:</th>
-                <td>{{mission.driver == null ? "" : mission.driver.firstName + " " + mission.driver.lastName}}</td>
-            </tr>
-            <tr>
-                <th scope="row">Truck:</th>
-                <td>{{mission.truck == null ? "" : mission.truck.licensePlate}}</td>
-            </tr>
-            <tr>
-                <td colspan=2>
-                    <table class="item-sublist">
-                        <thead>
-                            <tr>
-                                <th scope="col">client</th>
-                                <th scope="col">time</th>
-                                <th scope="col">address</th>
-                                <th scope="col">product</th>
-                                <th scope="col">quantity</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let support of supports">
-                                <td>{{support.orderContent.order.client.abbrev}}</td>
-                                <td>{{displayDateTime(support.plannedDeliveryTime, mission.loadingTime)}}</td>
-                                <td>{{support.orderContent.deliveryPoint.address.addressLine}} <br>
-                                    {{support.orderContent.deliveryPoint.address.city}}</td>
-                                <td>{{support.orderContent.product.name}}</td>
-                                <td>{{support.orderContent.quantity}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-        </tbody>
+        <tr>
+            <th scope="row">Loading time:</th>
+            <td>{{mission.loadingTime | date:"d MMMM y - HH'h'mm"}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Loading point:</th>
+            <td *ngIf="mission.loadingPoint != null">{{mission.loadingPoint.address.addressLine}} -
+                {{mission.loadingPoint.address.zipcode}} {{mission.loadingPoint.address.city.toUpperCase()}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Driver:</th>
+            <td>{{mission.driver == null ? "" : mission.driver.firstName + " " + mission.driver.lastName}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Truck:</th>
+            <td>{{mission.truck == null ? "" : mission.truck.licensePlate}}</td>
+        </tr>
+        <tr>
+            <td colspan=2>
+                <table class="item-sublist">
+                    <thead>
+                        <tr>
+                            <th scope="col">client</th>
+                            <th scope="col">time</th>
+                            <th scope="col">address</th>
+                            <th scope="col">product</th>
+                            <th scope="col">quantity</th>
+                        </tr>
+                        <tr>
+                            <td colspan="6" style="border-top: 1px solid; padding: 0px;"></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let support of supports">
+                            <td>{{support.orderContent.order.client.abbrev}}</td>
+                            <td>{{displayDateTime(support.plannedDeliveryTime, mission.loadingTime)}}</td>
+                            <td>{{support.orderContent.deliveryPoint.address.addressLine}} <br>
+                                {{support.orderContent.deliveryPoint.address.city}}</td>
+                            <td>{{support.orderContent.product.name}}</td>
+                            <td>{{support.orderContent.quantity}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
     </table>
 </div>
