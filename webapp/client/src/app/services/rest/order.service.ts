@@ -35,6 +35,10 @@ export class OrderService {
         return this.http.get<OrderContent[]>(this.orderContentUrl + "details");
     }
 
+    getOrderContentsUnsupportedDetailed(): Observable<OrderContent[]> {
+        return this.http.get<OrderContent[]>(this.orderContentUrl + "unsupported/details");
+    }
+
     getOrderContent(id: number): Observable<OrderContent> {
         return this.http.get<OrderContent>(this.orderContentUrl + id);
     }

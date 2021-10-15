@@ -56,7 +56,7 @@ export class MissionFormComponent implements OnInit {
     this.transportService.getTrucks().subscribe(
       trucksReceived => { this.trucks = trucksReceived; }
     )
-    this.orderService.getOrderContentsDetailed().subscribe(
+    this.orderService.getOrderContentsUnsupportedDetailed().subscribe(
       orderContentsReceived => {
         this.orderContents = orderContentsReceived;
         this.displayedOrderContents = orderContentsReceived;
