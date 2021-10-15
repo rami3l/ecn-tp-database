@@ -1,5 +1,5 @@
 <div class="container">
-    <h1 *ngIf="this.order == null && this.id != -1">Loading...</h1>
+    <h1 *ngIf="this.order == null">Loading...</h1>
     <h1 *ngIf="this.order != null">Order (id: {{order.id}})</h1>
     <table *ngIf="this.order != null" class="item-list">
         <tr>
@@ -15,8 +15,30 @@
             <td>{{order.client.address.zipcode}} {{order.client.address.city}}</td>
         </tr>
         <tr>
-            <th scope="row">Order contents:</th>
-            <td>TODO</td>
+            <td colspan=2>
+                <table class="item-sublist">
+                    <thead>
+                        <tr>
+                            <th scope="col">Desired delivery</th>
+                            <th scope="col">Delivery address</th>
+                            <th scope="col">product</th>
+                            <th scope="col">quantity</th>
+                        </tr>
+                        <tr>
+                            <td colspan="6" style="border-top: 1px solid; padding: 0px;"></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let orderContent of orderContents">
+                            <td>{{orderContent.desiredDeliveryDate | date:"d MMMM y"}}</td>
+                            <td>{{orderContent.deliveryPoint.address.addressLine}} <br>
+                                {{orderContent.deliveryPoint.address.city}}</td>
+                            <td>{{orderContent.product.name}}</td>
+                            <td>{{orderContent.quantity}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
         </tr>
     </table>
 </div>

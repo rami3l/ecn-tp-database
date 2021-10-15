@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Order } from 'src/app/dto/order';
+import { OrderContent } from 'src/app/dto/ordercontent';
 import { OrderService } from 'src/app/services/rest/order.service';
 
 @Component({
@@ -11,8 +12,8 @@ import { OrderService } from 'src/app/services/rest/order.service';
 })
 export class OrderCardComponent implements OnInit, OnDestroy {
 
-  id: number = -1;
   order: Order | undefined;
+  orderContents: OrderContent[] = [];
   orderChangeSubscription: Subscription | undefined;
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -20,7 +21,7 @@ export class OrderCardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(
-      param => this.loadOrder(param.id)
+      param => this.loadOrderWithOrderContents(param.id)
     );
   }
 
@@ -28,18 +29,18 @@ export class OrderCardComponent implements OnInit, OnDestroy {
     this.orderChangeSubscription?.unsubscribe();
   }
 
-  loadOrder(id: number) {
+  loadOrderWithOrderContents(id: number) {
     console.log("chargement de l'order " + id);
     if (isNaN(id)) {
       //TODO: exception si isNaN
       this.order = undefined;
     } else {
-      this.id = id;
-      if (id != -1) {
-        this.orderService.getOrder(id).subscribe(
-          orderReceived => { this.order = orderReceived; }
-        )
-      }
+      this.orderService.getOrder(id).subscribe(
+        orderReceived => { this.order = orderReceived; }
+      )
+      this.orderService.getOrderContentsDetailedByOrder(id).subscribe(
+        orderContentsReceived => { this.orderContents = orderContentsReceived; }
+      )
     }
   }
 
