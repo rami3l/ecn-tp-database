@@ -27,7 +27,11 @@ export class MissionFormComponent implements OnInit, OnDestroy {
   modalOpened = false;
   modalSubscription: Subscription | undefined;
   displayedOrderContents: OrderContent[] = [];
+  filteredDisplayedOrderContents: OrderContent[] = [];
   orderContentToAdd: OrderContent[] = [];
+  clientFilter: string = "";
+  addressFilter: string = "";
+  productFilter: string = "";
 
   loadingPoints: LoadingPoint[] = [];
   drivers: Driver[] = [];
@@ -62,6 +66,7 @@ export class MissionFormComponent implements OnInit, OnDestroy {
       orderContentsReceived => {
         this.orderContents = orderContentsReceived;
         this.displayedOrderContents = orderContentsReceived;
+        this.filteredDisplayedOrderContents = orderContentsReceived;
       }
     )
   }
@@ -117,6 +122,7 @@ export class MissionFormComponent implements OnInit, OnDestroy {
     this.orderContents = this.orderContents.filter(o => o !== orderContent);
     this.displayedOrderContents = this.displayedOrderContents.filter(o => o !== orderContent);
     this.orderContentToAdd.push(orderContent);
+    this.refreshFilter();
   }
 
   removeOrderContent(orderContent: OrderContent) {
@@ -127,11 +133,12 @@ export class MissionFormComponent implements OnInit, OnDestroy {
   }
 
   modalOpen() {
+    this.resetFilters();
     this.modalOpened = true;
     this.modalSubscription = fromEvent(window, 'keydown').subscribe(
       (event) => {
         if ((event as KeyboardEvent).key == "Escape") {
-          this.modalClose();
+          (this.clientFilter + this.addressFilter + this.productFilter) == "" ? this.modalClose() : this.resetFilters();
         }
       }
     );
@@ -139,7 +146,23 @@ export class MissionFormComponent implements OnInit, OnDestroy {
 
   modalClose() {
     this.modalSubscription?.unsubscribe();
-    this.modalOpened = false
+    this.modalOpened = false;
+  }
+
+  refreshFilter() {
+    this.filteredDisplayedOrderContents = this.displayedOrderContents.filter(
+      orderContent =>
+        orderContent.order.client.abbrev.toLowerCase().includes(this.clientFilter.toLowerCase()) &&
+        (orderContent.deliveryPoint.address.addressLine + " " + orderContent.deliveryPoint.address.city).toLowerCase().includes(this.addressFilter.toLowerCase()) &&
+        orderContent.product.name.toLowerCase().includes(this.productFilter.toLowerCase())
+    );
+  }
+
+  resetFilters() {
+    this.clientFilter = "";
+    this.addressFilter = "";
+    this.productFilter = "";
+    this.refreshFilter();
   }
 
 }
