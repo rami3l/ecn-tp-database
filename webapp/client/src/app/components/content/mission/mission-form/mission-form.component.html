@@ -73,7 +73,7 @@
             </tr>
             <tr>
                 <td colspan=2>
-                    <button id="myBtn" (click)="modalOpened=true">Add some order contents</button>
+                    <button id="myBtn" (click)="modalOpen()">Add some order contents</button>
                     <!-- Modal input for order contents -->
 
                 </td>
@@ -86,7 +86,7 @@
 
 <div *ngIf="modalOpened" class="modal">
     <div class="modal-content">
-        <span class="close" (click)="modalOpened=false">&times;</span>
+        <span class="close" (click)="modalClose()">&times;</span>
         <h2>Select order contents to add to the mission</h2>
         <div class="col-4">
             <div>

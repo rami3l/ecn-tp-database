@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { fromEvent, Subscription } from 'rxjs';
 import { MissionToSave } from 'src/app/dto/creations/mission-to-save';
 import { SupportedByToSave } from 'src/app/dto/creations/supportedby-to-save';
 import { Driver } from 'src/app/dto/driver';
@@ -18,12 +19,13 @@ import { TransportService } from 'src/app/services/rest/transport.service';
   templateUrl: './mission-form.component.html',
   styleUrls: ['./mission-form.component.scss']
 })
-export class MissionFormComponent implements OnInit {
+export class MissionFormComponent implements OnInit, OnDestroy {
 
   mission: MissionToSave = new MissionToSave();
   supports: SupportedBy[] = [];
   useDefaultTruck = true;
   modalOpened = false;
+  modalSubscription: Subscription | undefined;
   displayedOrderContents: OrderContent[] = [];
   orderContentToAdd: OrderContent[] = [];
 
@@ -62,6 +64,10 @@ export class MissionFormComponent implements OnInit {
         this.displayedOrderContents = orderContentsReceived;
       }
     )
+  }
+
+  ngOnDestroy(): void {
+    this.modalSubscription?.unsubscribe();
   }
 
   onSubmit(): void {
@@ -118,6 +124,22 @@ export class MissionFormComponent implements OnInit {
     this.orderContents.push(orderContent);
     this.displayedOrderContents.push(orderContent);
     this.missionForm.removeControl("deliveryTime_" + orderContent.id);
+  }
+
+  modalOpen() {
+    this.modalOpened = true;
+    this.modalSubscription = fromEvent(window, 'keydown').subscribe(
+      (event) => {
+        if ((event as KeyboardEvent).key == "Escape") {
+          this.modalClose();
+        }
+      }
+    );
+  }
+
+  modalClose() {
+    this.modalSubscription?.unsubscribe();
+    this.modalOpened = false
   }
 
 }
