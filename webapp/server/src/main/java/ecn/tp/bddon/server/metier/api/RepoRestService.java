@@ -124,6 +124,11 @@ public class RepoRestService {
         return orderService.getOrderContentsDetailed();
     }
 
+    @GetMapping("/ordercontents/unsupported/details")
+    public Iterable<OrderContentDetailed> getOrderContentsNotSupportedDetailed() {
+        return orderService.getOrderContentsUnsupportedOrUndeliveredDetailed();
+    }
+
     @GetMapping("/ordercontents/{id}")
     public OrderContentDetailed getOrderContentDetailed(@PathVariable("id") int orderContentId) {
         return orderService.getOrderContentDetailed(orderContentId);

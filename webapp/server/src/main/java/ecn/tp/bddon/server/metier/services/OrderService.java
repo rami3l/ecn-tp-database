@@ -63,4 +63,10 @@ public class OrderService {
     public OrderContentDetailed getOrderContentDetailed(int id) {
         return new OrderContentDetailed(getOrderContent(id));
     }
+
+    public Iterable<OrderContentDetailed> getOrderContentsUnsupportedOrUndeliveredDetailed() {
+        return StreamSupport.stream(orderContentRestRepository.findAllUnsupportedOrUndelivered().spliterator(), true)
+                .map(OrderContentDetailed::new).toList();
+    }
+
 }
