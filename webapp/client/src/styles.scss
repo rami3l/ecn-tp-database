@@ -20,12 +20,14 @@ $fixed-width-when-not-ajusting-size: 1800px;
     --green-1: rgb(12, 100, 0); // buttons more
     --green-2: rgb(10, 83, 0); // buttons more on hover
     --green-3: rgb(5, 46, 0); // buttons more when activated
+    --green-disabled: #6b976d;
     --red-1: #b38300; // buttons add
     --red-2: #8f6900; // buttons add on hover
     --red-3: #7c5b00; // buttons add when activated
     --blue-1: #0076fd; // buttons add
     --blue-2: #006ae2; // buttons add on hover
     --blue-3: #003a7c; // buttons add when activated
+    --input-text-focus: #7db1ec;
 }
 
 .webpage {
@@ -140,12 +142,34 @@ $fixed-width-when-not-ajusting-size: 1800px;
 .btn-submit:disabled {
     background-color: var(--blue-3);
     border-color: var(--blue-3);
-    // border-color: var(--grey-typo);
     color: var(--grey-typo-2);
 }
 
 .centered {
     float: none;
+}
+
+.input {
+    background-color: var(--green-1);
+    border-color: var(--green-2);
+    color: var(--grey-typo);
+}
+
+.input:focus{
+    background-color: var(--green-2);
+}
+
+.input:disabled {
+    background-color: var(--green-disabled);
+}
+
+.input-text {
+    background-color: var(--grey-typo);
+    border-color: var(--grey-typo-2);
+}
+
+.input-text:focus {
+    background-color: var(--input-text-focus);
 }
 
 /* Modal popup */
