@@ -7,7 +7,6 @@ import { SupportedByToSave } from 'src/app/dto/creations/supportedby-to-save';
 import { Driver } from 'src/app/dto/driver';
 import { LoadingPoint } from 'src/app/dto/loadingpoint';
 import { OrderContent } from 'src/app/dto/ordercontent';
-import { SupportedBy } from 'src/app/dto/supportedby';
 import { Truck } from 'src/app/dto/truck';
 import { MissionService } from 'src/app/services/rest/mission.service';
 import { OrderService } from 'src/app/services/rest/order.service';
@@ -21,8 +20,6 @@ import { TransportService } from 'src/app/services/rest/transport.service';
 })
 export class MissionFormComponent implements OnInit, OnDestroy {
 
-  mission: MissionToSave = new MissionToSave();
-  supports: SupportedBy[] = [];
   useDefaultTruck = true;
   modalOpened = false;
   modalSubscription: Subscription | undefined;
@@ -112,6 +109,7 @@ export class MissionFormComponent implements OnInit, OnDestroy {
     this.useDefaultTruck = !this.useDefaultTruck;
     if (this.useDefaultTruck) {
       this.missionForm.controls["truck"].disable();
+      this.onDriverChange();
     } else {
       this.missionForm.controls["truck"].enable();
     }
