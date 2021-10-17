@@ -34,3 +34,5 @@ client_open:
 server_up:
 	cd webapp/server \
 		&& ./gradlew bootRun
+
+resume: sql_resume client_up
