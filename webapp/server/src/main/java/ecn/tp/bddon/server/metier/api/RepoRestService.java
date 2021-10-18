@@ -3,9 +3,11 @@ package ecn.tp.bddon.server.metier.api;
 import javax.annotation.Resource;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -159,13 +161,25 @@ public class RepoRestService {
         return missionService.getSupports(missionId);
     }
 
-    @PostMapping("/missions/new")
+    @PutMapping("/missions/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public int updateMission(@PathVariable("id") int id, @RequestBody MissionToSave mission) {
+        return missionService.save(mission, id);
+    }
+
+    @PostMapping("/missions")
     @ResponseStatus(HttpStatus.CREATED)
     public int createMission(@RequestBody MissionToSave mission) {
         return missionService.save(mission);
     }
 
-    @PostMapping("/supportedby/new")
+    @DeleteMapping("/supportedby/{orderContentId}/{missionId}")
+    public void deleteSupportedBy(@PathVariable("orderContentId") int orderContentId,
+            @PathVariable("missionId") int missionId) {
+        missionService.deleteSupportedBy(orderContentId, missionId);
+    }
+
+    @PostMapping("/supportedby")
     @ResponseStatus(HttpStatus.CREATED)
     public void createSupportedBy(@RequestBody SupportedByToSave supportedBy) {
         missionService.save(supportedBy);
