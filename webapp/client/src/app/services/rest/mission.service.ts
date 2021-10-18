@@ -30,11 +30,19 @@ export class MissionService {
     }
 
     postMission(mission: MissionToSave): Observable<number> {
-        return this.http.post<number>(this.url + "new", mission);
+        return this.http.post<number>(this.url, mission);
     }
 
-    postSupportedBy(support: SupportedByToSave): Observable<number> {
-        return this.http.post<number>(this.supportedByUrl + "new", support);
+    postSupportedBy(support: SupportedByToSave): Observable<void> {
+        return this.http.post<void>(this.supportedByUrl, support);
+    }
+
+    updateMission(mission: MissionToSave, id: number): Observable<number> {
+        return this.http.put<number>(this.url + id, mission);
+    }
+
+    deleteSupportedBy(orderContentId: number, missionId: number): Observable<void> {
+        return this.http.delete<void>(this.supportedByUrl + orderContentId + "/" + missionId);
     }
 
 }

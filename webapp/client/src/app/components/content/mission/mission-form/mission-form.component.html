@@ -1,5 +1,5 @@
 <div class="container">
-    <h1>Add a mission</h1>
+    <h1>{{id==null ? "Add a mission" : "Edit mission " + id}}</h1>
     <table [formGroup]="missionForm" class="item-list">
         <tr>
             <th scope="row">Loading time:</th>
@@ -31,7 +31,7 @@
         <tr>
             <th scope="row">Truck:</th>
             <td>
-                <input type="checkbox" (click)="toggleUseDefaultTruck()"
+                <input type="checkbox" (click)="toggleUseDefaultTruck()" [checked]="!useDefaultTruck"
                     title="Use different truck than driver's default one">
                 <select formControlName="truck" class="input">
                     <option value="">Choose a truck (optional)</option>
@@ -79,6 +79,7 @@
             </td>
         </tr>
     </table>
+    <button *ngIf="id" routerLink="..">Cancel</button>
     <button class="btn-submit" [disabled]="!missionForm.valid" (click)="onSubmit()">Submit</button>
 </div>
 
@@ -89,19 +90,22 @@
         <h2>Select order contents to add to the mission</h2>
         <div class="col-4">
             <div>
-                <label for="client_filter">Client : </label>
-                <input class="input-text" type="text" id="client_filter" style="margin-right: 2%;"
-                    [(ngModel)]="clientFilter" (ngModelChange)="refreshFilter()">
+                <label for="client_filter">Client :
+                    <input class="input-text" type="text" id="client_filter" style="margin-right: 2%;"
+                        [(ngModel)]="clientFilter" (ngModelChange)="refreshFilter()">
+                </label>
             </div>
             <div>
-                <label for="product_filter">Product : </label>
-                <input class="input-text" type="text" id="product_filter" style="margin-right: 2%;"
-                    [(ngModel)]="productFilter" (ngModelChange)="refreshFilter()">
+                <label for="product_filter">Product :
+                    <input class="input-text" type="text" id="product_filter" style="margin-right: 2%;"
+                        [(ngModel)]="productFilter" (ngModelChange)="refreshFilter()">
+                </label>
             </div>
             <div>
-                <label for="address_filter">Address : </label>
-                <input class="input-text" type="text" id="address_filter" style="margin-right: 2%;"
-                    [(ngModel)]="addressFilter" (ngModelChange)="refreshFilter()">
+                <label for="address_filter">Address :
+                    <input class="input-text" type="text" id="address_filter" style="margin-right: 2%;"
+                        [(ngModel)]="addressFilter" (ngModelChange)="refreshFilter()">
+                </label>
             </div>
             <div>
                 <button class="btn-more centered" (click)="resetFilters()">Reset filters</button>

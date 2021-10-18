@@ -15,7 +15,8 @@ const routes: Routes = [
     path: 'missions', component: MissionsComponent,
     children: [
       { path: 'mission/new', component: MissionFormComponent },
-      { path: 'mission/:id', component: MissionCardComponent }
+      { path: 'mission/:id', component: MissionCardComponent },
+      { path: 'mission/:id/edit', component: MissionFormComponent }
     ]
   },
   { path: 'mission/:id', component: MissionCardComponent },
