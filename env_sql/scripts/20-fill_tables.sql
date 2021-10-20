@@ -53,6 +53,12 @@ VALUES
     ('KASUMI', 15);
 
 INSERT INTO
+    public.truck_type(truck_type_name)
+VALUES
+    ('frigorifique'),
+    ('double essieu');
+
+INSERT INTO
     public.truck(license_plate)
 VALUES
     ('AC-543-AG'),
