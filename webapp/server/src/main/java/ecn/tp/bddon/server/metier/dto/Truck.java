@@ -25,6 +25,9 @@ public class Truck implements Serializable {
     @Column(name = "license_plate")
     private String licensePlate;
 
+    @Column(name = "truck_type")
+    private TruckType truckType;
+
     @JsonIgnore
     @OneToMany(mappedBy = "truck")
     private List<Unavailability> unavailabilities = new ArrayList<>();

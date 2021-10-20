@@ -10,7 +10,7 @@ import ecn.tp.bddon.server.metier.dto.Mission;
 import ecn.tp.bddon.server.metier.dto.SupportedBy;
 import ecn.tp.bddon.server.metier.dto.creations.MissionToSave;
 import ecn.tp.bddon.server.metier.dto.creations.SupportedByToSave;
-import ecn.tp.bddon.server.metier.dto.idClasses.SupportedById;
+import ecn.tp.bddon.server.metier.dto.id_classes.SupportedById;
 import ecn.tp.bddon.server.metier.repository.MissionRestRepository;
 import ecn.tp.bddon.server.metier.repository.SupportedByRestRepository;
 

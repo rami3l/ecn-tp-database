@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
 
-import ecn.tp.bddon.server.metier.dto.idClasses.SupportedById;
+import ecn.tp.bddon.server.metier.dto.id_classes.SupportedById;
 import ecn.tp.bddon.server.utils.DateParser;
 import lombok.Data;
 import lombok.NoArgsConstructor;
