@@ -1,3 +1,5 @@
 webapp/client/node_modules
-webapp/server/.gradle
 webapp/server/bin
+webapp/server/build
+webapp/server/.*
+TODO
