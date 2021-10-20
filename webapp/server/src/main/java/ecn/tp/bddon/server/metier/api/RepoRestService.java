@@ -56,6 +56,11 @@ public class RepoRestService {
         return stockService.getProducts();
     }
 
+    @GetMapping("/products/{id}/quantity")
+    public int getProductQuantity(@PathVariable("id") int productId) {
+        return stockService.getProductQuantity(productId);
+    }
+
     @GetMapping("/clients")
     public Iterable<Client> getClients() {
         return clientService.getClients();
