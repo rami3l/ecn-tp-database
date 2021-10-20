@@ -9,6 +9,7 @@ services:
     #   interval: 10s
     #   retries: 10
     # restart: always
+    container_name: "ecn-tp-database-sql"
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password

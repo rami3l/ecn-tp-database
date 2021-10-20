@@ -69,9 +69,17 @@ CREATE TABLE IF NOT EXISTS public.driver (
     PRIMARY KEY (driver_id)
 );
 
+CREATE TABLE IF NOT EXISTS public.truck_type (
+    truck_type_id serial,
+    truck_type_name character varying NOT NULL,
+    PRIMARY KEY (truck_type_id)
+);
+
 CREATE TABLE IF NOT EXISTS public.truck (
     license_plate character varying NOT NULL,
-    PRIMARY KEY (license_plate)
+    truck_type integer,
+    PRIMARY KEY (license_plate),
+    FOREIGN KEY (truck_type) REFERENCES public.truck_type (truck_type_id) NOT VALID
 );
 
 CREATE TABLE IF NOT EXISTS public.unavailability (
@@ -89,6 +97,14 @@ CREATE TABLE IF NOT EXISTS public.address (
     zipcode character varying,
     city character varying,
     PRIMARY KEY (address_id)
+);
+
+CREATE TABLE IF NOT EXISTS public.certified_for (
+    driver integer,
+    truck_type integer,
+    PRIMARY KEY (driver, truck_type),
+    FOREIGN KEY (driver) REFERENCES public.driver (driver_id) NOT VALID,
+    FOREIGN KEY (truck_type) REFERENCES public.truck_type (truck_type_id) NOT VALID
 );
 
 ALTER TABLE
