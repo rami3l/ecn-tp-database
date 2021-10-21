@@ -27,7 +27,9 @@ $BODY$;
 ALTER FUNCTION public.stock_update() OWNER TO postgres;
 
 
-CREATE OR REPLACE TRIGGER stock_update AFTER
+DROP TRIGGER IF EXISTS stock_update on public.supported_by;
+
+CREATE TRIGGER stock_update AFTER
 DELETE
 OR
 UPDATE OF signature_time
