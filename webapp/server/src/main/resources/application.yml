@@ -9,3 +9,8 @@ spring:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: password
+  data:
+    mongodb:
+      user: mongo
+      password: password
+      uri: mongodb://localhost:27017/public
