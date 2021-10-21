@@ -35,4 +35,21 @@ server_up:
 	cd webapp/server \
 		&& ./gradlew bootRun
 
-resume: sql_resume client_up
+mongo_up:
+	cd env_mongo \
+		&& docker-compose down \
+		&& docker-compose up -d
+
+mongo_down:
+	cd env_mongo \
+		&& docker-compose down
+
+mongo_pause:
+	cd env_mongo \
+		&& docker-compose stop
+
+mongo_resume:
+	cd env_mongo \
+		&& docker-compose start
+
+resume: sql_resume mongo_resume client_up
