@@ -11,7 +11,7 @@ import { MissionsComponent } from './components/content/mission/missions/mission
 import { OrderCardComponent } from './components/content/order/order-card/order-card.component';
 import { OrderFormComponent } from './components/content/order/order-form/order-form.component';
 import { OrdersComponent } from './components/content/order/orders/orders.component';
-import { StockComponent } from './components/content/stock/stock.component';
+import { ProductsComponent } from './components/content/stock/products/products.component';
 import { WelcomeComponent } from './components/content/welcome/welcome.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 
@@ -27,7 +27,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
     OrdersComponent,
     OrderCardComponent,
     OrderFormComponent,
-    StockComponent
+    ProductsComponent
   ],
   imports: [
     BrowserModule,

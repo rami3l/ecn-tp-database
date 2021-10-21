@@ -5,7 +5,7 @@ import { MissionFormComponent } from './components/content/mission/mission-form/
 import { MissionsComponent } from './components/content/mission/missions/missions.component';
 import { OrderCardComponent } from './components/content/order/order-card/order-card.component';
 import { OrdersComponent } from './components/content/order/orders/orders.component';
-import { StockComponent } from './components/content/stock/stock.component';
+import { ProductsComponent } from './components/content/stock/products/products.component';
 import { WelcomeComponent } from './components/content/welcome/welcome.component';
 
 const routes: Routes = [
@@ -29,7 +29,7 @@ const routes: Routes = [
   },
   { path: 'order/:id', component: OrderCardComponent },
 
-  { path: 'stock', component: StockComponent }
+  { path: 'stock', component: ProductsComponent }
 ];
 
 @NgModule({

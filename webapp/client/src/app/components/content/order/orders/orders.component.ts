@@ -17,7 +17,6 @@ export class OrdersComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    console.log(this.route.url);
     this.orderService.getOrdersDetailed().subscribe(
       ordersReceived => {
         this.orders = ordersReceived;

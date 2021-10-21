@@ -9,12 +9,16 @@ import { environment } from 'src/environments/environment';
 })
 export class StockService {
 
-    url: string = environment.apiUrl + "missions/";
+    url: string = environment.apiUrl + "products/";
 
     constructor(private http: HttpClient) { }
 
-    getPrducts(): Observable<Product[]> {
+    getProducts(): Observable<Product[]> {
         return this.http.get<Product[]>(this.url);
+    }
+
+    getProductQuantity(id: number): Observable<number> {
+        return this.http.get<number>(this.url + id + "/quantity");
     }
 
     // getPrduct(id: number): Observable<Product> {
