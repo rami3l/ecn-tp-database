@@ -14,6 +14,7 @@ import { OrdersComponent } from './components/content/order/orders/orders.compon
 import { ProductsComponent } from './components/content/stock/products/products.component';
 import { WelcomeComponent } from './components/content/welcome/welcome.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { ProductCardComponent } from './components/content/stock/product-card/product-card.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { NavigationComponent } from './components/navigation/navigation.componen
     OrdersComponent,
     OrderCardComponent,
     OrderFormComponent,
-    ProductsComponent
+    ProductsComponent,
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,

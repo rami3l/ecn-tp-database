@@ -17,7 +17,7 @@
                 <tr *ngFor="let product of products">
                     <th scope="row">{{product.id}}</th>
                     <td>{{product.name}}</td>
-                    <td>{{quantities.get(product.id) ? quantities.get(product.id) : "N/A" }}</td>
+                    <td>{{quantities.get(product.id) ? quantities.get(product.id) : 0 }}</td>
                     <td><button class="btn-more" title="Details on product {{product.id}}"
                             routerLinkActive="btn-more-active" routerLink="./product/{{product.id}}"
                             #state="routerLinkActive" (click)="checkState(state.isActive)">More...</button>
