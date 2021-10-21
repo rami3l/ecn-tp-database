@@ -1,13 +1,16 @@
 -- Q9. Add the triggers on stock when we create, cancel or modify an order.
+ BEGIN;
+
 
 CREATE OR REPLACE FUNCTION public.stock_update() RETURNS trigger LANGUAGE 'plpgsql' NOT LEAKPROOF AS $BODY$
 begin
--- new :: order_content, influence :: stock
+-- new :: supported_by, influence :: stock
 update stock as s
 set quantity = s.quantity + (case
- when tg_op = 'INSERT' then -new.quantity
- when tg_op = 'UPDATE' then old.quantity - new.quantity
- when tg_op = 'DELETE' then old.quantity
+ when tg_op = 'INSERT' then -o.quantity
+ when tg_op = 'DELETE' then o.quantity
+ when tg_op = 'UPDATE' and not new.is_delivered then o.quantity
+ else 0
  end)
 from product p, order_content o, supported_by sup, mission m
 where o.product = product_id
@@ -24,11 +27,12 @@ $BODY$;
 ALTER FUNCTION public.stock_update() OWNER TO postgres;
 
 
-CREATE TRIGGER stock_update AFTER
+CREATE OR REPLACE TRIGGER stock_update AFTER
 DELETE
 OR
-UPDATE
+UPDATE OF signature_time
 OR
-INSERT ON public.order_content
+INSERT ON public.supported_by
 FOR EACH ROW EXECUTE FUNCTION public.stock_update();
 
+END;
