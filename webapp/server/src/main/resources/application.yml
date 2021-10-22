@@ -11,6 +11,9 @@ spring:
     password: password
   data:
     mongodb:
-      user: mongo
+      database: public
+      username: mongo
       password: password
-      uri: mongodb://localhost:27017/public
+      host: localhost
+      port: 27017
+      authentication-database: admin

@@ -21,12 +21,11 @@ repositories {
 dependencies {
 	// application web
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	// Java persistance API (couche d'accès aux données basée sur Spring Data JPA)
+	// Accès PostgreSQL
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	// Base de donnée postgresql utilisée
 	runtimeOnly 'org.postgresql:postgresql'
-	// Base donnée mongo utilisée
-	runtimeOnly 'org.springframework.data:spring-data-mongodb'
+	// Accès MongoDB
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	// Lombok: génération de constructeurs, getters, setters, builders, etc.
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
