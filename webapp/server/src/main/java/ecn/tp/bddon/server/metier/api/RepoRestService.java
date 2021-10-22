@@ -53,7 +53,7 @@ public class RepoRestService {
     @Resource
     private MissionService missionService;
     @Resource
-    private PhoneBookService infoTableService;
+    private PhoneBookService phoneBookService;
 
     @GetMapping("/products")
     public Iterable<Product> getProducts() {
@@ -194,9 +194,9 @@ public class RepoRestService {
         missionService.save(supportedBy);
     }
 
-    @GetMapping("/infotables")
-    public Iterable<PhoneBook> getInfoTables() {
-        return infoTableService.getInfoTables();
+    @GetMapping("/phonebooks")
+    public Iterable<PhoneBook> getPhoneBooks() {
+        return phoneBookService.getPhoneBooks();
     }
 
 }

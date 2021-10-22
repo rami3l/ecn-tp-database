@@ -13,7 +13,7 @@ public class PhoneBookService {
     @Resource
     private PhoneBookRestRepository phoneBookRestRepository;
 
-    public Iterable<PhoneBook> getInfoTables() {
+    public Iterable<PhoneBook> getPhoneBooks() {
         return phoneBookRestRepository.findAll();
     }
 
