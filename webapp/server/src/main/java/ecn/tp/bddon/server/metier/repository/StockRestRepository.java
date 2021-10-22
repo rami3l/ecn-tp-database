@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import ecn.tp.bddon.server.metier.dto.Stock;
+import ecn.tp.bddon.server.metier.dto.postgres.Stock;
 
 public interface StockRestRepository extends CrudRepository<Stock, Integer> {
 

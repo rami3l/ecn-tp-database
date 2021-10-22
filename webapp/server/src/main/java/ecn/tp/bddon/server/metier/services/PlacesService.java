@@ -6,9 +6,9 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import ecn.tp.bddon.server.metier.dto.Client;
-import ecn.tp.bddon.server.metier.dto.DeliveryPoint;
-import ecn.tp.bddon.server.metier.dto.LoadingPoint;
+import ecn.tp.bddon.server.metier.dto.postgres.Client;
+import ecn.tp.bddon.server.metier.dto.postgres.DeliveryPoint;
+import ecn.tp.bddon.server.metier.dto.postgres.LoadingPoint;
 import ecn.tp.bddon.server.metier.repository.DeliveryPointRestRepository;
 import ecn.tp.bddon.server.metier.repository.LoadingPointRestRepository;
 

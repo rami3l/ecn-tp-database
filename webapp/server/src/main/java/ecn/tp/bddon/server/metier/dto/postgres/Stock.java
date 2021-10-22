@@ -1,4 +1,4 @@
-package ecn.tp.bddon.server.metier.dto;
+package ecn.tp.bddon.server.metier.dto.postgres;
 
 import java.io.Serializable;
 
@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
 
-import ecn.tp.bddon.server.metier.dto.id_classes.StockId;
+import ecn.tp.bddon.server.metier.dto.postgres.id_classes.StockId;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

@@ -6,11 +6,11 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import ecn.tp.bddon.server.metier.dto.Mission;
-import ecn.tp.bddon.server.metier.dto.SupportedBy;
-import ecn.tp.bddon.server.metier.dto.creations.MissionToSave;
-import ecn.tp.bddon.server.metier.dto.creations.SupportedByToSave;
-import ecn.tp.bddon.server.metier.dto.id_classes.SupportedById;
+import ecn.tp.bddon.server.metier.dto.postgres.Mission;
+import ecn.tp.bddon.server.metier.dto.postgres.SupportedBy;
+import ecn.tp.bddon.server.metier.dto.postgres.creations.MissionToSave;
+import ecn.tp.bddon.server.metier.dto.postgres.creations.SupportedByToSave;
+import ecn.tp.bddon.server.metier.dto.postgres.id_classes.SupportedById;
 import ecn.tp.bddon.server.metier.repository.MissionRestRepository;
 import ecn.tp.bddon.server.metier.repository.SupportedByRestRepository;
 

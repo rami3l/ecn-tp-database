@@ -4,7 +4,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import ecn.tp.bddon.server.metier.dto.Product;
+import ecn.tp.bddon.server.metier.dto.postgres.Product;
 import ecn.tp.bddon.server.metier.repository.ProductRestRepository;
 import ecn.tp.bddon.server.metier.repository.StockRestRepository;
 

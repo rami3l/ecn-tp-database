@@ -1,9 +1,9 @@
-package ecn.tp.bddon.server.metier.dto.details;
+package ecn.tp.bddon.server.metier.dto.postgres.details;
 
-import ecn.tp.bddon.server.metier.dto.DeliveryPoint;
-import ecn.tp.bddon.server.metier.dto.Order;
-import ecn.tp.bddon.server.metier.dto.OrderContent;
-import ecn.tp.bddon.server.metier.dto.Product;
+import ecn.tp.bddon.server.metier.dto.postgres.DeliveryPoint;
+import ecn.tp.bddon.server.metier.dto.postgres.Order;
+import ecn.tp.bddon.server.metier.dto.postgres.OrderContent;
+import ecn.tp.bddon.server.metier.dto.postgres.Product;
 import lombok.Data;
 import lombok.NonNull;
 

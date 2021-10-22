@@ -1,4 +1,4 @@
-package ecn.tp.bddon.server.metier.dto.creations;
+package ecn.tp.bddon.server.metier.dto.postgres.creations;
 
 import lombok.Data;
 

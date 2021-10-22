@@ -6,8 +6,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import ecn.tp.bddon.server.metier.dto.Client;
-import ecn.tp.bddon.server.metier.dto.details.ClientDetailed;
+import ecn.tp.bddon.server.metier.dto.postgres.Client;
+import ecn.tp.bddon.server.metier.dto.postgres.details.ClientDetailed;
 import ecn.tp.bddon.server.metier.repository.ClientRestRepository;
 
 @Service

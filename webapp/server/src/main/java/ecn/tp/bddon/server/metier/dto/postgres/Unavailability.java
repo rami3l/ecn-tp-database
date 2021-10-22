@@ -1,4 +1,4 @@
-package ecn.tp.bddon.server.metier.dto;
+package ecn.tp.bddon.server.metier.dto.postgres;
 
 import java.io.Serializable;
 

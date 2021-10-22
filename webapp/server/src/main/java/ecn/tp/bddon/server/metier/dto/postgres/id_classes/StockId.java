@@ -1,4 +1,4 @@
-package ecn.tp.bddon.server.metier.dto.id_classes;
+package ecn.tp.bddon.server.metier.dto.postgres.id_classes;
 
 import java.io.Serializable;
 
@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SupportedById implements Serializable {
+public class StockId implements Serializable {
 
-    private int orderContentId;
-    private int missionId;
+    private int loadingPointId;
+    private int productId;
 
 }

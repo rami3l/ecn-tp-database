@@ -1,6 +1,6 @@
-package ecn.tp.bddon.server.metier.dto.details;
+package ecn.tp.bddon.server.metier.dto.postgres.details;
 
-import ecn.tp.bddon.server.metier.dto.Order;
+import ecn.tp.bddon.server.metier.dto.postgres.Order;
 import lombok.Data;
 import lombok.NonNull;
 

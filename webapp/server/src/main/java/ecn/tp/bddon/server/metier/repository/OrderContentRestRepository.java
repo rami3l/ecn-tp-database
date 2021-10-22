@@ -3,7 +3,7 @@ package ecn.tp.bddon.server.metier.repository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import ecn.tp.bddon.server.metier.dto.OrderContent;
+import ecn.tp.bddon.server.metier.dto.postgres.OrderContent;
 
 public interface OrderContentRestRepository extends CrudRepository<OrderContent, Integer> {
 

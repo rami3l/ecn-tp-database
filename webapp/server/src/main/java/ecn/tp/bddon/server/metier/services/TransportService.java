@@ -6,9 +6,9 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import ecn.tp.bddon.server.metier.dto.Driver;
-import ecn.tp.bddon.server.metier.dto.Truck;
-import ecn.tp.bddon.server.metier.dto.Unavailability;
+import ecn.tp.bddon.server.metier.dto.postgres.Driver;
+import ecn.tp.bddon.server.metier.dto.postgres.Truck;
+import ecn.tp.bddon.server.metier.dto.postgres.Unavailability;
 import ecn.tp.bddon.server.metier.repository.DriverRestRepository;
 import ecn.tp.bddon.server.metier.repository.TruckRestRepository;
 import lombok.NonNull;

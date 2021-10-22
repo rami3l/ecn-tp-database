@@ -1,10 +1,13 @@
-package ecn.tp.bddon.server.metier.dto;
+package ecn.tp.bddon.server.metier.dto.postgres;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -14,19 +17,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "client")
+@Table(name = "delivery_point")
 @Data
 @NoArgsConstructor
-public class Client implements Serializable {
+public class DeliveryPoint implements Serializable {
 
     @Id
-    private String abbrev;
+    @GeneratedValue
+    @Column(name = "delivery_point_id")
+    private int id;
 
-    private String name;
-
-    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "address")
     private Address address;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "client")
+    private Client client;
 
 }

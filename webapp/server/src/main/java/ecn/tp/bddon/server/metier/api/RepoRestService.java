@@ -12,25 +12,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import ecn.tp.bddon.server.metier.dto.Client;
-import ecn.tp.bddon.server.metier.dto.DeliveryPoint;
-import ecn.tp.bddon.server.metier.dto.Driver;
-import ecn.tp.bddon.server.metier.dto.LoadingPoint;
-import ecn.tp.bddon.server.metier.dto.Mission;
-import ecn.tp.bddon.server.metier.dto.Order;
-import ecn.tp.bddon.server.metier.dto.OrderContent;
-import ecn.tp.bddon.server.metier.dto.Product;
-import ecn.tp.bddon.server.metier.dto.SupportedBy;
-import ecn.tp.bddon.server.metier.dto.Truck;
-import ecn.tp.bddon.server.metier.dto.Unavailability;
-import ecn.tp.bddon.server.metier.dto.creations.MissionToSave;
-import ecn.tp.bddon.server.metier.dto.creations.SupportedByToSave;
-import ecn.tp.bddon.server.metier.dto.details.ClientDetailed;
-import ecn.tp.bddon.server.metier.dto.details.OrderContentDetailed;
-import ecn.tp.bddon.server.metier.dto.details.OrderDetailed;
+import ecn.tp.bddon.server.metier.dto.mongo.PhoneBook;
+import ecn.tp.bddon.server.metier.dto.postgres.Client;
+import ecn.tp.bddon.server.metier.dto.postgres.DeliveryPoint;
+import ecn.tp.bddon.server.metier.dto.postgres.Driver;
+import ecn.tp.bddon.server.metier.dto.postgres.LoadingPoint;
+import ecn.tp.bddon.server.metier.dto.postgres.Mission;
+import ecn.tp.bddon.server.metier.dto.postgres.Order;
+import ecn.tp.bddon.server.metier.dto.postgres.OrderContent;
+import ecn.tp.bddon.server.metier.dto.postgres.Product;
+import ecn.tp.bddon.server.metier.dto.postgres.SupportedBy;
+import ecn.tp.bddon.server.metier.dto.postgres.Truck;
+import ecn.tp.bddon.server.metier.dto.postgres.Unavailability;
+import ecn.tp.bddon.server.metier.dto.postgres.creations.MissionToSave;
+import ecn.tp.bddon.server.metier.dto.postgres.creations.SupportedByToSave;
+import ecn.tp.bddon.server.metier.dto.postgres.details.ClientDetailed;
+import ecn.tp.bddon.server.metier.dto.postgres.details.OrderContentDetailed;
+import ecn.tp.bddon.server.metier.dto.postgres.details.OrderDetailed;
 import ecn.tp.bddon.server.metier.services.ClientService;
 import ecn.tp.bddon.server.metier.services.MissionService;
 import ecn.tp.bddon.server.metier.services.OrderService;
+import ecn.tp.bddon.server.metier.services.PhoneBookService;
 import ecn.tp.bddon.server.metier.services.PlacesService;
 import ecn.tp.bddon.server.metier.services.StockService;
 import ecn.tp.bddon.server.metier.services.TransportService;
@@ -50,6 +52,8 @@ public class RepoRestService {
     private OrderService orderService;
     @Resource
     private MissionService missionService;
+    @Resource
+    private PhoneBookService infoTableService;
 
     @GetMapping("/products")
     public Iterable<Product> getProducts() {
@@ -188,6 +192,11 @@ public class RepoRestService {
     @ResponseStatus(HttpStatus.CREATED)
     public void createSupportedBy(@RequestBody SupportedByToSave supportedBy) {
         missionService.save(supportedBy);
+    }
+
+    @GetMapping("/infotables")
+    public Iterable<PhoneBook> getInfoTables() {
+        return infoTableService.getInfoTables();
     }
 
 }

@@ -1,4 +1,4 @@
-package ecn.tp.bddon.server.metier.dto;
+package ecn.tp.bddon.server.metier.dto.postgres;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
 
-import ecn.tp.bddon.server.metier.dto.id_classes.SupportedById;
+import ecn.tp.bddon.server.metier.dto.postgres.id_classes.SupportedById;
 import ecn.tp.bddon.server.utils.DateParser;
 import lombok.Data;
 import lombok.NoArgsConstructor;
