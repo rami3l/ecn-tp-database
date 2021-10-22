@@ -5,6 +5,7 @@ import { MissionFormComponent } from './components/content/mission/mission-form/
 import { MissionsComponent } from './components/content/mission/missions/missions.component';
 import { OrderCardComponent } from './components/content/order/order-card/order-card.component';
 import { OrdersComponent } from './components/content/order/orders/orders.component';
+import { PhonebookComponent } from './components/content/phonebook/phonebook.component';
 import { ProductCardComponent } from './components/content/stock/product-card/product-card.component';
 import { ProductsComponent } from './components/content/stock/products/products.component';
 import { WelcomeComponent } from './components/content/welcome/welcome.component';
@@ -37,7 +38,9 @@ const routes: Routes = [
       { path: 'product/:id', component: ProductCardComponent }
     ]
   },
-  { path: 'product/:id', component: ProductCardComponent }
+  { path: 'product/:id', component: ProductCardComponent },
+
+  { path: 'phonebooks', component: PhonebookComponent }
 ];
 
 @NgModule({
