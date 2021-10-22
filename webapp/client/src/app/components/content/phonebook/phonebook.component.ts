@@ -9,22 +9,40 @@ import { PhoneBookService } from 'src/app/services/rest/phonebook.service';
 })
 export class PhonebookComponent implements OnInit {
 
-  phoneBooks: PhoneBook[] | undefined;
+  head: string[] = [];
+  data: Map<string, string[][]> = new Map<string, string[][]>();
 
   constructor(private phoneBookService: PhoneBookService) { }
 
   ngOnInit(): void {
     this.phoneBookService.getPhoneBooks().subscribe(
-      phoneBooksReceived => this.phoneBooks = phoneBooksReceived
+      phoneBooksReceived => this.initTable(phoneBooksReceived)
     )
   }
 
-  fromFieldToString(from: Map<string, string>): string {
-    var display = ""
-    from.forEach((key, value) => {
-      display += key + ": "
+  initTable(phoneBooks: PhoneBook[]): void {
+    phoneBooks.forEach(phoneBook => {
+      var from = phoneBook.from.firstName + " " + phoneBook.from.lastName;
+      this.insertData(from, phoneBook.data);
+      console.log(this.data);
     })
-    return "";
+  }
+
+  insertData(from: string, content: Map<string, string>[]): void {
+    var lines: string[][] = [];
+    content.forEach(content_line => {
+      var line: string[] = [];
+      console.log("content_line:")
+      console.log(content_line);
+      for (const [key, value] of Object.entries(content_line)) {
+        if (!this.head.includes(key)) {
+          this.head.push(key);
+        }
+        line[this.head.indexOf(key)] = value;
+      }
+      lines.push(line);
+    });
+    this.data.set(from, lines);
   }
 
 }
