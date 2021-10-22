@@ -15,6 +15,6 @@ import lombok.NoArgsConstructor;
 public class PhoneBook {
     @Id
     private String id;
-    private Map<String, String> from;
+    private PhoneBookFrom from;
     private Map<String, String>[] data;
 }
