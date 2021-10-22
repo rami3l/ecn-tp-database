@@ -1,1 +1,7 @@
-<p>phonebook works!</p>
+<div class="container">
+    <h1 *ngIf="phoneBooks == null">Loading...</h1>
+    <h1 *ngIf="phoneBooks != null">Compilation of {{phoneBooks.length}} phone books</h1>
+    <div *ngFor="let phoneBook of phoneBooks">
+        {{phoneBook.from.firstName}} {{phoneBook.from.lastName}}
+    </div>
+</div>
