@@ -9,8 +9,9 @@ import { PhoneBookService } from 'src/app/services/rest/phonebook.service';
 })
 export class PhonebookComponent implements OnInit {
 
-  head: string[] = [];
-  data: Map<string, string[][]> = new Map<string, string[][]>();
+  nbCards = 0;
+  compilationHead: string[] = [];
+  phoneBooksCompilation: Map<string, string[][]> = new Map<string, string[][]>();
 
   constructor(private phoneBookService: PhoneBookService) { }
 
@@ -21,10 +22,10 @@ export class PhonebookComponent implements OnInit {
   }
 
   initTable(phoneBooks: PhoneBook[]): void {
+    this.nbCards = 0;
     phoneBooks.forEach(phoneBook => {
       var from = phoneBook.from.firstName + " " + phoneBook.from.lastName;
       this.insertData(from, phoneBook.data);
-      console.log(this.data);
     })
   }
 
@@ -32,17 +33,16 @@ export class PhonebookComponent implements OnInit {
     var lines: string[][] = [];
     content.forEach(content_line => {
       var line: string[] = [];
-      console.log("content_line:")
-      console.log(content_line);
+      this.nbCards++;
       for (const [key, value] of Object.entries(content_line)) {
-        if (!this.head.includes(key)) {
-          this.head.push(key);
+        if (!this.compilationHead.includes(key)) {
+          this.compilationHead.push(key);
         }
-        line[this.head.indexOf(key)] = value;
+        line[this.compilationHead.indexOf(key)] = value;
       }
       lines.push(line);
     });
-    this.data.set(from, lines);
+    this.phoneBooksCompilation.set(from, lines);
   }
 
 }

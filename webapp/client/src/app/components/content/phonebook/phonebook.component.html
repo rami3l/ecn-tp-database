@@ -1,15 +1,17 @@
 <div class="container">
-    <h1 *ngIf="data == null">Loading...</h1>
-    <h1 *ngIf="data != null">Compilation of {{data.size}} phone books</h1>
+    <h1 *ngIf="phoneBooksCompilation.size == 0">Loading...</h1>
+    <h1 *ngIf="phoneBooksCompilation != null">Compilation of {{nbCards}} cards from {{phoneBooksCompilation.size}} phone
+        books
+    </h1>
     <table class="item-list">
         <thead>
             <tr>
                 <th scope="col">From</th>
-                <th scope="col" *ngFor="let item of head">{{item}}</th>
+                <th scope="col" *ngFor="let item of compilationHead">{{item}}</th>
             </tr>
         </thead>
         <tbody>
-            <ng-container *ngFor="let content of data | keyvalue">
+            <ng-container *ngFor="let content of phoneBooksCompilation | keyvalue">
                 <tr>
                     <td [attr.rowspan]="content.value.length">{{content.key}}</td>
                     <ng-container *ngIf="content.value.length>0">
