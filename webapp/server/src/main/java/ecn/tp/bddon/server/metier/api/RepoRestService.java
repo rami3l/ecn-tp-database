@@ -29,13 +29,13 @@ import ecn.tp.bddon.server.metier.dto.postgres.creations.SupportedByToSave;
 import ecn.tp.bddon.server.metier.dto.postgres.details.ClientDetailed;
 import ecn.tp.bddon.server.metier.dto.postgres.details.OrderContentDetailed;
 import ecn.tp.bddon.server.metier.dto.postgres.details.OrderDetailed;
-import ecn.tp.bddon.server.metier.services.ClientService;
-import ecn.tp.bddon.server.metier.services.MissionService;
-import ecn.tp.bddon.server.metier.services.OrderService;
-import ecn.tp.bddon.server.metier.services.PhoneBookService;
-import ecn.tp.bddon.server.metier.services.PlacesService;
-import ecn.tp.bddon.server.metier.services.StockService;
-import ecn.tp.bddon.server.metier.services.TransportService;
+import ecn.tp.bddon.server.metier.services.rest.ClientService;
+import ecn.tp.bddon.server.metier.services.rest.MissionService;
+import ecn.tp.bddon.server.metier.services.rest.OrderService;
+import ecn.tp.bddon.server.metier.services.rest.PhoneBookService;
+import ecn.tp.bddon.server.metier.services.rest.PlacesService;
+import ecn.tp.bddon.server.metier.services.rest.StockService;
+import ecn.tp.bddon.server.metier.services.rest.TransportService;
 
 @RestController
 public class RepoRestService {

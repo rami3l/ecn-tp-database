@@ -1,4 +1,4 @@
-package ecn.tp.bddon.server.metier.services;
+package ecn.tp.bddon.server.metier.services.rest;
 
 import javax.annotation.Resource;
 
