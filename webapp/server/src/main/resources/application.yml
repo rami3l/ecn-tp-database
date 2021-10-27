@@ -20,5 +20,5 @@ spring:
   mail:
     host: smtp.laposte.net
     port: 587
-    username: mailsender
-    password: password
+    username: mailsender@laposte.net
+    password: psHj4EsD2xZd6Uv

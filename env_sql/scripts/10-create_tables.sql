@@ -107,6 +107,13 @@ CREATE TABLE IF NOT EXISTS public.certified_for (
     FOREIGN KEY (truck_type) REFERENCES public.truck_type (truck_type_id) NOT VALID
 );
 
+CREATE TABLE IF NOT EXISTS public.scheduling (
+    scheduling_id serial,
+    cron character varying,
+    email character varying,
+    PRIMARY KEY (scheduling_id)
+);
+
 ALTER TABLE
     public."order"
 ADD
