@@ -17,3 +17,8 @@ spring:
       host: localhost
       port: 27017
       authentication-database: admin
+  mail:
+    host: smtp.laposte.net
+    port: 587
+    username: mailsender
+    password: password

@@ -38,4 +38,16 @@ public class StockListingService {
         return listing;
     }
 
+    public String getCachedListing() {
+        return listing;
+    }
+
+    // TODO add method to create send list action (and save to database)
+
+    // TODO add method to remove send list action
+
+    // TODO add method to get all send list actions
+
+    // TODO add method to load all send list actions from database
+
 }
