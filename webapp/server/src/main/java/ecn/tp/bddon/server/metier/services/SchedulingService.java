@@ -47,7 +47,7 @@ public class SchedulingService {
         if (schedulers.containsKey(id)) {
             schedulers.get(id).destroy();
             schedulers.remove(id);
-            // TODO: remove task from database
+            log.info("Task with id {} cancelled", id);
             return true;
         }
         return false;

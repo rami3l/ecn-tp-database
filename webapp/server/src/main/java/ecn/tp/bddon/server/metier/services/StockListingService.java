@@ -1,5 +1,6 @@
 package ecn.tp.bddon.server.metier.services;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -58,13 +59,13 @@ public class StockListingService {
      * @param email          the email address to send the listing to
      * @param cronExpression the cron expression to use to schedule the listing
      */
-    public void scheduleSending(String email, String cronExpression) {
+    public int scheduleSending(String email, String cronExpression) {
         Scheduling scheduling = new Scheduling();
         scheduling.setEmail(email);
         scheduling.setCron(cronExpression);
         schedulingRestRepository.save(scheduling);
         log.info("Scheduling sending of the listing to {} with cron expression {}", email, cronExpression);
-        schedulingService.addTask(scheduling.getId(), () -> sendListingTo(email), cronExpression);
+        return schedulingService.addTask(scheduling.getId(), () -> sendListingTo(email), cronExpression);
     }
 
     /**
@@ -78,10 +79,23 @@ public class StockListingService {
         emailService.email(email, subject, body);
     }
 
-    // TODO add method to remove send list action
+    public boolean cancelSending(int id) {
+        schedulingRestRepository.deleteById(id);
+        return schedulingService.removeTask(id);
+    }
 
-    // TODO add method to get all send list actions
+    /**
+     * 
+     * @return all sendings that have been scheduled
+     */
+    public Iterable<Scheduling> getScheduledSendingList() {
+        return schedulingRestRepository.findAll();
+    }
 
-    // TODO add method to load all send list actions from database
+    @PostConstruct
+    private void initTasks() {
+        getScheduledSendingList().forEach(scheduling -> schedulingService.addTask(scheduling.getId(),
+                () -> sendListingTo(scheduling.getEmail()), scheduling.getCron()));
+    }
 
 }
