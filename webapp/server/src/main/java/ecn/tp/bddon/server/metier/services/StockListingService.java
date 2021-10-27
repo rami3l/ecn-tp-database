@@ -1,5 +1,7 @@
 package ecn.tp.bddon.server.metier.services;
 
+import java.util.Optional;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
@@ -31,17 +33,18 @@ public class StockListingService {
     private String listing = "";
 
     private void generateListing() {
-        listing = "";
+        String newListing = "";
         Iterable<Product> products = stockService.getProducts();
         Iterable<LoadingPoint> loadingPoints = placesService.getLoadingPoints();
-        loadingPoints.forEach(loadingPoint -> {
-            listing += loadingPoint.getAddress().getAddressLine() + " :\n";
-            products.forEach(product -> {
+        for (var loadingPoint : loadingPoints) {
+            newListing += loadingPoint.getAddress().getAddressLine() + " :\n";
+            for (var product : products) {
                 int quantity = stockService.getProductQuantityByLoadingPoint(product.getId(), loadingPoint.getId());
-                listing += product.getName() + " : " + quantity + " Kg\n";
-            });
-            listing += "\n\n";
-        });
+                newListing += product.getName() + " : " + quantity + " Kg\n";
+            }
+            newListing += "\n\n";
+        }
+        listing = newListing;
     }
 
     public String getListing() {
@@ -90,6 +93,15 @@ public class StockListingService {
      */
     public Iterable<Scheduling> getScheduledSendingList() {
         return schedulingRestRepository.findAll();
+    }
+
+    public Scheduling getScheduledSending(int id) {
+        Optional<Scheduling> scheduling = schedulingRestRepository.findById(id);
+        if (scheduling.isEmpty()) {
+            // TODO: lever erreur 404
+            return null;
+        }
+        return scheduling.get();
     }
 
     @PostConstruct

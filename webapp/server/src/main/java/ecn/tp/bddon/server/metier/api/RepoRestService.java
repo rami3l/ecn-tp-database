@@ -21,6 +21,7 @@ import ecn.tp.bddon.server.metier.dto.postgres.Mission;
 import ecn.tp.bddon.server.metier.dto.postgres.Order;
 import ecn.tp.bddon.server.metier.dto.postgres.OrderContent;
 import ecn.tp.bddon.server.metier.dto.postgres.Product;
+import ecn.tp.bddon.server.metier.dto.postgres.Scheduling;
 import ecn.tp.bddon.server.metier.dto.postgres.SupportedBy;
 import ecn.tp.bddon.server.metier.dto.postgres.Truck;
 import ecn.tp.bddon.server.metier.dto.postgres.Unavailability;
@@ -29,6 +30,7 @@ import ecn.tp.bddon.server.metier.dto.postgres.creations.SupportedByToSave;
 import ecn.tp.bddon.server.metier.dto.postgres.details.ClientDetailed;
 import ecn.tp.bddon.server.metier.dto.postgres.details.OrderContentDetailed;
 import ecn.tp.bddon.server.metier.dto.postgres.details.OrderDetailed;
+import ecn.tp.bddon.server.metier.services.StockListingService;
 import ecn.tp.bddon.server.metier.services.rest.ClientService;
 import ecn.tp.bddon.server.metier.services.rest.MissionService;
 import ecn.tp.bddon.server.metier.services.rest.OrderService;
@@ -54,6 +56,8 @@ public class RepoRestService {
     private MissionService missionService;
     @Resource
     private PhoneBookService phoneBookService;
+    @Resource
+    private StockListingService stockListingService;
 
     @GetMapping("/products")
     public Iterable<Product> getProducts() {
@@ -197,6 +201,27 @@ public class RepoRestService {
     @GetMapping("/phonebooks")
     public Iterable<PhoneBook> getPhoneBooks() {
         return phoneBookService.getPhoneBooks();
+    }
+
+    @PostMapping("/scheduledsendings")
+    @ResponseStatus(HttpStatus.CREATED)
+    public int scheduleSending() {
+        return stockListingService.scheduleSending("asphjt@gmail.com", "0 * * * * *");
+    }
+
+    @DeleteMapping("/scheduledsendings/{id}")
+    public void removeScheduledSending(@PathVariable int id) {
+        stockListingService.cancelSending(id);
+    }
+
+    @GetMapping("/scheduledsendings")
+    public Iterable<Scheduling> getScheduledSendingList() {
+        return stockListingService.getScheduledSendingList();
+    }
+
+    @GetMapping("/scheduledsendings/{id}")
+    public Scheduling getScheduledSending(@PathVariable int id) {
+        return stockListingService.getScheduledSending(id);
     }
 
 }
