@@ -224,4 +224,9 @@ public class RepoRestService {
         return stockListingService.getScheduledSending(id);
     }
 
+    @PutMapping("/sendlisting/{email}")
+    public void sendListing(@PathVariable String email) {
+        stockListingService.sendListingTo(email);
+    }
+
 }

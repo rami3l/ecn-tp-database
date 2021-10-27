@@ -37,12 +37,12 @@ public class StockListingService {
         Iterable<Product> products = stockService.getProducts();
         Iterable<LoadingPoint> loadingPoints = placesService.getLoadingPoints();
         for (var loadingPoint : loadingPoints) {
-            newListing += loadingPoint.getAddress().getAddressLine() + " :\n";
+            newListing += loadingPoint.getAddress().getAddressLine() + " :<ul>";
             for (var product : products) {
                 int quantity = stockService.getProductQuantityByLoadingPoint(product.getId(), loadingPoint.getId());
-                newListing += product.getName() + " : " + quantity + " Kg\n";
+                newListing += "<li>" + product.getName() + " : " + quantity + " Kg</li>";
             }
-            newListing += "\n\n";
+            newListing += "</ul>";
         }
         listing = newListing;
     }
@@ -78,7 +78,7 @@ public class StockListingService {
      */
     public void sendListingTo(String email) {
         String body = getListing();
-        String subject = "Stock: available product quantities by loadingpoint";
+        String subject = "[BIFORU - stock] available product quantities by loadingpoint";
         emailService.email(email, subject, body);
     }
 
