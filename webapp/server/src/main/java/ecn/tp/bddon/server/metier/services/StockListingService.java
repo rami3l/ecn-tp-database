@@ -34,20 +34,20 @@ public class StockListingService {
     private String listing = "";
 
     private void generateListing() {
-        String newListing = "";
+        StringBuilder listingBuilder = new StringBuilder();
         Iterable<Product> products = stockService.getProducts();
         Iterable<LoadingPoint> loadingPoints = placesService.getLoadingPoints();
         for (var loadingPoint : loadingPoints) {
             Address a = loadingPoint.getAddress();
-            newListing += a.getAddressLine() + " - " + (a.getZipcode() != null ? a.getZipcode() + " " : "")
-                    + a.getCity() + " :<ul>";
+            listingBuilder.append(a.getAddressLine() + " - ").append(a.getZipcode() != null ? a.getZipcode() + " " : "")
+                    .append(a.getCity() + " :<ul>");
             for (var product : products) {
                 int quantity = stockService.getProductQuantityByLoadingPoint(product.getId(), loadingPoint.getId());
-                newListing += "<li>" + product.getName() + " : " + quantity + " Kg</li>";
+                listingBuilder.append("<li>" + product.getName() + " : " + quantity + " Kg</li>");
             }
-            newListing += "</ul>";
+            listingBuilder.append("</ul>");
         }
-        listing = newListing;
+        listing = listingBuilder.toString();
     }
 
     public String getListing() {
