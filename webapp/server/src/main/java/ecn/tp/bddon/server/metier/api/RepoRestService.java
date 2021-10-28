@@ -26,6 +26,7 @@ import ecn.tp.bddon.server.metier.dto.postgres.SupportedBy;
 import ecn.tp.bddon.server.metier.dto.postgres.Truck;
 import ecn.tp.bddon.server.metier.dto.postgres.Unavailability;
 import ecn.tp.bddon.server.metier.dto.postgres.creations.MissionToSave;
+import ecn.tp.bddon.server.metier.dto.postgres.creations.SchedulingToCreate;
 import ecn.tp.bddon.server.metier.dto.postgres.creations.SupportedByToSave;
 import ecn.tp.bddon.server.metier.dto.postgres.details.ClientDetailed;
 import ecn.tp.bddon.server.metier.dto.postgres.details.OrderContentDetailed;
@@ -209,27 +210,55 @@ public class RepoRestService {
         return phoneBookService.getPhoneBooks();
     }
 
+    /**
+     * Endpoint to schedule sending of the listing
+     * 
+     * @param scheduling: object containing the email to send the listing to, and
+     *                    the cron expression of the scheduling
+     * @return the id of the scheduled action
+     */
     @PostMapping("/scheduledsendings")
     @ResponseStatus(HttpStatus.CREATED)
-    public int scheduleSending() {
-        return stockListingService.scheduleSending("asphjt@gmail.com", "0 * * * * *");
+    public int scheduleSending(@RequestBody SchedulingToCreate scheduling) {
+        return stockListingService.scheduleSending(scheduling.getEmail(), scheduling.getCron());
     }
 
+    /**
+     * Endpoint to cancel a scheduled sending
+     * 
+     * @param id: the id of the scheduled sending to cancel
+     */
     @DeleteMapping("/scheduledsendings/{id}")
     public void removeScheduledSending(@PathVariable int id) {
         stockListingService.cancelSending(id);
     }
 
+    /**
+     * Endpoint to get all scheduled sendings
+     * 
+     * @return the list of all scheduled sendings (email & cron expression)
+     */
     @GetMapping("/scheduledsendings")
     public Iterable<Scheduling> getScheduledSendingList() {
         return stockListingService.getScheduledSendingList();
     }
 
+    /**
+     * Endpoint to get the specified scheduled sending
+     * 
+     * @param id: id of the scheduled sending to get
+     * @return the scheduled sending (email & cron expression)
+     */
     @GetMapping("/scheduledsendings/{id}")
     public Scheduling getScheduledSending(@PathVariable int id) {
         return stockListingService.getScheduledSending(id);
     }
 
+    /**
+     * Endpoint to send the listing to the specified email address
+     * 
+     * @param email: email address to send the listing to
+     */
     @PutMapping("/sendlisting/{email}")
     public void sendListing(@PathVariable String email) {
         stockListingService.sendListingTo(email);

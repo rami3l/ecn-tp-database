@@ -70,7 +70,7 @@ public class StockListingService {
         scheduling.setEmail(email);
         scheduling.setCron(cronExpression);
         schedulingRestRepository.save(scheduling);
-        log.info("Scheduling sending of the listing to {} with cron expression {}", email, cronExpression);
+        log.info("Scheduling sending of the listing to {} with cron expression \"{}\"", email, cronExpression);
         return schedulingService.addTask(scheduling.getId(), () -> sendListingTo(email), cronExpression);
     }
 
