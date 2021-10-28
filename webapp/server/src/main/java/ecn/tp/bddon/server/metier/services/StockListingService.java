@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import ecn.tp.bddon.server.metier.dto.postgres.Address;
 import ecn.tp.bddon.server.metier.dto.postgres.LoadingPoint;
 import ecn.tp.bddon.server.metier.dto.postgres.Product;
 import ecn.tp.bddon.server.metier.dto.postgres.Scheduling;
@@ -37,7 +38,9 @@ public class StockListingService {
         Iterable<Product> products = stockService.getProducts();
         Iterable<LoadingPoint> loadingPoints = placesService.getLoadingPoints();
         for (var loadingPoint : loadingPoints) {
-            newListing += loadingPoint.getAddress().getAddressLine() + " :<ul>";
+            Address a = loadingPoint.getAddress();
+            newListing += a.getAddressLine() + " - " + (a.getZipcode() != null ? a.getZipcode() + " " : "")
+                    + a.getCity() + " :<ul>";
             for (var product : products) {
                 int quantity = stockService.getProductQuantityByLoadingPoint(product.getId(), loadingPoint.getId());
                 newListing += "<li>" + product.getName() + " : " + quantity + " Kg</li>";
