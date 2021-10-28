@@ -69,6 +69,12 @@ public class RepoRestService {
         return stockService.getProductQuantity(productId);
     }
 
+    @GetMapping("/products/{id}/quantity/{loadingpoint}")
+    public int getProductQuantityByLoadingPoint(@PathVariable("id") int productId,
+            @PathVariable("loadingpoint") int loadingPointId) {
+        return stockService.getProductQuantityByLoadingPoint(productId, loadingPointId);
+    }
+
     @GetMapping("/clients")
     public Iterable<Client> getClients() {
         return clientService.getClients();
