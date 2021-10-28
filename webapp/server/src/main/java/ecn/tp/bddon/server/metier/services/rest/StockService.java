@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import ecn.tp.bddon.server.metier.dto.postgres.Product;
 import ecn.tp.bddon.server.metier.dto.postgres.Stock;
+import ecn.tp.bddon.server.metier.dto.postgres.details.ProductDetailed;
 import ecn.tp.bddon.server.metier.repository.ProductRestRepository;
 import ecn.tp.bddon.server.metier.repository.StockRestRepository;
 
@@ -21,6 +22,15 @@ public class StockService {
 
     public Iterable<Product> getProducts() {
         return productRestRepository.findAll();
+    }
+
+    public ProductDetailed getProduct(int id) {
+        Optional<Product> product = productRestRepository.findById(id);
+        if (product.isEmpty()) {
+            // TODO: lever erreur 404
+            return null;
+        }
+        return new ProductDetailed(product.get());
     }
 
     public int getProductQuantity(int id) {

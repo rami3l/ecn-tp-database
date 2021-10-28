@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -28,6 +30,7 @@ public class Product implements Serializable {
 
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "productId", fetch = FetchType.LAZY)
     private List<Stock> stocks = new ArrayList<>();
 

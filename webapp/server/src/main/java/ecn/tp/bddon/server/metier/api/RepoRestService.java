@@ -31,6 +31,7 @@ import ecn.tp.bddon.server.metier.dto.postgres.creations.SupportedByToSave;
 import ecn.tp.bddon.server.metier.dto.postgres.details.ClientDetailed;
 import ecn.tp.bddon.server.metier.dto.postgres.details.OrderContentDetailed;
 import ecn.tp.bddon.server.metier.dto.postgres.details.OrderDetailed;
+import ecn.tp.bddon.server.metier.dto.postgres.details.ProductDetailed;
 import ecn.tp.bddon.server.metier.services.StockListingService;
 import ecn.tp.bddon.server.metier.services.rest.ClientService;
 import ecn.tp.bddon.server.metier.services.rest.MissionService;
@@ -63,6 +64,11 @@ public class RepoRestService {
     @GetMapping("/products")
     public Iterable<Product> getProducts() {
         return stockService.getProducts();
+    }
+
+    @GetMapping("/products/{id}")
+    public ProductDetailed getProduct(@PathVariable("id") int productId) {
+        return stockService.getProduct(productId);
     }
 
     @GetMapping("/products/{id}/quantity")
