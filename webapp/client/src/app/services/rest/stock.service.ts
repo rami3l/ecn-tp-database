@@ -17,11 +17,15 @@ export class StockService {
         return this.http.get<Product[]>(this.url);
     }
 
+    getProduct(id: number): Observable<Product> {
+        return this.http.get<Product>(this.url + id);
+    }
+
     getProductQuantity(id: number): Observable<number> {
         return this.http.get<number>(this.url + id + "/quantity");
     }
 
-    // getPrduct(id: number): Observable<Product> {
-    //     return this.http.get<Product>(this.url + id);
-    // }
+    getProductQuantityByLoadingPoint(id: number, loadingPointId: number): Observable<number> {
+        return this.http.get<number>(this.url + id + "/quantity/" + loadingPointId);
+    }
 }

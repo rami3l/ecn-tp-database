@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Address } from 'src/app/dto/address';
 import { DeliveryPoint } from 'src/app/dto/deliverypoint';
 import { LoadingPoint } from 'src/app/dto/loadingpoint';
 import { environment } from 'src/environments/environment';
@@ -29,5 +30,9 @@ export class PlacesService {
 
     getDeliveryPoint(id: number): Observable<LoadingPoint> {
         return this.http.get<DeliveryPoint>(this.deliveryPointUrl + id);
+    }
+
+    toString(address: Address) {
+        return address.addressLine + " - " + (address.zipcode ? address.zipcode + " " : "") + address.city;
     }
 }

@@ -1,6 +1,6 @@
 <div class="container">
-    <h1 *ngIf="phoneBooksCompilation.size == 0">Loading...</h1>
-    <h1 *ngIf="phoneBooksCompilation != null">Compilation of {{nbCards}} cards from {{phoneBooksCompilation.size}} phone
+    <h1 *ngIf="!phoneBooksCompilation.size">Loading...</h1>
+    <h1 *ngIf="phoneBooksCompilation.size">Compilation of {{nbCards}} cards from {{phoneBooksCompilation.size}} phone
         books
     </h1>
     <table class="item-list">

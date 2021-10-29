@@ -1,4 +1,20 @@
 <div class="container">
-    <br><br><br>
-    <h1>Not yet implemented !</h1>
+    <h1>{{productName || "Loading..."}}</h1>
+    <table class="item-list">
+        <thead>
+            <tr>
+                <th scope="col">Loading point</th>
+                <th scope="col">Quantity</th>
+            </tr>
+            <tr>
+                <td colspan="5" style="border-top: 1px solid; padding: 0px;"></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let loadingPoint of loadingPoints | keyvalue">
+                <td>{{loadingPoint.value}}</td>
+                <td>{{quantities?.get(loadingPoint.key) || 0}}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>

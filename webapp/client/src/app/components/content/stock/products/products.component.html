@@ -1,7 +1,7 @@
 <div class="grid">
     <div class="left-container">
-        <h1 *ngIf="this.products == null">Loading orders...</h1>
-        <h1 *ngIf="this.products != null">{{quantities.size + "/" + products.length }} product types in stock</h1>
+        <h1 *ngIf="this.products != null">{{this.products ? quantities.size + "/" + products.length + " product types in
+            stock" : "Loading products..."}}</h1>
         <table class="item-list">
             <thead>
                 <tr>

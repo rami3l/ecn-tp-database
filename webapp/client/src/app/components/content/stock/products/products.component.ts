@@ -20,19 +20,19 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     this.stockService.getProducts().subscribe(
       productsReceived => {
-        this.products = productsReceived;
-        this.products.forEach(product => {
+        productsReceived.forEach(product => {
           this.setProductQuantity(product.id);
         })
+        this.products = productsReceived;
       }
     )
   }
 
   private setProductQuantity(id: number): void {
     this.stockService.getProductQuantity(id).subscribe(
-      quantityReceveid => {
-        if (quantityReceveid) {
-          this.quantities.set(id, quantityReceveid);
+      quantityReceived => {
+        if (quantityReceived) {
+          this.quantities.set(id, quantityReceived);
         }
       }
     );
