@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { Scheduling } from 'src/app/dto/scheduling';
 import { StockService } from 'src/app/services/rest/stock.service';
@@ -8,7 +8,7 @@ import { StockService } from 'src/app/services/rest/stock.service';
   templateUrl: './product-export.component.html',
   styleUrls: ['./product-export.component.scss']
 })
-export class ProductExportComponent implements OnInit {
+export class ProductExportComponent implements OnInit, OnDestroy {
 
   schedulings: Scheduling[] | undefined;
   email: string = "";
@@ -24,6 +24,10 @@ export class ProductExportComponent implements OnInit {
     this.stockService.getScheduleSendings().subscribe(
       schedulingsReceived => this.schedulings = schedulingsReceived
     )
+  }
+
+  ngOnDestroy(): void {
+    this.modalSubscription?.unsubscribe();
   }
 
   sendListing() {
