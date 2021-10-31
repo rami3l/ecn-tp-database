@@ -9,6 +9,8 @@ import { PhonebookComponent } from './components/content/phonebook/phonebook.com
 import { ProductCardComponent } from './components/content/stock/product-card/product-card.component';
 import { ProductExportComponent } from './components/content/stock/product-export/product-export.component';
 import { ProductsComponent } from './components/content/stock/products/products.component';
+import { TruckCardComponent } from './components/content/truck/truck-card/truck-card.component';
+import { TruckComponent } from './components/content/truck/truck/truck.component';
 import { WelcomeComponent } from './components/content/welcome/welcome.component';
 
 const routes: Routes = [
@@ -32,6 +34,14 @@ const routes: Routes = [
     ]
   },
   { path: 'order/:id', component: OrderCardComponent },
+
+  {
+    path: 'trucks', component: TruckComponent,
+    children: [
+      { path: 'truck/:id', component: TruckCardComponent }
+    ]
+  },
+  { path: 'truck/:id', component: TruckCardComponent },
 
   {
     path: 'stock', component: ProductsComponent,

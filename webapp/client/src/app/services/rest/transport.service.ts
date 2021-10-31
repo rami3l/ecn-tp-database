@@ -19,10 +19,13 @@ export class TransportService {
         return this.http.get<Truck[]>(this.truckUrl);
     }
 
-    getTruck(id: number): Observable<Truck> {
-        return this.http.get<Truck>(this.truckUrl + id);
+    getTruck(licensePlate: string): Observable<Truck> {
+        return this.http.get<Truck>(this.truckUrl + licensePlate);
     }
 
+    getAssignedDriver(licensePlate: string): Observable<Driver> {
+        return this.http.get<Driver>(this.truckUrl + licensePlate + "/driver")
+    }
 
     getDrivers(): Observable<Driver[]> {
         return this.http.get<Driver[]>(this.driverUrl);

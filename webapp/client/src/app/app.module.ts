@@ -11,12 +11,14 @@ import { MissionsComponent } from './components/content/mission/missions/mission
 import { OrderCardComponent } from './components/content/order/order-card/order-card.component';
 import { OrderFormComponent } from './components/content/order/order-form/order-form.component';
 import { OrdersComponent } from './components/content/order/orders/orders.component';
+import { PhonebookComponent } from './components/content/phonebook/phonebook.component';
+import { ProductCardComponent } from './components/content/stock/product-card/product-card.component';
+import { ProductExportComponent } from './components/content/stock/product-export/product-export.component';
 import { ProductsComponent } from './components/content/stock/products/products.component';
+import { TruckComponent } from './components/content/truck/truck/truck.component';
 import { WelcomeComponent } from './components/content/welcome/welcome.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
-import { ProductCardComponent } from './components/content/stock/product-card/product-card.component';
-import { PhonebookComponent } from './components/content/phonebook/phonebook.component';
-import { ProductExportComponent } from './components/content/stock/product-export/product-export.component';
+import { TruckCardComponent } from './components/content/truck/truck-card/truck-card.component';
 
 
 @NgModule({
@@ -33,7 +35,9 @@ import { ProductExportComponent } from './components/content/stock/product-expor
     ProductsComponent,
     ProductCardComponent,
     PhonebookComponent,
-    ProductExportComponent
+    ProductExportComponent,
+    TruckComponent,
+    TruckCardComponent
   ],
   imports: [
     BrowserModule,
