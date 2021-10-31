@@ -1,6 +1,40 @@
 <div class="container">
-    <br>
-    <br>
-    <br>
-    <h1>Not yet implemented !</h1>
+    <h1>{{truck ? "Truck " + truck.licensePlate : "Loading truck..."}}</h1>
+    <table *ngIf="this.truck != null" class="item-list">
+        <tr>
+            <th scope="row">Assigned driver:</th>
+            <td>{{truck.assignedDriver ? truck.assignedDriver.firstName + " " + truck.assignedDriver.lastName : ""}}
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">Truck type:</th>
+            <td>{{truck.truckType}}</td>
+        </tr>
+        <tr *ngIf="unavailabilities.length">
+            <td colspan=2>
+                <table class="item-sublist">
+                    <caption>
+                        <h2>Unavailabilities of this truck</h2>
+                    </caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">start</th>
+                            <th scope="col">end</th>
+                            <th scope="col">comment</th>
+                        </tr>
+                        <tr>
+                            <td colspan="6" style="border-top: 1px solid; padding: 0px;"></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let unavailability of unavailabilities">
+                            <td>{{unavailability.startDate}}</td>
+                            <td>{{unavailability.endDate}}</td>
+                            <td>{{unavailability.comments}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
 </div>

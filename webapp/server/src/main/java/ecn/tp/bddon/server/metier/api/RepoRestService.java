@@ -112,6 +112,11 @@ public class RepoRestService {
         return transportService.getTrucks();
     }
 
+    @GetMapping("/trucks/{licenseplate}")
+    public Truck getTruck(@PathVariable("licenseplate") String licensePlate) {
+        return transportService.getTruck(licensePlate);
+    }
+
     @GetMapping("/trucks/{licenseplate}/unavailabilities")
     public Iterable<Unavailability> getUnavailabilities(@PathVariable("licenseplate") String licensePlate) {
         return transportService.getUnavailabilities(licensePlate);
