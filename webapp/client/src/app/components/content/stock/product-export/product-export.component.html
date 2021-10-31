@@ -1,9 +1,13 @@
 <div class="container">
-    <h1>{{schedulings ? "Export by email / schedule the export" : "Loading..."}}</h1>
-    <label for="email">Client :
-        <input class="input-text" type="text" id="email" style="margin-right: 10px;" [(ngModel)]="email">
-        <button class="btn-submit" (click)="sendListing()" title="send listing of the stock to {{email}}">Send</button>
-    </label><br><br>
+    <h1>{{schedulings ? "Export by email / schedule exports" : "Loading..."}}</h1>
+    <form (ngSubmit)="sendListing()">
+        <label for="email">Email :</label>
+        <input class="input-text" type="text" id="email" style="margin-left: 10px; margin-right: 10px;"
+            [(ngModel)]="email" name="email" [disabled]="sendingEmail">
+        <button class="btn-submit" type="submit" title="send listing of the stock to {{email}}"
+            [disabled]="sendingEmail">Send</button>
+    </form>
+    <br><br>
     <table *ngIf="schedulings?.length" class="item-sublist">
         <thead>
             <tr>

@@ -29,7 +29,10 @@ export class ProductExportComponent implements OnInit {
   sendListing() {
     this.sendingEmail = true;
     this.stockService.sendListingTo(this.email).subscribe(
-      () => this.sendingEmail = false
+      () => {
+        this.sendingEmail = false;
+        this.email = "";
+      }
     )
   }
 
