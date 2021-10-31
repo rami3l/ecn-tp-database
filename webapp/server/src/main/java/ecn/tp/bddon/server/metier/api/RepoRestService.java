@@ -226,7 +226,7 @@ public class RepoRestService {
     @PostMapping("/scheduledsendings")
     @ResponseStatus(HttpStatus.CREATED)
     public int scheduleSending(@RequestBody SchedulingToCreate scheduling) {
-        return stockListingService.scheduleSending(scheduling.getEmail(), scheduling.getCron());
+        return stockListingService.scheduleSending(scheduling);
     }
 
     /**

@@ -11,6 +11,7 @@ import ecn.tp.bddon.server.metier.dto.postgres.Address;
 import ecn.tp.bddon.server.metier.dto.postgres.LoadingPoint;
 import ecn.tp.bddon.server.metier.dto.postgres.Product;
 import ecn.tp.bddon.server.metier.dto.postgres.Scheduling;
+import ecn.tp.bddon.server.metier.dto.postgres.creations.SchedulingToCreate;
 import ecn.tp.bddon.server.metier.repository.SchedulingRestRepository;
 import ecn.tp.bddon.server.metier.services.rest.PlacesService;
 import ecn.tp.bddon.server.metier.services.rest.StockService;
@@ -60,18 +61,47 @@ public class StockListingService {
     }
 
     /**
-     * Schedule sending of the listing by email.
+     * Schedule sending of the listing by email and save this new scheduling to the
+     * database
      * 
-     * @param email          the email address to send the listing to
-     * @param cronExpression the cron expression to use to schedule the listing
+     * @param schedulingToCreate : Object containing the email address to send the
+     *                           listing to, and the cron expression of the
+     *                           scheduling
+     * @return the id of task created
      */
-    public int scheduleSending(String email, String cronExpression) {
+    public int scheduleSending(SchedulingToCreate schedulingToCreate) {
+        if (!schedulingService.isValid(schedulingToCreate.getCron())
+                || !emailService.isValid(schedulingToCreate.getEmail())) {
+            // TODO: lever erreur
+            return -1;
+        }
         Scheduling scheduling = new Scheduling();
-        scheduling.setEmail(email);
-        scheduling.setCron(cronExpression);
+        scheduling.setEmail(schedulingToCreate.getEmail());
+        scheduling.setCron(schedulingToCreate.getCron());
         schedulingRestRepository.save(scheduling);
+        return scheduleSending(scheduling.getId(), scheduling.getEmail(), scheduling.getCron());
+    }
+
+    /**
+     * Schedule sending of the listing by email
+     * 
+     * @param scheduling : Object containing the email address to send the listing
+     *                   to, the cron expression of the scheduling, and the id of
+     *                   the task to create
+     * @return the id of task created
+     */
+    public int scheduleSending(Scheduling scheduling) {
+        return scheduleSending(scheduling.getId(), scheduling.getEmail(), scheduling.getCron());
+    }
+
+    private int scheduleSending(int taskId, String email, String cronExpression) {
         log.info("Scheduling sending of the listing to {} with cron expression \"{}\"", email, cronExpression);
-        return schedulingService.addTask(scheduling.getId(), () -> sendListingTo(email), cronExpression);
+        try {
+            return schedulingService.addTask(taskId, () -> sendListingTo(email), cronExpression);
+        } catch (Exception e) {
+            log.error("Scheduling has failed :", e);
+            return -1;
+        }
     }
 
     /**
@@ -85,6 +115,13 @@ public class StockListingService {
         emailService.email(email, subject, body);
     }
 
+    /**
+     * Cancel a scheduled sending of the listing
+     * 
+     * @param id: id of the scheduled sending to cancel
+     * @return a boolean indicating if a scheduled sending has effectively been
+     *         cancelled
+     */
     public boolean cancelSending(int id) {
         schedulingRestRepository.deleteById(id);
         return schedulingService.removeTask(id);
@@ -98,6 +135,11 @@ public class StockListingService {
         return schedulingRestRepository.findAll();
     }
 
+    /**
+     * 
+     * @param id: id of the scheduled sending to get informations about
+     * @return the scheduled sending if it exits
+     */
     public Scheduling getScheduledSending(int id) {
         Optional<Scheduling> scheduling = schedulingRestRepository.findById(id);
         if (scheduling.isEmpty()) {
@@ -109,8 +151,7 @@ public class StockListingService {
 
     @PostConstruct
     private void initTasks() {
-        getScheduledSendingList().forEach(scheduling -> schedulingService.addTask(scheduling.getId(),
-                () -> sendListingTo(scheduling.getEmail()), scheduling.getCron()));
+        getScheduledSendingList().forEach(this::scheduleSending);
     }
 
 }

@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
+import org.springframework.scheduling.support.CronExpression;
 import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,12 @@ public class SchedulingService {
 
     Map<Integer, ThreadPoolTaskScheduler> schedulers = new HashMap<>();
 
-    public int addTask(int id, Runnable action, String cronExpression) {
+    public boolean isValid(String cronExpression) {
+        return CronExpression.isValidExpression(cronExpression);
+    }
+
+    public int addTask(int id, Runnable action, String cronExpression)
+            throws IllegalStateException, IllegalArgumentException {
         if (schedulers.containsKey(id)) {
             throw new IllegalStateException("Task already exists");
         }

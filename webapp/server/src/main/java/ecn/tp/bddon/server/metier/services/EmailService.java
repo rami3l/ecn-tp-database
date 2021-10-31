@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -24,6 +26,15 @@ public class EmailService {
     private JavaMailSender mailSender;
     @Resource
     private MailProperties mailProperties;
+
+    public boolean isValid(String email) {
+        try {
+            new InternetAddress(email).validate();
+            return true;
+        } catch (AddressException e) {
+            return false;
+        }
+    }
 
     public void email(String email, String subject, String body) {
         email(email, subject, body, null);
