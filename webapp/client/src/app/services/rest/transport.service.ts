@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { UnavailabilityToSave } from 'src/app/dto/creations/unavailability-to-save';
 import { Driver } from 'src/app/dto/driver';
 import { Truck } from 'src/app/dto/truck';
 import { Unavailability } from 'src/app/dto/unavailability';
@@ -30,6 +31,14 @@ export class TransportService {
 
     getUnavailabilities(licensePlate: string): Observable<Unavailability[]> {
         return this.http.get<Unavailability[]>(this.truckUrl + licensePlate + "/unavailabilities");
+    }
+
+    getUnavailability(licensePlate: string, unavailabilityId: number): Observable<Unavailability> {
+        return this.http.get<Unavailability>(this.truckUrl + licensePlate + "/unavailabilities/" + unavailabilityId);
+    }
+
+    addUnavailabiliy(licensePlate: string, unavailability: UnavailabilityToSave): Observable<number> {
+        return this.http.post<number>(this.truckUrl + licensePlate + "/unavailabilities", unavailability);
     }
 
     getDrivers(): Observable<Driver[]> {

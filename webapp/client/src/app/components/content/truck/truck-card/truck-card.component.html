@@ -36,5 +36,33 @@
                 </table>
             </td>
         </tr>
+        <tr>
+            <td colspan=2>
+                <!-- Opens the modal popup to choose order contents -->
+                <button class="btn-add centered" title="Register new unavailability" (click)="modalOpen()">New
+                    unavailability</button>
+            </td>
+        </tr>
     </table>
+</div>
+
+<!-- modal popup to choose order contents -->
+<div *ngIf="modalOpened" class="modal">
+    <div class="modal-content">
+        <span class="close" (click)="modalClose()">&times;</span>
+        <h2>You can select dates (optional) and specify a comment (optional)</h2>
+        <form (ngSubmit)="createUnavailability()">
+            <label for="start_date">Start date :</label>
+            <input class="input" type="date" id="start_date" style="margin-right: 10px;" [(ngModel)]="startDate"
+                name="start_date">
+            <label for="end_date">End date :</label>
+            <input class="input" type="date" id="start_date" style="margin-right: 10px;" [(ngModel)]="endDate"
+                name="end_date">
+            <label for="comment">Comment :</label>
+            <input class="input-text" type="text" id="comment" style="margin-right: 10px;" [(ngModel)]="comment"
+                name="comment">
+            <button type="submit" class="btn-submit" style="margin-left: 10px;"
+                title="Validate the scheduled export">validate</button>
+        </form>
+    </div>
 </div>
