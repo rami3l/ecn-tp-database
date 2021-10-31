@@ -8,6 +8,11 @@
                     <th scope="col">#</th>
                     <th scope="col">product</th>
                     <th scope="col">quantity</th>
+                    <th scope="col">
+                        <button class="btn-add" title="Export (or schedule export) of stocks by loadingpoint"
+                            routerLinkActive="btn-add-active" routerLink="./export" #state="routerLinkActive"
+                            (click)="checkState(state.isActive)">Export</button>
+                    </th>
                 </tr>
                 <tr>
                     <td colspan="5" style="border-top: 1px solid; padding: 0px;"></td>

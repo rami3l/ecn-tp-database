@@ -58,7 +58,8 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let orderContent of orderContentToAdd">
-                            <td><input type="time" formControlName="deliveryTime_{{orderContent.id}}"></td>
+                            <td><input type="time" class="input" formControlName="deliveryTime_{{orderContent.id}}">
+                            </td>
                             <td>{{orderContent.order.client.abbrev}}</td>
                             <td>{{orderContent.deliveryPoint.address.addressLine}} <br>
                                 {{orderContent.deliveryPoint.address.city}}</td>

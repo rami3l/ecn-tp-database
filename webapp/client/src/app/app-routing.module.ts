@@ -7,6 +7,7 @@ import { OrderCardComponent } from './components/content/order/order-card/order-
 import { OrdersComponent } from './components/content/order/orders/orders.component';
 import { PhonebookComponent } from './components/content/phonebook/phonebook.component';
 import { ProductCardComponent } from './components/content/stock/product-card/product-card.component';
+import { ProductExportComponent } from './components/content/stock/product-export/product-export.component';
 import { ProductsComponent } from './components/content/stock/products/products.component';
 import { WelcomeComponent } from './components/content/welcome/welcome.component';
 
@@ -35,7 +36,8 @@ const routes: Routes = [
   {
     path: 'stock', component: ProductsComponent,
     children: [
-      { path: 'product/:id', component: ProductCardComponent }
+      { path: 'product/:id', component: ProductCardComponent },
+      { path: 'export', component: ProductExportComponent }
     ]
   },
   { path: 'product/:id', component: ProductCardComponent },

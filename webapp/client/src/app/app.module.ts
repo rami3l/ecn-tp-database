@@ -16,6 +16,7 @@ import { WelcomeComponent } from './components/content/welcome/welcome.component
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { ProductCardComponent } from './components/content/stock/product-card/product-card.component';
 import { PhonebookComponent } from './components/content/phonebook/phonebook.component';
+import { ProductExportComponent } from './components/content/stock/product-export/product-export.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { PhonebookComponent } from './components/content/phonebook/phonebook.com
     OrderFormComponent,
     ProductsComponent,
     ProductCardComponent,
-    PhonebookComponent
+    PhonebookComponent,
+    ProductExportComponent
   ],
   imports: [
     BrowserModule,
