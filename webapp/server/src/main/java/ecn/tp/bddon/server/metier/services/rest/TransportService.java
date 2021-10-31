@@ -39,6 +39,11 @@ public class TransportService {
         return getTruck(licensePlate).getUnavailabilities();
     }
 
+    public Driver getAssignedDriverIfExists(String licensePlate) {
+        Optional<Driver> driver = driverRestRepository.findByDefaultTruck_licensePlate(licensePlate);
+        return driver.orElse(null);
+    }
+
     public Iterable<Driver> getDrivers() {
         return driverRestRepository.findAll();
     }

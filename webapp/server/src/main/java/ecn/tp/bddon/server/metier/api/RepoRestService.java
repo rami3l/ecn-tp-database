@@ -117,6 +117,11 @@ public class RepoRestService {
         return transportService.getUnavailabilities(licensePlate);
     }
 
+    @GetMapping("/trucks/{licenseplate}/driver")
+    public Driver getAssignedDriverIfExists(@PathVariable("licenseplate") String licensePlate) {
+        return transportService.getAssignedDriverIfExists(licensePlate);
+    }
+
     @GetMapping("/drivers")
     public Iterable<Driver> getDrivers() {
         return transportService.getDrivers();
