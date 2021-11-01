@@ -26,7 +26,7 @@ import ecn.tp.bddon.server.metier.dto.postgres.SupportedBy;
 import ecn.tp.bddon.server.metier.dto.postgres.Truck;
 import ecn.tp.bddon.server.metier.dto.postgres.Unavailability;
 import ecn.tp.bddon.server.metier.dto.postgres.creations.MissionToSave;
-import ecn.tp.bddon.server.metier.dto.postgres.creations.SchedulingToCreate;
+import ecn.tp.bddon.server.metier.dto.postgres.creations.SchedulingToSave;
 import ecn.tp.bddon.server.metier.dto.postgres.creations.SupportedByToSave;
 import ecn.tp.bddon.server.metier.dto.postgres.details.ClientDetailed;
 import ecn.tp.bddon.server.metier.dto.postgres.details.OrderContentDetailed;
@@ -235,7 +235,7 @@ public class RepoRestService {
      */
     @PostMapping("/scheduledsendings")
     @ResponseStatus(HttpStatus.CREATED)
-    public int scheduleSending(@RequestBody SchedulingToCreate scheduling) {
+    public int scheduleSending(@RequestBody SchedulingToSave scheduling) {
         return stockListingService.scheduleSending(scheduling);
     }
 

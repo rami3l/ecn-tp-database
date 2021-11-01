@@ -11,7 +11,7 @@ import ecn.tp.bddon.server.metier.dto.postgres.Address;
 import ecn.tp.bddon.server.metier.dto.postgres.LoadingPoint;
 import ecn.tp.bddon.server.metier.dto.postgres.Product;
 import ecn.tp.bddon.server.metier.dto.postgres.Scheduling;
-import ecn.tp.bddon.server.metier.dto.postgres.creations.SchedulingToCreate;
+import ecn.tp.bddon.server.metier.dto.postgres.creations.SchedulingToSave;
 import ecn.tp.bddon.server.metier.repository.SchedulingRestRepository;
 import ecn.tp.bddon.server.metier.services.rest.PlacesService;
 import ecn.tp.bddon.server.metier.services.rest.StockService;
@@ -69,7 +69,7 @@ public class StockListingService {
      *                           scheduling
      * @return the id of task created
      */
-    public int scheduleSending(SchedulingToCreate schedulingToCreate) {
+    public int scheduleSending(SchedulingToSave schedulingToCreate) {
         if (!schedulingService.isValid(schedulingToCreate.getCron())
                 || !emailService.isValid(schedulingToCreate.getEmail())) {
             // TODO: lever erreur
