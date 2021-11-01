@@ -28,6 +28,7 @@ import ecn.tp.bddon.server.metier.dto.postgres.Unavailability;
 import ecn.tp.bddon.server.metier.dto.postgres.creations.MissionToSave;
 import ecn.tp.bddon.server.metier.dto.postgres.creations.SchedulingToSave;
 import ecn.tp.bddon.server.metier.dto.postgres.creations.SupportedByToSave;
+import ecn.tp.bddon.server.metier.dto.postgres.creations.UnavailabilityToSave;
 import ecn.tp.bddon.server.metier.dto.postgres.details.ClientDetailed;
 import ecn.tp.bddon.server.metier.dto.postgres.details.OrderContentDetailed;
 import ecn.tp.bddon.server.metier.dto.postgres.details.OrderDetailed;
@@ -88,7 +89,7 @@ public class RepoRestService {
     }
 
     @GetMapping("/clients/{abbrev}")
-    public ClientDetailed getClient(@PathVariable("abbrev") String abbrev) {
+    public ClientDetailed getClient(@PathVariable String abbrev) {
         return clientService.getClientDetailed(abbrev);
     }
 
@@ -112,14 +113,31 @@ public class RepoRestService {
         return transportService.getTrucks();
     }
 
-    @GetMapping("/trucks/{licenseplate}")
-    public Truck getTruck(@PathVariable("licenseplate") String licensePlate) {
+    @GetMapping("/trucks/{licensePlate}")
+    public Truck getTruck(@PathVariable String licensePlate) {
         return transportService.getTruck(licensePlate);
     }
 
-    @GetMapping("/trucks/{licenseplate}/unavailabilities")
-    public Iterable<Unavailability> getUnavailabilities(@PathVariable("licenseplate") String licensePlate) {
+    @GetMapping("/trucks/{licensePlate}/unavailabilities")
+    public Iterable<Unavailability> getUnavailabilities(@PathVariable String licensePlate) {
         return transportService.getUnavailabilities(licensePlate);
+    }
+
+    @GetMapping("/trucks/{licensePlate}/unavailabilities/{id}")
+    public Unavailability getUnavailability(@PathVariable String licensePlate, @PathVariable int id) {
+        return transportService.getUnavailability(licensePlate, id);
+    }
+
+    @PostMapping("/trucks/{licenseplate}/unavailabilities")
+    @ResponseStatus(HttpStatus.CREATED)
+    public int createUnavailability(@PathVariable("licenseplate") String licensePlate,
+            @RequestBody UnavailabilityToSave unavailability) {
+        return transportService.save(licensePlate, unavailability);
+    }
+
+    @DeleteMapping("/unavailabilities/{id}")
+    public void deleteUnavailability(@PathVariable int id) {
+        transportService.deleteUnavailability(id);
     }
 
     @GetMapping("/trucks/{licenseplate}/driver")
@@ -210,8 +228,7 @@ public class RepoRestService {
     }
 
     @DeleteMapping("/supportedby/{orderContentId}/{missionId}")
-    public void deleteSupportedBy(@PathVariable("orderContentId") int orderContentId,
-            @PathVariable("missionId") int missionId) {
+    public void deleteSupportedBy(@PathVariable int orderContentId, @PathVariable int missionId) {
         missionService.deleteSupportedBy(orderContentId, missionId);
     }
 

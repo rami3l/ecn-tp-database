@@ -7,7 +7,7 @@ import java.util.List;
 
 public class DateParser {
 
-    public static final List<String> DATE_FORMATS = List.of("yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm");
+    public static final List<String> DATE_FORMATS = List.of("yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm", "yyyy-MM-dd");
 
     private DateParser() {
         // utility class must not be implemented
@@ -20,6 +20,9 @@ public class DateParser {
      * @return the date parsed
      */
     public static Date parseDateTime(String date) {
+        if ("".equals(date) || date == null) {
+            return null;
+        }
         for (String dateFormat : DATE_FORMATS) {
             try {
                 return (new SimpleDateFormat(dateFormat)).parse(date);
@@ -29,6 +32,11 @@ public class DateParser {
         throw new IllegalArgumentException("No format corresponding found");
     }
 
+    public static java.sql.Date parseSqlDate(String date) {
+        Date d = parseDateTime(date);
+        return d == null ? null : new java.sql.Date(d.getTime());
+    }
+
     /**
      * Try to parse date with format stored in DateParse.DATE_FORMATS
      * 
@@ -36,7 +44,8 @@ public class DateParser {
      * @return the timestamp parsed from the date
      */
     public static Timestamp getTimeStampFromStringDate(String date) {
-        return new Timestamp(parseDateTime(date).getTime());
+        Date d = parseDateTime(date);
+        return d == null ? null : new Timestamp(d.getTime());
     }
 
 }

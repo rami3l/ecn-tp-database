@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import ecn.tp.bddon.server.metier.dto.postgres.Unavailability;
 
-public interface UnavailabilityRestRepository extends CrudRepository<Unavailability, String> {
+public interface UnavailabilityRestRepository extends CrudRepository<Unavailability, Integer> {
 
 }
