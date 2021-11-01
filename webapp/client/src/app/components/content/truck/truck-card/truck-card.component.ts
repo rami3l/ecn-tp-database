@@ -81,4 +81,9 @@ export class TruckCardComponent implements OnInit, OnDestroy {
     this.modalClose();
   }
 
+  deleteUnavailability(unavailability: Unavailability) {
+    this.transportService.removeUnavailability(unavailability.id);
+    this.unavailabilities = this.unavailabilities.filter(u => u.id != unavailability.id);
+  }
+
 }

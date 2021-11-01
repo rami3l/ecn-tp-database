@@ -27,6 +27,7 @@ public class DateParser {
             try {
                 return (new SimpleDateFormat(dateFormat)).parse(date);
             } catch (Exception e) {
+                // this format didn't work -> test another
             }
         }
         throw new IllegalArgumentException("No format corresponding found");

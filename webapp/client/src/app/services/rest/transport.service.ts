@@ -14,6 +14,7 @@ export class TransportService {
 
     truckUrl: string = environment.apiUrl + "trucks/";
     driverUrl: string = environment.apiUrl + "drivers/";
+    unavailabilityUrl: string = environment.apiUrl + "unavailabilities/"
 
     constructor(private http: HttpClient) { }
 
@@ -39,6 +40,10 @@ export class TransportService {
 
     addUnavailabiliy(licensePlate: string, unavailability: UnavailabilityToSave): Observable<number> {
         return this.http.post<number>(this.truckUrl + licensePlate + "/unavailabilities", unavailability);
+    }
+
+    removeUnavailability(id: number) {
+        this.http.delete(this.unavailabilityUrl + id).subscribe();
     }
 
     getDrivers(): Observable<Driver[]> {
