@@ -1,0 +1,13 @@
+<div class="container">
+    <h1>{{driver ? "driver " + driver.firstName + " " + driver.lastName : "Loading driver..."}}</h1>
+    <table *ngIf="this.driver != null" class="item-list">
+        <tr>
+            <th scope="row">Default Truck:</th>
+            <td>{{driver.defaultTruck?.licensePlate}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Certifications:</th>
+            <td>{{certifications.join(", ")}}</td>
+        </tr>
+    </table>
+</div>

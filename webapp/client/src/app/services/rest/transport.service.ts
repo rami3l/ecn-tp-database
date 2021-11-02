@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { UnavailabilityToSave } from 'src/app/dto/creations/unavailability-to-save';
 import { Driver } from 'src/app/dto/driver';
 import { Truck } from 'src/app/dto/truck';
+import { TruckType } from 'src/app/dto/trucktype';
 import { Unavailability } from 'src/app/dto/unavailability';
 import { environment } from 'src/environments/environment';
 
@@ -15,6 +16,7 @@ export class TransportService {
     truckUrl: string = environment.apiUrl + "trucks/";
     driverUrl: string = environment.apiUrl + "drivers/";
     unavailabilityUrl: string = environment.apiUrl + "unavailabilities/"
+    truckTypeUrl: string = environment.apiUrl + "trucktypes/"
 
     constructor(private http: HttpClient) { }
 
@@ -52,5 +54,9 @@ export class TransportService {
 
     getDriver(id: number): Observable<Driver> {
         return this.http.get<Driver>(this.driverUrl + id);
+    }
+
+    getTruckType(id: number): Observable<TruckType> {
+        return this.http.get<TruckType>(this.truckTypeUrl + id);
     }
 }

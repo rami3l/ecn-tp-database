@@ -19,6 +19,8 @@ import { TruckComponent } from './components/content/truck/truck/truck.component
 import { WelcomeComponent } from './components/content/welcome/welcome.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { TruckCardComponent } from './components/content/truck/truck-card/truck-card.component';
+import { DriversComponent } from './components/content/driver/drivers/drivers.component';
+import { DriverCardComponent } from './components/content/driver/driver-card/driver-card.component';
 
 
 @NgModule({
@@ -37,7 +39,9 @@ import { TruckCardComponent } from './components/content/truck/truck-card/truck-
     PhonebookComponent,
     ProductExportComponent,
     TruckComponent,
-    TruckCardComponent
+    TruckCardComponent,
+    DriversComponent,
+    DriverCardComponent
   ],
   imports: [
     BrowserModule,

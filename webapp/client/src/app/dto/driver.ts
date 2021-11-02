@@ -1,3 +1,4 @@
+import { Certification } from "./certification";
 import { Truck } from "./truck";
 
 export class Driver {
@@ -5,6 +6,7 @@ export class Driver {
         public id: number,
         public firstName: string,
         public lastName: string,
-        public defaultTruck: Truck
+        public defaultTruck: Truck,
+        public certifications: Certification[]
     ) { }
 }

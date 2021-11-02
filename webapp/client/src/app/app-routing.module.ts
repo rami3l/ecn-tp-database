@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DriverCardComponent } from './components/content/driver/driver-card/driver-card.component';
+import { DriversComponent } from './components/content/driver/drivers/drivers.component';
 import { MissionCardComponent } from './components/content/mission/mission-card/mission-card.component';
 import { MissionFormComponent } from './components/content/mission/mission-form/mission-form.component';
 import { MissionsComponent } from './components/content/mission/missions/missions.component';
@@ -42,6 +44,14 @@ const routes: Routes = [
     ]
   },
   { path: 'truck/:id', component: TruckCardComponent },
+
+  {
+    path: 'drivers', component: DriversComponent,
+    children: [
+      { path: 'driver/:id', component: DriverCardComponent }
+    ]
+  },
+  { path: 'driver/:id', component: DriverCardComponent },
 
   {
     path: 'stock', component: ProductsComponent,

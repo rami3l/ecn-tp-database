@@ -1,0 +1,29 @@
+<div class="grid">
+    <div class="left-container">
+        <h1 *ngIf="this.drivers == null">Loading drivers...</h1>
+        <h1 *ngIf="this.drivers != null">{{drivers.length }} drivers</h1>
+        <table class="item-list">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">name</th>
+                    <th scope="col">default truck</th>
+                </tr>
+                <tr>
+                    <td colspan="6" style="border-top: 1px solid; padding: 0px;"></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let driver of drivers">
+                    <th scope="row">{{driver.id}}</th>
+                    <td>{{driver.firstName}} {{driver.lastName}}</td>
+                    <td>{{driver.defaultTruck?.licensePlate}}</td>
+                    <td><button class="btn-more" title="Details on driver {{driver.id}}"
+                            routerLinkActive="btn-more-active" routerLink="./driver/{{driver.id}}"
+                            #state="routerLinkActive" (click)="checkState(state.isActive)">More...</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <router-outlet></router-outlet>
+</div>
