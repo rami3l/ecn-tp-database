@@ -24,6 +24,7 @@ import ecn.tp.bddon.server.metier.dto.postgres.Product;
 import ecn.tp.bddon.server.metier.dto.postgres.Scheduling;
 import ecn.tp.bddon.server.metier.dto.postgres.SupportedBy;
 import ecn.tp.bddon.server.metier.dto.postgres.Truck;
+import ecn.tp.bddon.server.metier.dto.postgres.TruckType;
 import ecn.tp.bddon.server.metier.dto.postgres.Unavailability;
 import ecn.tp.bddon.server.metier.dto.postgres.creations.MissionToSave;
 import ecn.tp.bddon.server.metier.dto.postgres.creations.SchedulingToSave;
@@ -144,6 +145,11 @@ public class RepoRestService {
     @GetMapping("/trucks/{licenseplate}/driver")
     public Driver getAssignedDriverIfExists(@PathVariable("licenseplate") String licensePlate) {
         return transportService.getAssignedDriverIfExists(licensePlate);
+    }
+
+    @GetMapping("/trucktypes/{id}")
+    public TruckType getAssignedDriverIfExists(@PathVariable int id) {
+        return transportService.getTruckType(id);
     }
 
     @GetMapping("/drivers")

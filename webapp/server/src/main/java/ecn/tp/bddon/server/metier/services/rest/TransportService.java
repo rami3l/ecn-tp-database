@@ -9,11 +9,13 @@ import org.springframework.stereotype.Service;
 
 import ecn.tp.bddon.server.metier.dto.postgres.Driver;
 import ecn.tp.bddon.server.metier.dto.postgres.Truck;
+import ecn.tp.bddon.server.metier.dto.postgres.TruckType;
 import ecn.tp.bddon.server.metier.dto.postgres.Unavailability;
 import ecn.tp.bddon.server.metier.dto.postgres.creations.UnavailabilityToSave;
 import ecn.tp.bddon.server.metier.dto.postgres.details.DriverDetailed;
 import ecn.tp.bddon.server.metier.repository.DriverRestRepository;
 import ecn.tp.bddon.server.metier.repository.TruckRestRepository;
+import ecn.tp.bddon.server.metier.repository.TruckTypeRestRepository;
 import ecn.tp.bddon.server.metier.repository.UnavailabilityRestRepository;
 import lombok.NonNull;
 
@@ -28,6 +30,9 @@ public class TransportService {
 
     @Resource
     private UnavailabilityRestRepository unavailabilityRestRepository;
+
+    @Resource
+    private TruckTypeRestRepository truckTypeRestRepository;
 
     public Iterable<Truck> getTrucks() {
         return truckRestRepository.findAll();
@@ -91,6 +96,15 @@ public class TransportService {
 
     public DriverDetailed getDriverDetailed(int driverId) {
         return new DriverDetailed(getDriver(driverId));
+    }
+
+    public TruckType getTruckType(int id) {
+        Optional<TruckType> truckType = truckTypeRestRepository.findById(id);
+        if (truckType.isEmpty()) {
+            // TODO: lever erreur 404
+            return null;
+        }
+        return truckType.get();
     }
 
 }

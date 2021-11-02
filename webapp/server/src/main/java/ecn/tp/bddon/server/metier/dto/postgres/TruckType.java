@@ -18,9 +18,9 @@ public class TruckType implements Serializable {
 
     @Id
     @Column(name = "truck_type_id")
-    private String id;
+    private int id;
 
     @Column(name = "truck_type_name")
-    private String truckTypeName;
+    private String name;
 
 }
