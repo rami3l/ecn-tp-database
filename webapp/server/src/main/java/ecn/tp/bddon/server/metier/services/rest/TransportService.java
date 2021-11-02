@@ -11,6 +11,7 @@ import ecn.tp.bddon.server.metier.dto.postgres.Driver;
 import ecn.tp.bddon.server.metier.dto.postgres.Truck;
 import ecn.tp.bddon.server.metier.dto.postgres.Unavailability;
 import ecn.tp.bddon.server.metier.dto.postgres.creations.UnavailabilityToSave;
+import ecn.tp.bddon.server.metier.dto.postgres.details.DriverDetailed;
 import ecn.tp.bddon.server.metier.repository.DriverRestRepository;
 import ecn.tp.bddon.server.metier.repository.TruckRestRepository;
 import ecn.tp.bddon.server.metier.repository.UnavailabilityRestRepository;
@@ -86,6 +87,10 @@ public class TransportService {
             return null;
         }
         return driver.get();
+    }
+
+    public DriverDetailed getDriverDetailed(int driverId) {
+        return new DriverDetailed(getDriver(driverId));
     }
 
 }

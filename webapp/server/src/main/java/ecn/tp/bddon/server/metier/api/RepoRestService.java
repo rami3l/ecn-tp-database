@@ -30,6 +30,7 @@ import ecn.tp.bddon.server.metier.dto.postgres.creations.SchedulingToSave;
 import ecn.tp.bddon.server.metier.dto.postgres.creations.SupportedByToSave;
 import ecn.tp.bddon.server.metier.dto.postgres.creations.UnavailabilityToSave;
 import ecn.tp.bddon.server.metier.dto.postgres.details.ClientDetailed;
+import ecn.tp.bddon.server.metier.dto.postgres.details.DriverDetailed;
 import ecn.tp.bddon.server.metier.dto.postgres.details.OrderContentDetailed;
 import ecn.tp.bddon.server.metier.dto.postgres.details.OrderDetailed;
 import ecn.tp.bddon.server.metier.dto.postgres.details.ProductDetailed;
@@ -151,8 +152,8 @@ public class RepoRestService {
     }
 
     @GetMapping("/drivers/{id}")
-    public Driver getDriver(@PathVariable("id") int driverId) {
-        return transportService.getDriver(driverId);
+    public DriverDetailed getDriver(@PathVariable("id") int driverId) {
+        return transportService.getDriverDetailed(driverId);
     }
 
     @GetMapping("/orders")
