@@ -8,6 +8,8 @@ $fixed-width-when-not-ajusting-size: 1800px;
 :root {
     --grey-typo: #bdc1c6;
     --grey-typo-2: #778fac;
+    --grey-btn-link: #465566;
+    --grey-btn-link-2: #38434f;
     --white-typo-btn: white;
     --dark-background: #202124;
     --modal-background: rgba(0,0,0,0.4);
@@ -94,39 +96,36 @@ $fixed-width-when-not-ajusting-size: 1800px;
     padding: 12px 10px;
 }
 
-.btn-more, .btn-add, .btn-submit {
-    background-color: var(--green-1);
-    border-color: var(--green-1);
+.btn-more, .btn-add, .btn-submit, .btn-item-link {
     color: var(--white-typo-btn);
-    padding: 5px 10px;
     text-align: center;
     cursor: pointer;
     border-radius: 4px;
+}
+
+.btn-more, .btn-add, .btn-submit {
+    padding: 5px 10px;
+}
+
+// boutons de navigations entre items
+.btn-item-link {
+    background-color: var(--grey-btn-link);
+    border-color: var(--grey-btn-link);
+}
+
+.btn-item-link:hover {
+    background-color: var(--grey-btn-link-2);
+}
+
+// bouton d'affichage de détails
+.btn-more {
+    background-color: var(--green-1);
+    border-color: var(--green-1);
     float: right;
-}
-
-.btn-add {
-    background-color: var(--red-1);
-    border-color: var(--red-1);
-}
-
-.btn-submit {
-    background-color: var(--blue-1);
-    border-color: var(--blue-1);
-    float: none;
-    margin-top: 10px;
 }
 
 .btn-more:hover {
     background-color: var(--green-2);
-}
-
-.btn-add:hover {
-    background-color: var(--red-2);
-}
-
-.btn-submit:hover {
-    background-color: var(--blue-2);
 }
 
 .btn-more-active {
@@ -134,9 +133,31 @@ $fixed-width-when-not-ajusting-size: 1800px;
     border-color: var(--grey-typo);
 }
 
+// bouton d'ajout
+.btn-add {
+    background-color: var(--red-1);
+    border-color: var(--red-1);
+    float: right;
+}
+
+.btn-add:hover {
+    background-color: var(--red-2);
+}
+
 .btn-add-active {
     background-color: var(--red-3);
     border-color: var(--grey-typo);
+}
+
+// bouton de validation
+.btn-submit {
+    background-color: var(--blue-1);
+    border-color: var(--blue-1);
+    margin-top: 10px;
+}
+
+.btn-submit:hover {
+    background-color: var(--blue-2);
 }
 
 .btn-submit:disabled {
