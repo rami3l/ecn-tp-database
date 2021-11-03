@@ -45,7 +45,7 @@ public class Driver implements Serializable {
     private List<CertifiedFor> certifications = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "driver", fetch = FetchType.LAZY)
     private List<Mission> missions = new ArrayList<>();
 
 }
