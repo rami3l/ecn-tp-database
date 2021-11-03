@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UnavailabilityToSave } from 'src/app/dto/creations/unavailability-to-save';
 import { Driver } from 'src/app/dto/driver';
+import { Mission } from 'src/app/dto/mission';
 import { Truck } from 'src/app/dto/truck';
 import { TruckType } from 'src/app/dto/trucktype';
 import { Unavailability } from 'src/app/dto/unavailability';
@@ -54,6 +55,10 @@ export class TransportService {
 
     getDriver(id: number): Observable<Driver> {
         return this.http.get<Driver>(this.driverUrl + id);
+    }
+
+    getDriverMissions(driverId: number): Observable<Mission[]> {
+        return this.http.get<Mission[]>(this.driverUrl + driverId + "/missions");
     }
 
     getTruckType(id: number): Observable<TruckType> {

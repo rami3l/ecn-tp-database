@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Driver } from 'src/app/dto/driver';
+import { Mission } from 'src/app/dto/mission';
 import { TransportService } from 'src/app/services/rest/transport.service';
 
 @Component({
@@ -14,6 +15,7 @@ export class DriverCardComponent implements OnInit, OnDestroy {
   driver?: Driver;
   driverChangeSubscription?: Subscription;
   certifications: string[] = [];
+  missions: Mission[] = [];
 
   constructor(private activatedRoute: ActivatedRoute,
     private transportService: TransportService) { }
@@ -33,13 +35,24 @@ export class DriverCardComponent implements OnInit, OnDestroy {
     this.transportService.getDriver(id).subscribe(
       driverReceived => {
         this.driver = driverReceived;
-        driverReceived.certifications.forEach(
-          certification => this.transportService.getTruckType(certification.truckTypeId).subscribe(
-            truckTypeReceived => this.certifications.push(truckTypeReceived.name)
-          )
-        )
+        this.loadCertifications(driverReceived);
+        this.loadDriverMissions(driverReceived.id);
       }
     )
+  }
+
+  private loadCertifications(driver: Driver) {
+    driver.certifications.forEach(
+      certification => this.transportService.getTruckType(certification.truckTypeId).subscribe(
+        truckTypeReceived => this.certifications.push(truckTypeReceived.name)
+      )
+    );
+  }
+
+  private loadDriverMissions(diverId: number) {
+    this.transportService.getDriverMissions(diverId).subscribe(
+      missionsReceived => this.missions = missionsReceived
+    );
   }
 
 }
