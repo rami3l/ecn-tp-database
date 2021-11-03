@@ -25,7 +25,10 @@
                     <th scope="row">{{mission.id}}</th>
                     <td>{{mission.loadingTime | date:'d MMMM y'}}</td>
                     <td>{{mission.loadingPoint?.address?.city}}</td>
-                    <td>{{mission.driver == null ? "" : mission.driver.firstName + " " + mission.driver.lastName}}</td>
+                    <td><button routerLink="/drivers/driver/{{mission.driver.id}}" class="btn-item-link"
+                            title="Driver {{mission.driver.firstName}} {{mission.driver.lastName}}"
+                            *ngIf="mission.driver">{{mission.driver.firstName}} {{mission.driver.lastName}}</button>
+                    </td>
                     <td><button routerLink="/trucks/truck/{{mission.truck.licensePlate}}" class="btn-item-link"
                             title="Truck {{mission.truck.licensePlate}}"
                             *ngIf="mission.truck">{{mission.truck.licensePlate}}</button></td>

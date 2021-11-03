@@ -13,7 +13,11 @@
         </tr>
         <tr>
             <th scope="row">Driver:</th>
-            <td>{{mission.driver == null ? "" : mission.driver.firstName + " " + mission.driver.lastName}}</td>
+            <td>
+                <button routerLink="/drivers/driver/{{mission.driver.id}}" class="btn-item-link"
+                    title="Driver {{mission.driver.firstName}} {{mission.driver.lastName}}"
+                    *ngIf="mission.driver">{{mission.driver.firstName}} {{mission.driver.lastName}}</button>
+            </td>
         </tr>
         <tr>
             <th scope="row">Truck:</th>

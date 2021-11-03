@@ -3,7 +3,11 @@
     <table *ngIf="this.truck != null" class="item-list">
         <tr>
             <th scope="row">Assigned driver:</th>
-            <td>{{truck.assignedDriver ? truck.assignedDriver.firstName + " " + truck.assignedDriver.lastName : ""}}
+            <td>
+                <button routerLink="/drivers/driver/{{truck.assignedDriver.id}}" class="btn-item-link"
+                    title="Driver {{truck.assignedDriver.firstName}} {{truck.assignedDriver.lastName}}"
+                    *ngIf="truck.assignedDriver">{{truck.assignedDriver.firstName}}
+                    {{truck.assignedDriver.lastName}}</button>
             </td>
         </tr>
         <tr>

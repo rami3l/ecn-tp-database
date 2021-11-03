@@ -17,8 +17,12 @@
                 <tr *ngFor="let truck of trucks">
                     <th scope="row">{{truck.licensePlate}}</th>
                     <td>{{truck.truckType?.name}}</td>
-                    <td>{{truck.assignedDriver == null ? "" :truck.assignedDriver.firstName + " " +
-                        truck.assignedDriver.lastName}}</td>
+                    <td>
+                        <button routerLink="/drivers/driver/{{truck.assignedDriver.id}}" class="btn-item-link"
+                            title="Driver {{truck.assignedDriver.firstName}} {{truck.assignedDriver.lastName}}"
+                            *ngIf="truck.assignedDriver">{{truck.assignedDriver.firstName}}
+                            {{truck.assignedDriver.lastName}}</button>
+                    </td>
                     <td><button class="btn-more" title="Details on truck {{truck.licensePlate}}"
                             routerLinkActive="btn-more-active" routerLink="./truck/{{truck.licensePlate}}"
                             #state="routerLinkActive" (click)="checkState(state.isActive)">More...</button></td>
