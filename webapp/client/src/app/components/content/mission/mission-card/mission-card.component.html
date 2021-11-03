@@ -17,7 +17,9 @@
         </tr>
         <tr>
             <th scope="row">Truck:</th>
-            <td>{{mission.truck?.licensePlate}}</td>
+            <td><button routerLink="/trucks/truck/{{mission.truck.licensePlate}}" class="btn-item-link"
+                    title="Truck {{mission.truck.licensePlate}}"
+                    *ngIf="mission.truck">{{mission.truck.licensePlate}}</button></td>
         </tr>
         <tr>
             <td colspan=2>
