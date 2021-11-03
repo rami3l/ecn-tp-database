@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -40,7 +41,11 @@ public class Driver implements Serializable {
     private Truck defaultTruck;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "driverId")
+    @OneToMany(mappedBy = "driverId", fetch = FetchType.LAZY)
     private List<CertifiedFor> certifications = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
+    private List<Mission> missions = new ArrayList<>();
 
 }

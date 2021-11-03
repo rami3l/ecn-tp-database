@@ -158,8 +158,13 @@ public class RepoRestService {
     }
 
     @GetMapping("/drivers/{id}")
-    public DriverDetailed getDriver(@PathVariable("id") int driverId) {
-        return transportService.getDriverDetailed(driverId);
+    public DriverDetailed getDriver(@PathVariable int id) {
+        return transportService.getDriverDetailed(id);
+    }
+
+    @GetMapping("/drivers/{id}/missions")
+    public Iterable<Mission> getDriverMissions(@PathVariable int id) {
+        return transportService.getDriver(id).getMissions();
     }
 
     @GetMapping("/orders")
