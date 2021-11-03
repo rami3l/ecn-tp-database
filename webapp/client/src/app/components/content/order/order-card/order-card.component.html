@@ -33,7 +33,10 @@
                             <td>{{orderContent.desiredDeliveryDate | date:"d MMMM y"}}</td>
                             <td>{{orderContent.deliveryPoint.address.addressLine}} <br>
                                 {{orderContent.deliveryPoint.address.city}}</td>
-                            <td>{{orderContent.product.name}}</td>
+                            <td>
+                                <button routerLink="/stock/product/{{orderContent.product.id}}" class="btn-item-link"
+                                    title="Product '{{orderContent.product.name}}'">{{orderContent.product.name}}</button>
+                            </td>
                             <td>{{orderContent.quantity}}</td>
                         </tr>
                     </tbody>

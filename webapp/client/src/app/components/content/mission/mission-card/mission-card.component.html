@@ -46,7 +46,11 @@
                             <td>{{displayDateTime(support.plannedDeliveryTime, mission.loadingTime)}}</td>
                             <td>{{support.orderContent.deliveryPoint.address.addressLine}} <br>
                                 {{support.orderContent.deliveryPoint.address.city}}</td>
-                            <td>{{support.orderContent.product.name}}</td>
+                            <td>
+                                <button routerLink="/stock/product/{{support.orderContent.product.id}}"
+                                    class="btn-item-link"
+                                    title="Product '{{support.orderContent.product.name}}'">{{support.orderContent.product.name}}</button>
+                            </td>
                             <td>{{support.orderContent.quantity}}</td>
                         </tr>
                     </tbody>
