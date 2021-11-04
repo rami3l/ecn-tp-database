@@ -177,7 +177,7 @@ export class MissionFormComponent implements OnInit, OnDestroy {
       }
     )
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-      this.router.navigate(["/missions"]));
+      this.router.navigate(["/missions/mission/" + missionId]));
   }
 
   onDriverChange(): void {
