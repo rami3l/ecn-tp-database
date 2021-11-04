@@ -30,6 +30,7 @@ $fixed-width-when-not-ajusting-size: 1800px;
     --blue-2: #006ae2; // buttons add on hover
     --blue-3: #003a7c; // buttons add when activated
     --input-text-focus: #7db1ec;
+    --ok-background: rgb(8, 59, 1);
 }
 
 .webpage {
@@ -84,6 +85,15 @@ $fixed-width-when-not-ajusting-size: 1800px;
     table-layout: auto;
     width: 100%;
     border: 3px solid;
+    border-collapse: collapse;
+}
+
+.item-list > thead {
+    border-bottom: solid 2px var(--grey-typo);
+}
+
+.item-sublist > thead {
+    border-bottom: solid 1px var(--grey-typo);
 }
 
 .item-sublist {
@@ -232,4 +242,8 @@ $fixed-width-when-not-ajusting-size: 1800px;
     color: #000;
     text-decoration: none;
     cursor: pointer;
+  }
+
+  .ok {
+    background-color: var(--ok-background);
   }
