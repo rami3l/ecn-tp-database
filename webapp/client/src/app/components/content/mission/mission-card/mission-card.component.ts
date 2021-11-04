@@ -19,6 +19,19 @@ export class MissionCardComponent implements OnInit, OnDestroy {
   supports: SupportedBy[] = [];
   missionChangeSubscription: Subscription | undefined;
 
+  titles = ["client", "time", "address", "product", "quantity"]
+  sortId = 0;
+  whatToSort = (x: SupportedBy) => [x.orderContent.order.client.abbrev, x.plannedDeliveryTime, x.orderContent.deliveryPoint.address.addressLine, x.orderContent.product.name, x.orderContent.quantity];
+
+  sortByColumn(id: number) {
+    if (id + 1 != Math.abs(this.sortId)) {
+      this.sortId = id + 1;
+    }
+    this.supports.sort((x1, x2) => this.sortId * (this.whatToSort(x1)[id] < this.whatToSort(x2)[id] ? 1 : -1));
+    this.sortId *= -1;
+  }
+
+
   constructor(private activatedRoute: ActivatedRoute,
     private missionService: MissionService,
     private orderService: OrderService,

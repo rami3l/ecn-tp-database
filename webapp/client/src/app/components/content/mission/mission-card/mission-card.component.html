@@ -33,11 +33,9 @@
                 <table class="item-sublist">
                     <thead>
                         <tr>
-                            <th scope="col">client</th>
-                            <th scope="col">time</th>
-                            <th scope="col">address</th>
-                            <th scope="col">product</th>
-                            <th scope="col">quantity</th>
+                            <th scope="col" *ngFor="let title of titles; index as i" (click)="sortByColumn(i)"
+                                title="Click to sort" style="cursor: pointer;">
+                                {{title}} {{sortId == i+1 ? "⇑" : sortId == -i-1 ? "⇓" : "" }} </th>
                         </tr>
                         <tr>
                             <td colspan="6" style="border-top: 1px solid; padding: 0px;"></td>
