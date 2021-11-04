@@ -43,6 +43,7 @@ import ecn.tp.bddon.server.metier.services.rest.PhoneBookService;
 import ecn.tp.bddon.server.metier.services.rest.PlacesService;
 import ecn.tp.bddon.server.metier.services.rest.StockService;
 import ecn.tp.bddon.server.metier.services.rest.TransportService;
+import ecn.tp.bddon.server.utils.DateParser;
 
 @RestController
 public class RepoRestService {
@@ -140,6 +141,11 @@ public class RepoRestService {
     @DeleteMapping("/unavailabilities/{id}")
     public void deleteUnavailability(@PathVariable int id) {
         transportService.deleteUnavailability(id);
+    }
+
+    @GetMapping("/trucks/{licensePlate}/isAvailable/{date}")
+    public boolean isAvailable(@PathVariable String licensePlate, @PathVariable String date) {
+        return transportService.isTruckAvailable(licensePlate, DateParser.parseDateTime(date));
     }
 
     @GetMapping("/trucks/{licenseplate}/driver")

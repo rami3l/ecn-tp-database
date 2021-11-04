@@ -10,5 +10,10 @@ public interface OrderContentRestRepository extends CrudRepository<OrderContent,
     @Query(value = "select * from order_content where order_content_id not in ( select order_content from supported_by where signature_time is NULL or is_delivered = true)", nativeQuery = true)
     Iterable<OrderContent> findAllUnsupportedOrUndelivered();
 
+    // @Query(value = "select * from order_content where order_content_id not in (
+    // select order_content from supported_by where signature_time is NULL or
+    // is_delivered = true)", nativeQuery = true)
+    // Iterable<OrderContent> isNotSupported();
+
     Iterable<OrderContent> findByOrder_id(int orderId);
 }

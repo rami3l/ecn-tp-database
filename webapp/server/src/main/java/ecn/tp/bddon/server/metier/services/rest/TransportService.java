@@ -1,5 +1,6 @@
 package ecn.tp.bddon.server.metier.services.rest;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,6 +61,20 @@ public class TransportService {
 
     public Iterable<Unavailability> getUnavailabilities(String licensePlate) {
         return getTruck(licensePlate).getUnavailabilities();
+    }
+
+    public boolean isTruckAvailable(String licensePlate, Date date) {
+        Iterable<Unavailability> unavailabilities = getUnavailabilities(licensePlate);
+        for (var unavailability : unavailabilities) {
+            var startDate = unavailability.getStartDate();
+            var endDate = unavailability.getEndDate();
+            // dès qu'on trouve une indisponibilité qui contient la date passée en paramètre
+            // on retourne false
+            if ((startDate == null || startDate.before(date)) && (endDate == null || endDate.after(date))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public int save(@NonNull String licensePlate, UnavailabilityToSave unavailabilityToSave) {
