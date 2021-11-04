@@ -70,7 +70,7 @@ public class TransportService {
             var endDate = unavailability.getEndDate();
             // dès qu'on trouve une indisponibilité qui contient la date passée en paramètre
             // on retourne false
-            if ((startDate == null || startDate.before(date)) && (endDate == null || endDate.after(date))) {
+            if ((startDate == null || !startDate.after(date)) && (endDate == null || !endDate.before(date))) {
                 return false;
             }
         }
