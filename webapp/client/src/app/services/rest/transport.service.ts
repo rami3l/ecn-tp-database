@@ -64,4 +64,8 @@ export class TransportService {
     getTruckType(id: number): Observable<TruckType> {
         return this.http.get<TruckType>(this.truckTypeUrl + id);
     }
+
+    isTruckAvailable(licensePlate: string, date: string) {
+        return this.http.get<boolean>(this.truckUrl + licensePlate + "/isAvailable/" + date.split("T")[0]);
+    }
 }

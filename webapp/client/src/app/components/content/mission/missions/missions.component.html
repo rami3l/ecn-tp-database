@@ -29,9 +29,12 @@
                             title="Driver {{mission.driver.firstName}} {{mission.driver.lastName}}"
                             *ngIf="mission.driver">{{mission.driver.firstName}} {{mission.driver.lastName}}</button>
                     </td>
-                    <td><button routerLink="/trucks/truck/{{mission.truck.licensePlate}}" class="btn-item-link"
-                            title="Truck {{mission.truck.licensePlate}}"
-                            *ngIf="mission.truck">{{mission.truck.licensePlate}}</button></td>
+                    <td [style]="mission.truckAvailable ? '':'background-color: brown'"
+                        [title]="mission.truckAvailable ? '':'Truck not available at mission date'">
+                        <button routerLink="/trucks/truck/{{mission.truck.licensePlate}}" class="btn-item-link"
+                            title="Truck {{mission.truck.licensePlate}}{{mission.truckAvailable ? '':' - Not available at mission date !'}}"
+                            *ngIf="mission.truck">{{mission.truck.licensePlate}}</button>
+                    </td>
                     <td><button class="btn-more" title="Details on mission {{mission.id}}"
                             routerLinkActive="btn-more-active" routerLink="./mission/{{mission.id}}"
                             #state="routerLinkActive" (click)="checkState(state.isActive)">More...</button></td>

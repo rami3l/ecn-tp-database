@@ -25,6 +25,7 @@ export class MissionFormComponent implements OnInit, OnDestroy {
   useDefaultTruck = true;
   modalOpened = false;
   modalSubscription: Subscription | undefined;
+  isTruckAvailable = true;
 
   /* Order contents à afficher, à afficher après le filtrage, et à ajouter à la nouvelle mission */
   displayedOrderContents: OrderContent[] = [];
@@ -243,6 +244,18 @@ export class MissionFormComponent implements OnInit, OnDestroy {
     this.addressFilter = "";
     this.productFilter = "";
     this.refreshFilter();
+  }
+
+  getTruckAvailable(): void {
+    var licensePlate = this.missionForm.controls.truck.value;
+    var date = this.missionForm.controls.loadingDate.value;
+    if (licensePlate && date) {
+      this.transportService.isTruckAvailable(licensePlate, date).subscribe(
+        result => this.isTruckAvailable = result
+      );
+    } else {
+      this.isTruckAvailable = true;
+    }
   }
 
 }

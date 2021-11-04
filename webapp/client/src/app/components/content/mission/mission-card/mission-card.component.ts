@@ -6,6 +6,7 @@ import { Mission } from 'src/app/dto/mission';
 import { SupportedBy } from 'src/app/dto/supportedby';
 import { MissionService } from 'src/app/services/rest/mission.service';
 import { OrderService } from 'src/app/services/rest/order.service';
+import { TransportService } from 'src/app/services/rest/transport.service';
 
 @Component({
   selector: 'app-mission-card',
@@ -20,7 +21,8 @@ export class MissionCardComponent implements OnInit, OnDestroy {
 
   constructor(private activatedRoute: ActivatedRoute,
     private missionService: MissionService,
-    private orderService: OrderService) { }
+    private orderService: OrderService,
+    private transportService: TransportService) { }
 
   ngOnInit(): void {
     this.missionChangeSubscription = this.activatedRoute.params.subscribe(
@@ -39,7 +41,10 @@ export class MissionCardComponent implements OnInit, OnDestroy {
       this.mission = undefined;
     } else {
       this.missionService.getMission(id).subscribe(
-        missionReceived => { this.mission = missionReceived; }
+        missionReceived => {
+          this.mission = missionReceived;
+          this.setAvailable(this.mission);
+        }
       )
       this.missionService.getSupports(id).subscribe(
         supportsReceived => {
@@ -59,6 +64,12 @@ export class MissionCardComponent implements OnInit, OnDestroy {
         }
       )
     })
+  }
+
+  private setAvailable(mission: Mission) {
+    this.transportService.isTruckAvailable(mission.truck.licensePlate, mission.loadingTime.toString()).subscribe(
+      result => mission.truckAvailable = result
+    )
   }
 
   displayDateTime(datetime: Date, datetimeRef: Date): string {

@@ -4,7 +4,8 @@
         <tr>
             <th scope="row">Loading time:</th>
             <td>
-                <input type="date" class="input" formControlName="loadingDate" style="margin-right: 2%;">
+                <input type="date" class="input" formControlName="loadingDate" style="margin-right: 2%;"
+                    (ngModelChange)="getTruckAvailable()">
                 <input type="time" class="input" formControlName="loadingTime">
             </td>
         </tr>
@@ -30,10 +31,11 @@
         </tr>
         <tr>
             <th scope="row">Truck:</th>
-            <td>
+            <td [style]="isTruckAvailable ? '':'background-color: brown'"
+                [title]="isTruckAvailable ? '':'Truck not available at mission date'">
                 <input type="checkbox" (click)="toggleUseDefaultTruck()" [checked]="!useDefaultTruck"
                     title="Use different truck than driver's default one">
-                <select formControlName="truck" class="input">
+                <select formControlName="truck" class="input" (ngModelChange)="getTruckAvailable()">
                     <option value="">Choose a truck (optional)</option>
                     <option *ngFor="let truck of trucks" value="{{truck.licensePlate}}">
                         {{truck.licensePlate}}</option>
