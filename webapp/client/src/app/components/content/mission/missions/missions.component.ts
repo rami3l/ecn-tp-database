@@ -13,6 +13,10 @@ export class MissionsComponent implements OnInit {
 
 
   missions: Mission[] | undefined;
+  titles = ["#", "date", "loading city", "driver", "truck"]
+  sortId = 0;
+  whatToSort = (m: Mission) => [m.id, m.loadingTime, m.loadingPoint.address.city, m.driver.firstName + m.driver.lastName, m.truck.licensePlate]
+
 
   constructor(private missionService: MissionService,
     private transportService: TransportService,
@@ -42,6 +46,14 @@ export class MissionsComponent implements OnInit {
     this.transportService.isTruckAvailable(mission.truck.licensePlate, mission.loadingTime.toString()).subscribe(
       result => mission.truckAvailable = result
     )
+  }
+
+  orderByColumn(id: number) {
+    if (id + 1 != Math.abs(this.sortId)) {
+      this.sortId = id + 1;
+    }
+    this.missions?.sort((m1, m2) => this.sortId * (this.whatToSort(m1)[id] < this.whatToSort(m2)[id] ? 1 : -1));
+    this.sortId *= -1;
   }
 
 }
