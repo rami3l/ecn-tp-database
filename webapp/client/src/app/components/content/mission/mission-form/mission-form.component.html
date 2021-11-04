@@ -79,7 +79,7 @@
             </td>
         </tr>
     </table>
-    <button *ngIf="id" routerLink="..">Cancel</button>
+    <button *ngIf="id" routerLink=".." class="btn-cancel">Cancel</button>
     <button class="btn-submit" [disabled]="!missionForm.valid" (click)="onSubmit()">Submit</button>
 </div>
 

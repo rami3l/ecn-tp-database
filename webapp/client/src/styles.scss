@@ -26,6 +26,8 @@ $fixed-width-when-not-ajusting-size: 1800px;
     --red-1: #b38300; // buttons add
     --red-2: #8f6900; // buttons add on hover
     --red-3: #7c5b00; // buttons add when activated
+    --red-cancel: #bd3131; // buttons cancel
+    --red-cancel-2: #9b2e26; // buttons cancel on hover
     --blue-1: #0076fd; // buttons add
     --blue-2: #006ae2; // buttons add on hover
     --blue-3: #003a7c; // buttons add when activated
@@ -106,14 +108,14 @@ $fixed-width-when-not-ajusting-size: 1800px;
     padding: 12px 10px;
 }
 
-.btn-more, .btn-add, .btn-submit, .btn-item-link {
+.btn-more, .btn-add, .btn-submit, .btn-cancel, .btn-item-link {
     color: var(--white-typo-btn);
     text-align: center;
     cursor: pointer;
     border-radius: 4px;
 }
 
-.btn-more, .btn-add, .btn-submit {
+.btn-more, .btn-add, .btn-submit, .btn-cancel {
     padding: 5px 10px;
 }
 
@@ -174,6 +176,15 @@ $fixed-width-when-not-ajusting-size: 1800px;
     background-color: var(--blue-3);
     border-color: var(--blue-3);
     color: var(--grey-typo-2);
+}
+
+.btn-cancel {
+    background-color: var(--red-cancel);
+    border-color: var(--red-cancel);
+}
+
+.btn-cancel:hover {
+    background-color: var(--red-cancel-2);
 }
 
 .centered {
