@@ -25,7 +25,7 @@ sql_set:
 
 client_set:
 	cd webapp/client \
-		&& npm install
+		&& npm install -y
 
 client_up:
 	cd webapp/client \
