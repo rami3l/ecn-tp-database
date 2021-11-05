@@ -23,6 +23,10 @@ sql_set:
 		&& sudo chown 5050:5050 pgpass.conf \
 		&& sudo chmod 0600 pgpass.conf
 
+client_set:
+	cd webapp/client \
+		&& npm install
+
 client_up:
 	cd webapp/client \
 		&& ng s -o

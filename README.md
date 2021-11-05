@@ -1,9 +1,10 @@
 # ecn-tp-database
 
-Pour exécuter le projet vous devez avoir `docker`, `make`, `gradle` et `angular-cli` (pour `ng`) sur votre machine.
+Pour exécuter le projet vous devez avoir `docker`, `make`, `gradle` et `angular-cli` (donc `NodeJS` et `npm`) sur votre machine.
 
 ## Ensemble du projet
 
+- Avant de mettre en route le client: `make client_set` (pour installer les dépendances)
 - Pour mettre en route le client: `make client_up`
 - Pour mettre en route le backend: `make backend_up`
 - Pour mettre en route le backend sans écraser les données en base: `make backend_resume`
