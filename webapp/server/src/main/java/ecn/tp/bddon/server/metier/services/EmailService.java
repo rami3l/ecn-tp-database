@@ -9,7 +9,6 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -40,7 +39,7 @@ public class EmailService {
         email(email, subject, body, null);
     }
 
-    public void email(String toEmail, String subject, String body, @Nullable Map<String, byte[]> files) {
+    public void email(String toEmail, String subject, String body, Map<String, byte[]> files) {
         log.debug("Sending email from {} to {} through {}:{}", mailProperties.getUsername(), toEmail,
                 mailProperties.getHost(), mailProperties.getPort());
         try {
