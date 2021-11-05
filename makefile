@@ -25,11 +25,11 @@ sql_set:
 
 client_up:
 	cd webapp/client \
-		&& ng s
-
-client_open:
-	cd webapp/client \
 		&& ng s -o
+
+client_up_background:
+	cd webapp/client \
+		&& ng s
 
 server_up:
 	cd webapp/server \
@@ -53,3 +53,6 @@ mongo_resume:
 		&& docker-compose start
 
 resume: sql_resume mongo_resume client_up
+
+backend_up: sql_up mongo_up server_up
+backend_resume: sql_resume mongo_resume server_up
