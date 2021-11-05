@@ -45,4 +45,8 @@ export class MissionService {
         return this.http.delete<void>(this.supportedByUrl + orderContentId + "/" + missionId);
     }
 
+    isMissionFinished(missionId: number): Observable<boolean> {
+        return this.http.get<boolean>(this.url + missionId + "/ok");
+    }
+
 }

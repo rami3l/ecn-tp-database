@@ -1,7 +1,8 @@
 import { formatDate } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { SupportedByToSave } from 'src/app/dto/creations/supportedby-to-save';
 import { Mission } from 'src/app/dto/mission';
 import { SupportedBy } from 'src/app/dto/supportedby';
 import { MissionService } from 'src/app/services/rest/mission.service';
@@ -35,7 +36,8 @@ export class MissionCardComponent implements OnInit, OnDestroy {
   constructor(private activatedRoute: ActivatedRoute,
     private missionService: MissionService,
     private orderService: OrderService,
-    private transportService: TransportService) { }
+    private transportService: TransportService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.missionChangeSubscription = this.activatedRoute.params.subscribe(
@@ -58,13 +60,17 @@ export class MissionCardComponent implements OnInit, OnDestroy {
           this.mission = missionReceived;
           this.setAvailable(this.mission);
         }
-      )
-      this.missionService.getSupports(id).subscribe(
-        supportsReceived => {
-          this.loadOrderContents(supportsReceived);
-        }
-      )
+      );
+      this.loadSupports(id);
     }
+  }
+
+  private loadSupports(id: number) {
+    this.missionService.getSupports(id).subscribe(
+      supportsReceived => {
+        this.loadOrderContents(supportsReceived);
+      }
+    );
   }
 
   private loadOrderContents(supportsReceived: SupportedBy[]) {
@@ -93,6 +99,24 @@ export class MissionCardComponent implements OnInit, OnDestroy {
       display = date + "\n" + display;
     }
     return display;
+  }
+
+  signOrderContent(id: number, delivered: boolean, signatureTime: string | undefined = undefined) {
+    if (this.mission) {
+      var supportToSign = this.supports.filter(support => support.orderContentId = id)[0];
+      console.log(supportToSign.delivered, delivered)
+      if (supportToSign.delivered == delivered && supportToSign.signatureTime) {
+        signatureTime = "";
+      } else if (signatureTime == undefined) {
+        signatureTime = new Date().toISOString();
+      }
+      var newSupport = new SupportedByToSave(supportToSign.plannedDeliveryTime.toString(), id, this.mission.id, delivered, signatureTime);
+      console.log(newSupport);
+      this.missionService.postSupportedBy(newSupport).subscribe(
+        () => this.router.navigateByUrl('/', { skipLocationChange: true })
+          .then(() => this.router.navigate(["/missions/mission/" + this.mission?.id]))
+      );
+    }
   }
 
 }

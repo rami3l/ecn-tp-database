@@ -68,11 +68,22 @@ public class MissionService {
         supportedBy.setPlannedDeliveryTime(supportedByToSave.getPlannedDeliveryTime());
         supportedBy.setOrderContentId(supportedByToSave.getOrderContentId());
         supportedBy.setMissionId(supportedByToSave.getMissionId());
+        supportedBy.setDelivered(supportedByToSave.isDelivered());
+        supportedBy.setSignatureTime(supportedByToSave.getSignatureTime());
         supportedByRestRepository.save(supportedBy);
     }
 
     public void deleteSupportedBy(int orderContentId, int missionId) {
         supportedByRestRepository.deleteById(new SupportedById(orderContentId, missionId));
+    }
+
+    public boolean isMissionFinished(int id) {
+        for (SupportedBy support : getSupports(id)) {
+            if (!support.isDelivered() || support.getSignatureTime() == null) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }

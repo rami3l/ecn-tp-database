@@ -228,6 +228,11 @@ public class RepoRestService {
         return missionService.getMission(missionId);
     }
 
+    @GetMapping("/missions/{id}/ok")
+    public boolean isMissionFinished(@PathVariable("id") int missionId) {
+        return missionService.isMissionFinished(missionId);
+    }
+
     @GetMapping("/missions/{id}/supports")
     public Iterable<SupportedBy> getMissionOrderContents(@PathVariable("id") int missionId) {
         return missionService.getSupports(missionId);

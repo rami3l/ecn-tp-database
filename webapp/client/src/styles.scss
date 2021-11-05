@@ -33,6 +33,7 @@ $fixed-width-when-not-ajusting-size: 1800px;
     --blue-3: #003a7c; // buttons add when activated
     --input-text-focus: #7db1ec;
     --ok-background: rgb(8, 59, 1);
+    --pas-ok-background: rgb(107, 37, 5);
 }
 
 .webpage {
@@ -257,4 +258,8 @@ $fixed-width-when-not-ajusting-size: 1800px;
 
   .ok {
     background-color: var(--ok-background);
+  }
+
+  .pas_ok {
+    background-color: var(--pas-ok-background);
   }

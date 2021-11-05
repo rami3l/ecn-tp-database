@@ -9,6 +9,7 @@ export class Mission {
         public loadingPoint: LoadingPoint,
         public driver: Driver,
         public truck: Truck,
-        public truckAvailable: boolean
+        public truckAvailable: boolean,
+        public finished: boolean
     ) { }
 }

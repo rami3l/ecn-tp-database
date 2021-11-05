@@ -36,10 +36,12 @@
                             <th scope="col" *ngFor="let title of titles; index as i" (click)="sortByColumn(i)"
                                 title="Click to sort" style="cursor: pointer;">
                                 {{title}} {{sortId == i+1 ? "⇑" : sortId == -i-1 ? "⇓" : "" }} </th>
+                            <th scope="col" colspan="2">Sign</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let support of supports" [ngClass]="{'ok': support.isDelivered}">
+                        <tr *ngFor="let support of supports"
+                            [ngClass]="{'ok': support.signatureTime && support.delivered, 'pas_ok': support.signatureTime && !support.delivered }">
                             <td>{{support.orderContent.order.client.abbrev}}</td>
                             <td>{{displayDateTime(support.plannedDeliveryTime, mission.loadingTime)}}</td>
                             <td>{{support.orderContent.deliveryPoint.address.addressLine}} <br>
@@ -50,6 +52,11 @@
                                     title="Product '{{support.orderContent.product.name}}'">{{support.orderContent.product.name}}</button>
                             </td>
                             <td>{{support.orderContent.quantity}}</td>
+                            <td><button class="btn-more" title="Sign for this order content"
+                                    (click)="signOrderContent(support.orderContentId, true)">Delivered</button></td>
+                            <td><button class="btn-more" title="Specify that order content has not been delivered"
+                                    (click)="signOrderContent(support.orderContentId, false)">Not</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

@@ -2,9 +2,13 @@ package ecn.tp.bddon.server.utils;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
 public class DateParser {
 
     public static final List<String> DATE_FORMATS = List.of("yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm", "yyyy-MM-dd");
@@ -45,8 +49,15 @@ public class DateParser {
      * @return the timestamp parsed from the date
      */
     public static Timestamp getTimeStampFromStringDate(String date) {
-        Date d = parseDateTime(date);
-        return d == null ? null : new Timestamp(d.getTime());
+        try {
+            log.info("trying to parse '" + date + "' with zone");
+            return new Timestamp(Instant.parse(date).toEpochMilli());
+
+        } catch (Exception e) {
+            log.info("trying to parse without zone");
+            Date d = parseDateTime(date);
+            return d == null ? null : new Timestamp(d.getTime());
+        }
     }
 
 }

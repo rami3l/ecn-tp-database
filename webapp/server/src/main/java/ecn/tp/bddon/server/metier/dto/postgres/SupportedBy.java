@@ -28,7 +28,7 @@ public class SupportedBy implements Serializable {
     private Timestamp signatureTime;
 
     @Column(name = "is_delivered")
-    private boolean isDelivered;
+    private boolean delivered;
 
     @Id
     @Column(name = "order_content")

@@ -8,5 +8,7 @@ public class SupportedByToSave {
     private String plannedDeliveryTime;
     private int orderContentId;
     private int missionId;
+    private boolean delivered;
+    private String signatureTime;
 
 }

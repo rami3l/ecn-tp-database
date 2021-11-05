@@ -39,7 +39,7 @@ export class MissionsComponent implements OnInit {
       missionsReceived => {
         this.missions = missionsReceived;
         this.missions.forEach(
-          mission => this.setAvailable(mission)
+          mission => this.setAvailableAndFinished(mission)
         )
       }
     )
@@ -51,9 +51,12 @@ export class MissionsComponent implements OnInit {
     }
   }
 
-  private setAvailable(mission: Mission) {
+  private setAvailableAndFinished(mission: Mission) {
     this.transportService.isTruckAvailable(mission.truck.licensePlate, mission.loadingTime.toString()).subscribe(
       result => mission.truckAvailable = result
+    )
+    this.missionService.isMissionFinished(mission.id).subscribe(
+      result => mission.finished = result
     )
   }
 
