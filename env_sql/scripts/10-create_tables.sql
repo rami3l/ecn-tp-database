@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS public.unavailability (
 CREATE TABLE IF NOT EXISTS public.address (
     address_id serial,
     address_line character varying,
-    zipcode integer,
+    zipcode character varying,
     city character varying,
     PRIMARY KEY (address_id)
 );
@@ -105,6 +105,13 @@ CREATE TABLE IF NOT EXISTS public.certified_for (
     PRIMARY KEY (driver, truck_type),
     FOREIGN KEY (driver) REFERENCES public.driver (driver_id) NOT VALID,
     FOREIGN KEY (truck_type) REFERENCES public.truck_type (truck_type_id) NOT VALID
+);
+
+CREATE TABLE IF NOT EXISTS public.scheduling (
+    scheduling_id serial,
+    cron character varying,
+    email character varying,
+    PRIMARY KEY (scheduling_id)
 );
 
 ALTER TABLE

@@ -1,0 +1,29 @@
+<div class="container">
+    <h1 *ngIf="!phoneBooksCompilation.size">Loading...</h1>
+    <h1 *ngIf="phoneBooksCompilation.size">Compilation of {{nbCards}} cards from {{phoneBooksCompilation.size}} phone
+        books
+    </h1>
+    <table class="item-list">
+        <thead>
+            <tr>
+                <th scope="col">From</th>
+                <th scope="col" *ngFor="let item of compilationHead">{{item}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let content of phoneBooksCompilation | keyvalue">
+                <tr>
+                    <td [attr.rowspan]="content.value.length">{{content.key}}</td>
+                    <ng-container *ngIf="content.value.length>0">
+                        <td *ngFor="let item of content.value[0]">{{item}}</td>
+                    </ng-container>
+                </tr>
+                <ng-container *ngIf="content.value.length>1">
+                    <tr *ngFor="let line of content.value.slice(1)">
+                        <td *ngFor="let item of line">{{item}}</td>
+                    </tr>
+                </ng-container>
+            </ng-container>
+        </tbody>
+    </table>
+</div>

@@ -9,11 +9,11 @@ VALUES
     ('15 rue des rochers', NULL, 'Metz'),
     ('10 boulevard des marins', NULL, 'Nice'),
     -- Clients
-    ('12 Boulevard Wezemir', 75012, 'Paris'),
+    ('12 Boulevard Wezemir', '75012', 'Paris'),
     -- KAEDE
-    ('1 Cours Saint Pierre', 33000, 'Bordeaux'),
+    ('1 Cours Saint Pierre', '33000', 'Bordeaux'),
     -- KUROMU
-    ('24 Rue du pont', 49000, 'Angers'),
+    ('24 Rue du pont', '49000', 'Angers'),
     -- KASUMI
     -- Delivery points
     -- KAEDE

@@ -1,0 +1,69 @@
+<div class="container">
+    <h1 *ngIf="this.mission == null">Loading...</h1>
+    <h1 *ngIf="this.mission != null">Mission (id: {{mission.id}})</h1>
+    <table *ngIf="this.mission != null" class="item-list">
+        <tr>
+            <th scope="row">Loading time:</th>
+            <td>{{mission.loadingTime | date:"d MMMM y - HH'h'mm"}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Loading point:</th>
+            <td *ngIf="mission.loadingPoint != null">{{mission.loadingPoint.address.addressLine}} -
+                {{mission.loadingPoint.address.zipcode}} {{mission.loadingPoint.address.city.toUpperCase()}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Driver:</th>
+            <td>
+                <button routerLink="/drivers/driver/{{mission.driver.id}}" class="btn-item-link"
+                    title="Driver {{mission.driver.firstName}} {{mission.driver.lastName}}"
+                    *ngIf="mission.driver">{{mission.driver.firstName}} {{mission.driver.lastName}}</button>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">Truck:</th>
+            <td [style]="mission.truckAvailable ? '':'background-color: brown'"
+                [title]="mission.truckAvailable ? '':'Truck not available at mission date'">
+                <button routerLink="/trucks/truck/{{mission.truck.licensePlate}}" class="btn-item-link"
+                    title="Truck {{mission.truck.licensePlate}}{{mission.truckAvailable ? '':' - Not available at mission date !'}}"
+                    *ngIf="mission.truck">{{mission.truck.licensePlate}}</button>
+            </td>
+        </tr>
+        <tr>
+            <td colspan=2>
+                <table class="item-sublist">
+                    <thead>
+                        <tr>
+                            <th scope="col" *ngFor="let title of titles; index as i" (click)="sortByColumn(i)"
+                                title="Click to sort" style="cursor: pointer;">
+                                {{title}} {{sortId == i+1 ? "⇑" : sortId == -i-1 ? "⇓" : "" }} </th>
+                            <th scope="col" colspan="2">Sign</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let support of supports"
+                            [ngClass]="{'ok': support.signatureTime && support.delivered, 'pas_ok': support.signatureTime && !support.delivered }"
+                            [title]="support.signatureTime && support.delivered ? 'Item delivered (signed)' : 
+                            support.signatureTime && !support.delivered ? 'Item not delivered (signed)' : 'Item not already delivered'">
+                            <td>{{support.orderContent.order.client.abbrev}}</td>
+                            <td>{{displayDateTime(support.plannedDeliveryTime, mission.loadingTime)}}</td>
+                            <td>{{support.orderContent.deliveryPoint.address.addressLine}} <br>
+                                {{support.orderContent.deliveryPoint.address.city}}</td>
+                            <td>
+                                <button routerLink="/stock/product/{{support.orderContent.product.id}}"
+                                    class="btn-item-link"
+                                    title="Product '{{support.orderContent.product.name}}'">{{support.orderContent.product.name}}</button>
+                            </td>
+                            <td>{{support.orderContent.quantity}}</td>
+                            <td><button class="btn-more" title="Sign for this order content"
+                                    (click)="signOrderContent(support, true)">Delivered</button></td>
+                            <td><button class="btn-more" title="Specify that order content has not been delivered"
+                                    (click)="signOrderContent(support, false)">Not</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <button class="btn-add centered" style="margin-top: 10px;" routerLink="./edit">Edit</button>
+</div>

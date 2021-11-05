@@ -1,0 +1,31 @@
+<div class="grid">
+    <div class="left-container">
+        <h1 *ngIf="this.trucks == null">Loading trucks...</h1>
+        <h1 *ngIf="this.trucks != null">{{trucks.length }} trucks</h1>
+        <table class="item-list">
+            <thead>
+                <tr>
+                    <th scope="col">license plate</th>
+                    <th scope="col">type</th>
+                    <th scope="col">driver assigned</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let truck of trucks">
+                    <th scope="row">{{truck.licensePlate}}</th>
+                    <td>{{truck.truckType?.name}}</td>
+                    <td>
+                        <button routerLink="/drivers/driver/{{truck.assignedDriver.id}}" class="btn-item-link"
+                            title="Driver {{truck.assignedDriver.firstName}} {{truck.assignedDriver.lastName}}"
+                            *ngIf="truck.assignedDriver">{{truck.assignedDriver.firstName}}
+                            {{truck.assignedDriver.lastName}}</button>
+                    </td>
+                    <td><button class="btn-more" title="Details on truck {{truck.licensePlate}}"
+                            routerLinkActive="btn-more-active" routerLink="./truck/{{truck.licensePlate}}"
+                            #state="routerLinkActive" (click)="checkState(state.isActive)">More...</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <router-outlet></router-outlet>
+</div>

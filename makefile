@@ -23,6 +23,18 @@ sql_set:
 		&& sudo chown 5050:5050 pgpass.conf \
 		&& sudo chmod 0600 pgpass.conf
 
+client_up:
+	cd webapp/client \
+		&& ng s
+
+client_open:
+	cd webapp/client \
+		&& ng s -o
+
+server_up:
+	cd webapp/server \
+		&& ./gradlew bootRun
+
 mongo_up:
 	cd env_mongo \
 		&& docker-compose down \
@@ -39,3 +51,5 @@ mongo_pause:
 mongo_resume:
 	cd env_mongo \
 		&& docker-compose start
+
+resume: sql_resume mongo_resume client_up

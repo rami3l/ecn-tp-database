@@ -1,0 +1,72 @@
+<div class="container">
+    <h1>{{truck ? "Truck " + truck.licensePlate : "Loading truck..."}}</h1>
+    <table *ngIf="this.truck != null" class="item-list">
+        <tr>
+            <th scope="row">Assigned driver:</th>
+            <td>
+                <button routerLink="/drivers/driver/{{truck.assignedDriver.id}}" class="btn-item-link"
+                    title="Driver {{truck.assignedDriver.firstName}} {{truck.assignedDriver.lastName}}"
+                    *ngIf="truck.assignedDriver">{{truck.assignedDriver.firstName}}
+                    {{truck.assignedDriver.lastName}}</button>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">Truck type:</th>
+            <td>{{truck.truckType}}</td>
+        </tr>
+        <tr *ngIf="unavailabilities.length">
+            <td colspan=2>
+                <table class="item-sublist">
+                    <caption>
+                        <h2>Unavailabilities of this truck</h2>
+                    </caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">start</th>
+                            <th scope="col">end</th>
+                            <th scope="col">comment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let unavailability of unavailabilities">
+                            <td>{{unavailability.startDate}}</td>
+                            <td>{{unavailability.endDate}}</td>
+                            <td>{{unavailability.comments}}</td>
+                            <td>
+                                <button class="btn-add" (click)="deleteUnavailability(unavailability)">-</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan=2>
+                <!-- Opens the modal popup to choose order contents -->
+                <button class="btn-add centered" title="Register new unavailability" (click)="modalOpen()">New
+                    unavailability</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<!-- modal popup to choose order contents -->
+<div *ngIf="modalOpened" class="modal">
+    <div class="modal-content">
+        <span class="close" (click)="modalClose()">&times;</span>
+        <h2>You can select dates (optional) and specify a comment (optional)</h2>
+        <form (ngSubmit)="createUnavailability()">
+            <label for="start_date">Start date :</label>
+            <input class="input" type="date" id="start_date" style="margin-right: 10px;" [(ngModel)]="startDate"
+                name="start_date">
+            <label for="end_date">End date :</label>
+            <input class="input" type="date" id="start_date" style="margin-right: 10px;" [(ngModel)]="endDate"
+                name="end_date">
+            <label for="comment">Comment :</label>
+            <input class="input-text" type="text" id="comment" style="margin-right: 10px;" [(ngModel)]="comment"
+                name="comment">
+            <button type="submit" class="btn-submit" style="margin-left: 10px;"
+                title="Validate the scheduled export">validate</button>
+        </form>
+    </div>
+</div>

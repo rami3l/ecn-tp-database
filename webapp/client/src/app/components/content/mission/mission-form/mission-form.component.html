@@ -1,0 +1,128 @@
+<div class="container">
+    <h1>{{id==null ? "Add a mission" : "Edit mission " + id}}</h1>
+    <table [formGroup]="missionForm" class="item-list">
+        <tr>
+            <th scope="row">Loading time:</th>
+            <td>
+                <input type="date" class="input" formControlName="loadingDate" style="margin-right: 2%;"
+                    (ngModelChange)="getTruckAvailable()">
+                <input type="time" class="input" formControlName="loadingTime">
+            </td>
+        </tr>
+        <tr>
+            <th scope=" row">Loading point:</th>
+            <td>
+                <select formControlName="loadingPoint" class="input">
+                    <option value="">Choose a loading point</option>
+                    <option *ngFor="let loadingPoint of loadingPoints" value="{{loadingPoint.id}}">
+                        {{loadingPoint.address.addressLine}} - {{loadingPoint.address.city}}</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">Driver:</th>
+            <td>
+                <select formControlName="driver" class="input" (ngModelChange)="onDriverChange()">
+                    <option value="">Choose a driver</option>
+                    <option *ngFor="let driver of drivers" value="{{driver.id}}">
+                        {{driver.firstName}} {{driver.lastName}}</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">Truck:</th>
+            <td [style]="isTruckAvailable ? '':'background-color: brown'"
+                [title]="isTruckAvailable ? '':'Truck not available at mission date'">
+                <input type="checkbox" (click)="toggleUseDefaultTruck()" [checked]="!useDefaultTruck"
+                    title="Use different truck than driver's default one">
+                <select formControlName="truck" class="input" (ngModelChange)="getTruckAvailable()">
+                    <option value="">Choose a truck (optional)</option>
+                    <option *ngFor="let truck of trucks" value="{{truck.licensePlate}}">
+                        {{truck.licensePlate}}</option>
+                </select>
+                <!-- TODO: check if truck is available when loading time is selected -->
+            </td>
+        </tr>
+        <tr *ngIf="orderContentToAdd.length>0">
+            <td colspan=2>
+                <table class="item-sublist">
+                    <thead>
+                        <tr>
+                            <th scope="col">time</th>
+                            <th scope="col">client</th>
+                            <th scope="col">address</th>
+                            <th scope="col">product</th>
+                            <th scope="col">quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let orderContent of orderContentToAdd">
+                            <td><input type="time" class="input" formControlName="deliveryTime_{{orderContent.id}}">
+                            </td>
+                            <td>{{orderContent.order.client.abbrev}}</td>
+                            <td>{{orderContent.deliveryPoint.address.addressLine}} <br>
+                                {{orderContent.deliveryPoint.address.city}}</td>
+                            <td>{{orderContent.product.name}}</td>
+                            <td>{{orderContent.quantity}}</td>
+                            <td>
+                                <button class="btn-add" (click)="removeOrderContent(orderContent)">-</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan=2>
+                <!-- Opens the modal popup to choose order contents -->
+                <button class="btn-add centered" (click)="modalOpen()">Add some order contents</button>
+            </td>
+        </tr>
+    </table>
+    <button *ngIf="id" routerLink=".." class="btn-cancel">Cancel</button>
+    <button class="btn-submit" [disabled]="!missionForm.valid" (click)="onSubmit()">Submit</button>
+</div>
+
+<!-- modal popup to choose order contents -->
+<div *ngIf="modalOpened" class="modal">
+    <div class="modal-content">
+        <span class="close" (click)="modalClose()">&times;</span>
+        <h2>Select order contents to add to the mission</h2>
+        <div class="col-4">
+            <div>
+                <label for="client_filter">Client :
+                    <input class="input-text" type="text" id="client_filter" style="margin-right: 2%;"
+                        [(ngModel)]="clientFilter" (ngModelChange)="refreshFilter()">
+                </label>
+            </div>
+            <div>
+                <label for="product_filter">Product :
+                    <input class="input-text" type="text" id="product_filter" style="margin-right: 2%;"
+                        [(ngModel)]="productFilter" (ngModelChange)="refreshFilter()">
+                </label>
+            </div>
+            <div>
+                <label for="address_filter">Address :
+                    <input class="input-text" type="text" id="address_filter" style="margin-right: 2%;"
+                        [(ngModel)]="addressFilter" (ngModelChange)="refreshFilter()">
+                </label>
+            </div>
+            <div>
+                <button class="btn-more centered" (click)="resetFilters()">Reset filters</button>
+            </div>
+        </div>
+        <table class="add-list">
+            <tr *ngFor="let orderContent of filteredDisplayedOrderContents">
+                <td>
+                    {{orderContent.order.client.abbrev}} (order {{orderContent.order.id}}) -
+                    {{orderContent.product.name}} ({{orderContent.quantity}} Kg) ->
+                    {{orderContent.deliveryPoint.address.addressLine}} {{orderContent.deliveryPoint.address.city}}
+                </td>
+                <td>
+                    <button class="btn-add" style="margin-left: 10px;" (click)="addOrderContent(orderContent)"
+                        title="add order content {{orderContent.id}} to this mission">+</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

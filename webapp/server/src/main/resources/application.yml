@@ -1,0 +1,24 @@
+server:
+  port: 7779
+  servlet:
+    context-path: /api
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: password
+  data:
+    mongodb:
+      database: public
+      username: mongo
+      password: password
+      host: localhost
+      port: 27017
+      authentication-database: admin
+  mail:
+    host: smtp.laposte.net
+    port: 587
+    username: mailsender@laposte.net
+    password: psHj4EsD2xZd6Uv

@@ -1,0 +1,44 @@
+<div class="container">
+    <h1 *ngIf="this.order == null">Loading...</h1>
+    <h1 *ngIf="this.order != null">Order (id: {{order.id}})</h1>
+    <table *ngIf="this.order != null" class="item-list">
+        <tr>
+            <th scope="row">Client:</th>
+            <td>{{order.client.abbrev}} {{order.client.name == null ? "" : "(" + order.client.name + ")"}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Address:</th>
+            <td>{{order.client.address.addressLine}}</td>
+        </tr>
+        <tr>
+            <th scope="row">City:</th>
+            <td>{{order.client.address.zipcode}} {{order.client.address.city}}</td>
+        </tr>
+        <tr>
+            <td colspan=2>
+                <table class="item-sublist">
+                    <thead>
+                        <tr>
+                            <th scope="col">Desired delivery</th>
+                            <th scope="col">Delivery address</th>
+                            <th scope="col">product</th>
+                            <th scope="col">quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let orderContent of orderContents">
+                            <td>{{orderContent.desiredDeliveryDate | date:"d MMMM y"}}</td>
+                            <td>{{orderContent.deliveryPoint.address.addressLine}} <br>
+                                {{orderContent.deliveryPoint.address.city}}</td>
+                            <td>
+                                <button routerLink="/stock/product/{{orderContent.product.id}}" class="btn-item-link"
+                                    title="Product '{{orderContent.product.name}}'">{{orderContent.product.name}}</button>
+                            </td>
+                            <td>{{orderContent.quantity}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>

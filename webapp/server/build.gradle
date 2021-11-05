@@ -1,0 +1,40 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.5'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'ecn.tp.bddon'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '16'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// application web
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	// Accès PostgreSQL
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	runtimeOnly 'org.postgresql:postgresql'
+	// Accès MongoDB
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+	// Envoi de mails
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail'
+	// Lombok: génération de constructeurs, getters, setters, builders, etc.
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	// Tests unitaires
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+	useJUnitPlatform()
+}

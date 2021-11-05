@@ -1,0 +1,32 @@
+<div class="grid">
+    <div class="left-container">
+        <h1 *ngIf="this.products != null">{{this.products ? quantities.size + "/" + products.length + " product types in
+            stock" : "Loading products..."}}</h1>
+        <table class="item-list">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">product</th>
+                    <th scope="col">quantity</th>
+                    <th scope="col">
+                        <button class="btn-add" title="Export (or schedule export) of stocks by loadingpoint"
+                            routerLinkActive="btn-add-active" routerLink="./export" #state="routerLinkActive"
+                            (click)="checkState(state.isActive)">Export</button>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of products">
+                    <th scope="row">{{product.id}}</th>
+                    <td>{{product.name}}</td>
+                    <td>{{quantities.get(product.id) ? quantities.get(product.id) : 0 }}</td>
+                    <td><button class="btn-more" title="Details on product {{product.id}}"
+                            routerLinkActive="btn-more-active" routerLink="./product/{{product.id}}"
+                            #state="routerLinkActive" (click)="checkState(state.isActive)">More...</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <router-outlet></router-outlet>
+</div>

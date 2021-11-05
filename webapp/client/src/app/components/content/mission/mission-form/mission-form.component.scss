@@ -1,0 +1,14 @@
+.add-list {
+    table-layout: auto;
+    margin: auto;
+    padding-top: 20px;
+}
+
+.add-list td {
+    padding-top: 10px;
+}
+
+.col-4 {
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr 1fr;
+}

@@ -1,0 +1,48 @@
+<div class="container">
+    <h1>{{schedulings ? "Export by email / schedule exports" : "Loading..."}}</h1>
+    <form (ngSubmit)="sendListing()">
+        <label for="email">Email :</label>
+        <input class="input-text" type="text" id="email" style="margin-left: 10px; margin-right: 10px;"
+            [(ngModel)]="email" name="email" [disabled]="sendingEmail">
+        <button class="btn-submit" type="submit" title="send listing of the stock to {{email}}"
+            [disabled]="sendingEmail">Send</button>
+    </form>
+    <br><br>
+    <table *ngIf="schedulings?.length" class="item-sublist">
+        <thead>
+            <tr>
+                <th scope="col">email</th>
+                <th scope="col">cron expression</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let scheduling of schedulings">
+                <td>{{scheduling.email}}</td>
+                <td>{{scheduling.cron}} </td>
+                <td>
+                    <button class="btn-add" (click)="cancelScheduling(scheduling.id)">-</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- Opens the modal popup to schedule an export -->
+    <button class="btn-add centered" (click)="modalOpen()">Schedule an export</button>
+</div>
+
+<!-- modal popup to schedule an export -->
+<div *ngIf="modalOpened" class="modal">
+    <div class="modal-content">
+        <span class="close" (click)="modalClose()">&times;</span>
+        <h2>Specify email address and cron expression</h2>
+        <form (ngSubmit)="scheduleSending()">
+            <label for="sch_email">Email :</label>
+            <input class="input-text" type="text" id="sch_email" style="margin-right: 10px;" [(ngModel)]="sch_email"
+                name="sch_email">
+            <label for="sch_cron">Cron :</label>
+            <input class="input-text" type="text" id="sch_cron" style="margin-right: 10px;" [(ngModel)]="sch_cron"
+                name="sch_cron">
+            <button type="submit" class="btn-submit" style="margin-left: 10px;"
+                title="Validate the scheduled export">validate</button>
+        </form>
+    </div>
+</div>
