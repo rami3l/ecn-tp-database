@@ -45,7 +45,7 @@ export class MissionService {
         return this.http.delete<void>(this.supportedByUrl + orderContentId + "/" + missionId);
     }
 
-    isMissionFinished(missionId: number): Observable<number> {
+    getMissionState(missionId: number): Observable<number> {
         return this.http.get<number>(this.url + missionId + "/ok");
     }
 

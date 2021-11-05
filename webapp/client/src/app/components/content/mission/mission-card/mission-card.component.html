@@ -41,7 +41,9 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let support of supports"
-                            [ngClass]="{'ok': support.signatureTime && support.delivered, 'pas_ok': support.signatureTime && !support.delivered }">
+                            [ngClass]="{'ok': support.signatureTime && support.delivered, 'pas_ok': support.signatureTime && !support.delivered }"
+                            [title]="support.signatureTime && support.delivered ? 'Item delivered (signed)' : 
+                            support.signatureTime && !support.delivered ? 'Item not delivered (signed)' : 'Item not already delivered'">
                             <td>{{support.orderContent.order.client.abbrev}}</td>
                             <td>{{displayDateTime(support.plannedDeliveryTime, mission.loadingTime)}}</td>
                             <td>{{support.orderContent.deliveryPoint.address.addressLine}} <br>

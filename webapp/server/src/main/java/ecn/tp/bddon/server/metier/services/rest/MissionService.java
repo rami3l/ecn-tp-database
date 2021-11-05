@@ -1,5 +1,6 @@
 package ecn.tp.bddon.server.metier.services.rest;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.annotation.Resource;
@@ -16,6 +17,11 @@ import ecn.tp.bddon.server.metier.repository.SupportedByRestRepository;
 
 @Service
 public class MissionService {
+
+    public static final int MISSION_OK = 1;
+    public static final int MISSION_KO = -1;
+    public static final int MISSION_BEGUN = 2;
+    public static final int MISSION_NOT_BEGUN = 0;
 
     @Resource
     private MissionRestRepository missionRestRepository;
@@ -78,17 +84,25 @@ public class MissionService {
     }
 
     public int isMissionFinished(int id) {
-        for (SupportedBy support : getSupports(id)) {
+        int nbSupportFinished = 0;
+        List<SupportedBy> supports = supportedByRestRepository.findAllByMissionId(id);
+        for (SupportedBy support : supports) {
+            if (support.getSignatureTime() != null) {
+                nbSupportFinished++;
+            }
+        }
+        if (0 < nbSupportFinished && nbSupportFinished < supports.size()) {
+            return MISSION_BEGUN;
+        }
+        if (nbSupportFinished == 0) {
+            return MISSION_NOT_BEGUN;
+        }
+        for (SupportedBy support : supports) {
             if (support.getSignatureTime() != null && !support.isDelivered()) {
-                return -1;
+                return MISSION_KO;
             }
         }
-        for (SupportedBy support : getSupports(id)) {
-            if (support.getSignatureTime() == null) {
-                return 0;
-            }
-        }
-        return 1;
+        return MISSION_OK;
     }
 
 }

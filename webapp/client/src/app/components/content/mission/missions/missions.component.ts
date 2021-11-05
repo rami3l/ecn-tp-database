@@ -11,6 +11,10 @@ import { TransportService } from 'src/app/services/rest/transport.service';
 })
 export class MissionsComponent implements OnInit {
 
+  MISSION_OK = Mission.OK;
+  MISSION_KO = Mission.KO;
+  MISSION_BEGUN = Mission.BEGUN;
+  MISSION_NOT_BEGUN = Mission.NOT_BEGUN;
 
   missions: Mission[] | undefined;
 
@@ -55,8 +59,8 @@ export class MissionsComponent implements OnInit {
     this.transportService.isTruckAvailable(mission.truck.licensePlate, mission.loadingTime.toString()).subscribe(
       result => mission.truckAvailable = result
     )
-    this.missionService.isMissionFinished(mission.id).subscribe(
-      result => mission.finished = result
+    this.missionService.getMissionState(mission.id).subscribe(
+      result => mission.status = result
     )
   }
 

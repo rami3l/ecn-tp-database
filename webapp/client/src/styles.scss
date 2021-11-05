@@ -34,6 +34,7 @@ $fixed-width-when-not-ajusting-size: 1800px;
     --input-text-focus: #7db1ec;
     --ok-background: rgb(8, 59, 1);
     --pas-ok-background: rgb(107, 37, 5);
+    --begun-background: rgb(22, 49, 100);
 }
 
 .webpage {
@@ -262,4 +263,8 @@ $fixed-width-when-not-ajusting-size: 1800px;
 
   .pas_ok {
     background-color: var(--pas-ok-background);
+  }
+
+  .begun {
+    background-color: var(--begun-background);
   }
