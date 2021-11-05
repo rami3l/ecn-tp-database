@@ -26,13 +26,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let mission of missions">
+                        <tr *ngFor="let mission of missions"
+                            [ngClass]="{'ok': mission.status == MISSION_OK, 'pas_ok': mission.status == MISSION_KO, 'begun': mission.status == MISSION_BEGUN}"
+                            [title]="mission.status == MISSION_OK ? 'Mission finished (all items delivered)' : 
+                            mission.status == MISSION_KO ? 'Mission finished but any items not delivered' :
+                            mission.status == MISSION_BEGUN ? 'Mission begun' : 'Mission not begun'">
                             <th scope="row">{{mission.id}}</th>
                             <td>{{mission.loadingTime | date:'d MMMM y'}}</td>
                             <td>{{mission.loadingPoint?.address?.city}}</td>
-                            <td><button routerLink="/trucks/truck/{{mission.truck.licensePlate}}" class="btn-item-link"
+                            <td [style]="mission.truckAvailable ? '':'background-color: brown'"
+                                [title]="mission.truckAvailable ? '':'Truck not available at mission date'">
+                                <button routerLink="/trucks/truck/{{mission.truck.licensePlate}}" class="btn-item-link"
                                     title="Truck {{mission.truck.licensePlate}}"
-                                    *ngIf="mission.truck">{{mission.truck.licensePlate}}</button></td>
+                                    *ngIf="mission.truck">{{mission.truck.licensePlate}}</button>
+                            </td>
                             <td><button class="btn-more" title="See mission {{mission.id}} in missions page"
                                     routerLink="/missions/mission/{{mission.id}}">See</button></td>
                         </tr>

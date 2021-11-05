@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Driver } from 'src/app/dto/driver';
 import { Mission } from 'src/app/dto/mission';
+import { MissionService } from 'src/app/services/rest/mission.service';
 import { TransportService } from 'src/app/services/rest/transport.service';
 
 @Component({
@@ -12,13 +13,19 @@ import { TransportService } from 'src/app/services/rest/transport.service';
 })
 export class DriverCardComponent implements OnInit, OnDestroy {
 
+  MISSION_OK = Mission.OK;
+  MISSION_KO = Mission.KO;
+  MISSION_BEGUN = Mission.BEGUN;
+  MISSION_NOT_BEGUN = Mission.NOT_BEGUN;
+
   driver?: Driver;
   driverChangeSubscription?: Subscription;
   certifications: string[] = [];
   missions: Mission[] = [];
 
   constructor(private activatedRoute: ActivatedRoute,
-    private transportService: TransportService) { }
+    private transportService: TransportService,
+    private missionService: MissionService) { }
 
   ngOnInit(): void {
     this.driverChangeSubscription = this.activatedRoute.params.subscribe(
@@ -51,8 +58,22 @@ export class DriverCardComponent implements OnInit, OnDestroy {
 
   private loadDriverMissions(diverId: number) {
     this.transportService.getDriverMissions(diverId).subscribe(
-      missionsReceived => this.missions = missionsReceived
+      missionsReceived => {
+        this.missions = missionsReceived;
+        this.missions.forEach(
+          (mission) => this.setAvailableAndState(mission)
+        );
+      }
     );
+  }
+
+  private setAvailableAndState(mission: Mission) {
+    this.transportService.isTruckAvailable(mission.truck.licensePlate, mission.loadingTime.toString()).subscribe(
+      result => mission.truckAvailable = result
+    )
+    this.missionService.getMissionState(mission.id).subscribe(
+      result => mission.status = result
+    )
   }
 
 }
