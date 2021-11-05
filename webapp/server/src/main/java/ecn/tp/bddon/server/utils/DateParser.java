@@ -29,6 +29,7 @@ public class DateParser {
         }
         for (String dateFormat : DATE_FORMATS) {
             try {
+                log.debug("trying to parse with template " + dateFormat);
                 return (new SimpleDateFormat(dateFormat)).parse(date);
             } catch (Exception e) {
                 // this format didn't work -> test another
@@ -50,11 +51,11 @@ public class DateParser {
      */
     public static Timestamp getTimeStampFromStringDate(String date) {
         try {
-            log.info("trying to parse '" + date + "' with zone");
+            log.debug("trying to parse '" + date + "' with zone");
             return new Timestamp(Instant.parse(date).toEpochMilli());
 
         } catch (Exception e) {
-            log.info("trying to parse without zone");
+            log.debug("trying to parse without zone");
             Date d = parseDateTime(date);
             return d == null ? null : new Timestamp(d.getTime());
         }
