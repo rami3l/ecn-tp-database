@@ -20,13 +20,25 @@ L'environnement sql est composé d'un serveur postgresql, ainsi que pgadmin pour
 - Pour le mettre en pause: `make sql_pause` et `make sql_resume`
 - Pour l'arrêter totalement (suppression du conteneur): `make sql_down`
 
+Pour accéder à pgadmin:  
+url: http://localhost:15432  
+identifiant: `admin@pgadmin.com`  
+mot de passe: `password`
+Pour la base de donnée (au cas où pgpass.conf ne fonctionne pas): `password`
+
 ## Environnement MongoDB
 
 - Pour lancer le conteneur: `make mongo_up` .
 - Pour le mettre en pause: `make mongo_pause` et `make mongo_resume`
 - Pour l'arrêter totalement (suppression du conteneur): `make mongo_down`
 
+Pour accéder à mongo-express:  
+url: http://localhost:8081
+
 ## WebApp
 
 - Pour lancer le backend en Java: `make server_up`
 - Pour lancer le client en Angular: `make client_up` (ou `make client_up_background`)
+
+Pour accéder au client:  
+url: http://localhost:4200
