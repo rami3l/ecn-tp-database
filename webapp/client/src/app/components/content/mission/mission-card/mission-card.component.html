@@ -53,9 +53,9 @@
                             </td>
                             <td>{{support.orderContent.quantity}}</td>
                             <td><button class="btn-more" title="Sign for this order content"
-                                    (click)="signOrderContent(support.orderContentId, true)">Delivered</button></td>
+                                    (click)="signOrderContent(support, true)">Delivered</button></td>
                             <td><button class="btn-more" title="Specify that order content has not been delivered"
-                                    (click)="signOrderContent(support.orderContentId, false)">Not</button>
+                                    (click)="signOrderContent(support, false)">Not</button>
                             </td>
                         </tr>
                     </tbody>

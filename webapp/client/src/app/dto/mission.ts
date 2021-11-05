@@ -10,6 +10,6 @@ export class Mission {
         public driver: Driver,
         public truck: Truck,
         public truckAvailable: boolean,
-        public finished: boolean
+        public finished: number
     ) { }
 }

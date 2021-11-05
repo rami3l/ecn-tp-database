@@ -101,16 +101,16 @@ export class MissionCardComponent implements OnInit, OnDestroy {
     return display;
   }
 
-  signOrderContent(id: number, delivered: boolean, signatureTime: string | undefined = undefined) {
+  signOrderContent(supportToSign: SupportedBy, delivered: boolean, signatureTime: string | undefined = undefined) {
     if (this.mission) {
-      var supportToSign = this.supports.filter(support => support.orderContentId = id)[0];
-      console.log(supportToSign.delivered, delivered)
       if (supportToSign.delivered == delivered && supportToSign.signatureTime) {
         signatureTime = "";
-      } else if (signatureTime == undefined) {
-        signatureTime = new Date().toISOString();
+      } else {
+        if (signatureTime == undefined) {
+          signatureTime = new Date().toISOString();
+        }
       }
-      var newSupport = new SupportedByToSave(supportToSign.plannedDeliveryTime.toString(), id, this.mission.id, delivered, signatureTime);
+      var newSupport = new SupportedByToSave(supportToSign.plannedDeliveryTime.toString(), supportToSign.orderContentId, this.mission.id, delivered, signatureTime);
       console.log(newSupport);
       this.missionService.postSupportedBy(newSupport).subscribe(
         () => this.router.navigateByUrl('/', { skipLocationChange: true })

@@ -77,13 +77,18 @@ public class MissionService {
         supportedByRestRepository.deleteById(new SupportedById(orderContentId, missionId));
     }
 
-    public boolean isMissionFinished(int id) {
+    public int isMissionFinished(int id) {
         for (SupportedBy support : getSupports(id)) {
-            if (!support.isDelivered() || support.getSignatureTime() == null) {
-                return false;
+            if (support.getSignatureTime() != null && !support.isDelivered()) {
+                return -1;
             }
         }
-        return true;
+        for (SupportedBy support : getSupports(id)) {
+            if (support.getSignatureTime() == null) {
+                return 0;
+            }
+        }
+        return 1;
     }
 
 }

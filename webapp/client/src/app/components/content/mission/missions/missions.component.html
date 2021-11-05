@@ -16,7 +16,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let mission of missions" [ngClass]="{'ok': mission.finished}">
+                <tr *ngFor="let mission of missions"
+                    [ngClass]="{'ok': mission.finished == 1, 'pas_ok': mission.finished == -1}">
                     <th scope="row">{{mission.id}}</th>
                     <td>{{mission.loadingTime | date:'d MMMM y'}}</td>
                     <td>{{mission.loadingPoint?.address?.city}}</td>

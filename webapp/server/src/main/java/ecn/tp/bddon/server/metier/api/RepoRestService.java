@@ -229,7 +229,7 @@ public class RepoRestService {
     }
 
     @GetMapping("/missions/{id}/ok")
-    public boolean isMissionFinished(@PathVariable("id") int missionId) {
+    public int isMissionFinished(@PathVariable("id") int missionId) {
         return missionService.isMissionFinished(missionId);
     }
 
