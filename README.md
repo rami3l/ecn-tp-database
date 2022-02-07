@@ -1,6 +1,6 @@
 # ecn-tp-database
 
-Ce projet a été réalisé dans le cadre d'un tp de l'option info à Centrale Nantes (par groupe de 2). Voici [le sujet de ce TP (Sujet-tp.pdf)](Sujet-tp.pdf).
+Ce projet a été réalisé dans le cadre d'un TP de l'option info à Centrale Nantes (en groupe de 2). Le sujet du tp est présent (ficher [Sujet-tp.pdf](Sujet-tp.pdf)).
 
 Pour exécuter le projet vous devez avoir `docker-compose` (donc `docker`), `make`, `gradle` et `angular-cli` (donc `NodeJS` et `npm`) sur votre machine.
 
@@ -24,8 +24,8 @@ L'environnement sql est composé d'un serveur postgresql, ainsi que pgadmin pour
 Pour accéder à pgadmin:  
 url: http://localhost:15432  
 identifiant: `admin@pgadmin.com`  
-mot de passe: `password`
-Pour la base de donnée (au cas où pgpass.conf ne fonctionne pas): `password`
+mot de passe: `password`  
+Mot de passe de la base de donnée (normalement déjà enregistré dans pgadmin): `password`
 
 ## Environnement MongoDB
 
