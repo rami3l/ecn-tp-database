@@ -4,7 +4,10 @@ default:
 sql_up:
 	cd env_sql \
 		&& docker-compose down \
-		&& docker-compose up -d
+		&& docker-compose up -d \
+		&& docker exec -it -u root ecn-tp-database-pgadmin cp /tmp/pgpass.conf /pgadmin4 \
+		&& docker exec -it -u root ecn-tp-database-pgadmin chown pgadmin:pgadmin /pgadmin4/pgpass.conf \
+		&& docker exec -it -u root ecn-tp-database-pgadmin chmod 600 /pgadmin4/pgpass.conf
 
 sql_down:
 	cd env_sql \
@@ -17,11 +20,6 @@ sql_pause:
 sql_resume:
 	cd env_sql \
 		&& docker-compose start
-
-sql_set:
-	cd env_sql/config \
-		&& sudo chown 5050:5050 pgpass.conf \
-		&& sudo chmod 0600 pgpass.conf
 
 client_set:
 	cd webapp/client \
