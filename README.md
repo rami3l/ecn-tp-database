@@ -1,6 +1,8 @@
 # ecn-tp-database
 
-Pour exécuter le projet vous devez avoir `docker`, `make`, `gradle` et `angular-cli` (donc `NodeJS` et `npm`) sur votre machine.
+Ce projet a été réalisé dans le cadre d'un tp de l'option info à Centrale Nantes (par groupe de 2). Voici [le sujet de ce TP (Sujet-tp.pdf)](Sujet-tp.pdf).
+
+Pour exécuter le projet vous devez avoir `docker-compose` (donc `docker`), `make`, `gradle` et `angular-cli` (donc `NodeJS` et `npm`) sur votre machine.
 
 ## Ensemble du projet
 
